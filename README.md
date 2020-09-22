@@ -5,25 +5,25 @@ Repo buat kerja bareng website GICC 2021
 Homepage and such. Orang pertama kali masuk website, masuk ke page yang dipegang app Landing. Pokoknya kalo belum perlu login, arahnya kesini.
 
 # Struktur
-[MENU BAR]
+## Menu Bar
 Home - Pre Events - Competition - Sign in button
         dropdown:   
 	StrateGICC   
 	GICClass     
 	DialoGICC
 	MiniCC
-------------------------
-[SIGN IN PAGE]
+
+## Sign in Page
 email
 password
 forget password
 dont have an account? sign up
-------------------------
-[USER PROFILE]
+
+## User Profile
 Sesuai Django
 Guidelines lomba khusus utk participants (locked for non main-event participants)
-------------------------
-[HOME / LANDING PAGE (SCROLL DOWN)]
+
+## Landing
 Tulisan gede GICC 2021
 insert :	GICC is ...
 		Objectives
@@ -47,8 +47,8 @@ Calendar of Events
 Supported by
 Sponsors
 Media partners
-------------------------
-[PRE EVENT - STRATEGICC]
+
+# Pre-event - StrateGICC
 desc
 show speakers and their jobs
 event dates
@@ -59,7 +59,7 @@ Sign up for this event
 		choose what event to sign up
 		show that "You have signed up for ..."
 
-[PRE EVENT - ClassGICC]
+# Pre-event - ClassGICC
 desc
 show classes and their dates
 Sign up for this event
@@ -71,27 +71,27 @@ Sign up for this event
 		choose what event to sign up
 		show that "You have signed up for ..."
 
-[PRE EVENT - DialoGICC]
+# Pre-event - DialoGICC
 desc
 show speakers and achievements/jobs
 event dates
 redirect to IG page
 
-[PRE EVENT - MiniCC]
+# Pre-event - MiniCC
 desc
 link for guidelines
 timeline
 redirect to IG page
-------------------------
-[COMPETITION]
+
+# Competition
 Competition description		
 Who you will solve cases for
 Guidelines
 Register button
 Competition timeline
 Awards
-------------------------
-[FOOTER]
+
+# Footer
 Footer (namanya footer bukan ya?)
 	Logo GICC
 	Logo Karinov
