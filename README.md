@@ -7,95 +7,96 @@ Homepage and such. Orang pertama kali masuk website, masuk ke page yang dipegang
 # Struktur
 ## Menu Bar
 Home - Pre Events - Competition - Sign in button
-        dropdown:   
-	StrateGICC   
-	GICClass     
-	DialoGICC
-	MiniCC
+
+Dropdown pre-events:
+* StrateGICC   
+* GICClass     
+* DialoGICC
+* MiniCC
 
 ## Sign in Page
-email
-password
-forget password
-dont have an account? sign up
+* email
+* password
+* forget password
+* dont have an account? sign up
 
 ## User Profile
-Sesuai Django
-Guidelines lomba khusus utk participants (locked for non main-event participants)
+* Sesuai Django
+* Guidelines lomba khusus utk participants (locked for non main-event participants)
 
 ## Landing
-Tulisan gede GICC 2021
-insert :	GICC is ...
-		Objectives
-		Why should you join?
+Tulisan gede GICC 2021<br/>
+descriptions such as
+ * GICC is ...
+ * Objectives
+ * Why should you join?
 
-Pre Events:	StrateGICC > desc singkat + show the speakers + redirect to its page
-		GICClass > desc singkat + show type of classes + redirect to its page
-		DialoGICC > desc singkat + show the speakers + redirect to its page
-		MiniGICC > desc singkat + redirect to its page
+Pre Events:
+* StrateGICC > desc singkat + show the speakers + redirect to its page<br/>
+* GICClass > desc singkat + show type of classes + redirect to its page<br/>
+* DialoGICC > desc singkat + show the speakers + redirect to its page
+* MiniGICC > desc singkat + redirect to its page
 
 Competition
-	deskripsi
-	eyecatcher sedikit
-	 cth: (you will work to solve X company in the final)
-	redirect to its page
+* deskripsi
+* eyecatcher sedikit
+* cth: (you will work to solve X company in the final)
+* redirect to its page
 
-Awards for the Competition
+Awards for the Competition <br/>
 
-Calendar of Events
+Calendar of Events<br/>
 
-Supported by
-Sponsors
-Media partners
+Supported by<br/>
+Sponsors<br/>
+Media partners<br/>
 
 # Pre-event - StrateGICC
-desc
-show speakers and their jobs
-event dates
-Sign up for this event
-	if not using account:
-		redirect to login page
-	else:
-		choose what event to sign up
-		show that "You have signed up for ..."
+desc<br/>
+show speakers and their jobs<br/>
+event dates<br/>
+Sign up for this event<br/>
+* if not using an account, redirect to login page
+* else:
+  * link to user panel
+  * choose what event to sign up
+  * show that "You have signed up for ..."
 
 # Pre-event - ClassGICC
-desc
-show classes and their dates
-Sign up for this event
-	if not using account:
-		redirect to login page
-		di login page ada tombol sign up
-	else:
-		link to panel user
-		choose what event to sign up
-		show that "You have signed up for ..."
+desc<br/>
+show classes and their dates<br/>
+Sign up for this event<br/>
+* if not using an account, redirect to login page
+* else:
+  * link to user panel
+  * choose what event to sign up
+  * show that "You have signed up for ..."
 
 # Pre-event - DialoGICC
-desc
-show speakers and achievements/jobs
-event dates
-redirect to IG page
+desc<br/>
+show speakers and achievements/jobs<br/>
+event dates<br/>
+redirect to IG page<br/>
 
 # Pre-event - MiniCC
-desc
-link for guidelines
-timeline
-redirect to IG page
+desc<br/>
+link for guidelines<br/>
+timeline<br/>
+redirect to IG page<br/>
 
 # Competition
-Competition description		
-Who you will solve cases for
-Guidelines
-Register button
-Competition timeline
-Awards
+Competition description	<br/>	
+Who you will solve cases for<br/>
+Guidelines<br/>
+Register button<br/>
+Competition timeline<br/>
+Awards<br/>
 
 # Footer
-Footer (namanya footer bukan ya?)
-	Logo GICC
-	Logo Karinov
-	Logo KM	
-	Contact links (IG, Line, LinkedIn)
-	Privacy Policy
-	Terms of Service
+(namanya footer bukan ya?)
+* Logo GICC
+* Logo Karinov
+* Logo KM	
+* Contact links (IG, Line, LinkedIn, CP)
+* Privacy Policy
+* Terms of Service
