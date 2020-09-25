@@ -51,7 +51,7 @@ Supported by<br/>
 Sponsors<br/>
 Media partners<br/>
 
-# Pre-event - StrateGICC
+## Pre-event - StrateGICC
 desc<br/>
 show speakers and their jobs<br/>
 event dates<br/>
@@ -62,7 +62,7 @@ Sign up for this event<br/>
   * choose what event to sign up
   * show that "You have signed up for ..."
 
-# Pre-event - ClassGICC
+## Pre-event - ClassGICC
 desc<br/>
 show classes and their dates<br/>
 Sign up for this event<br/>
@@ -72,19 +72,19 @@ Sign up for this event<br/>
   * choose what event to sign up
   * show that "You have signed up for ..."
 
-# Pre-event - DialoGICC
+## Pre-event - DialoGICC
 desc<br/>
 show speakers and achievements/jobs<br/>
 event dates<br/>
 redirect to IG page<br/>
 
-# Pre-event - MiniCC
+## Pre-event - MiniCC
 desc<br/>
 link for guidelines<br/>
 timeline<br/>
 redirect to IG page<br/>
 
-# Competition
+## Competition
 Competition description	<br/>	
 Who you will solve cases for<br/>
 Guidelines<br/>
@@ -92,7 +92,7 @@ Register button<br/>
 Competition timeline<br/>
 Awards<br/>
 
-# Footer
+## Footer
 (namanya footer bukan ya?)
 * Logo GICC
 * Logo Karinov
