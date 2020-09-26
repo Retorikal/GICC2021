@@ -32,4 +32,6 @@ urlpatterns = [
         auth_views.LogoutView.as_view(template_name="users/logout.html"),
         name="logout",
     ),
+    path("pre_events/", include("pre_events.urls")),
+    path("competition/", include("competition.urls")),
 ]
