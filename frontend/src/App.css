@@ -1,0 +1,92 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  padding: 0;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  background-color: #213665;
+  color: white;
+  width: 100%;
+  padding: 10px 0;
+  margin: 30px 0;
+}
+
+.title h1 {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+
+header {
+  padding-top: 30px;
+  min-height: 70px;
+}
+
+header a {
+  text-decoration: none;
+  color: black;
+}
+
+header li {
+  float: left;
+  display: inline;
+  padding: 0 20px 0 20px;
+}
+
+header #home {
+  float: left;
+}
+
+header #home h1 {
+  margin: 0;
+}
+
+header nav {
+  float: right;
+  margin-top: 10px;
+}
+
+#description h1 {
+  font-size: 55px;
+}
+
+#description .desc-box {
+  float: left;
+  width: 30%;
+  padding: 10px 10px 10px 0;
+}
+
+#pre .pre-box img {
+  width: 200px;
+}
+
+#pre .pre-box {
+  float: left;
+  width: 20%;
+  margin-right: 40px;
+}
+
+#competition p {
+  text-align: center;
+  width: 70%;
+  padding-left: 180px;
+  font-size: 20px;
+}
+#competition img {
+  padding-left: 180px;
+  width: 750px;
+}
