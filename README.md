@@ -6,7 +6,7 @@ Homepage and such. Orang pertama kali masuk website, masuk ke page yang dipegang
 
 # Struktur
 ## Menu Bar
-Home - Pre Events - Competition - Sign in button
+Home - Pre Events - Competition - Sign in button (not logged in) / User (logged in)
 
 Dropdown pre-events:
 * StrateGICC   
