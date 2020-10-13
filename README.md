@@ -4,6 +4,17 @@ Repo buat kerja bareng website GICC 2021
 # Landing
 Homepage and such. Orang pertama kali masuk website, masuk ke page yang dipegang app Landing. Pokoknya kalo belum perlu login, arahnya kesini.
 
+# Authentication API
+https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html
+
+Harap diperhatikan dan install library terkait dengan:
+    pip install djangorestframework-simplejwt
+Atau kalo pake linux yang versi pythonya harus disebut:
+    pip3 install djangorestframework-simplejwt
+
+Bikin view yang requires authentication:
+https://simpleisbetterthancomplex.com/tutorial/2018/12/19/how-to-use-jwt-authentication-with-django-rest-framework.html
+
 # Struktur
 ## Menu Bar
 Home - Pre Events - Competition - Sign in button (not logged in) / User (logged in)

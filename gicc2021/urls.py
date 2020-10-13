@@ -20,7 +20,15 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+
+    # Might be removed: Landing views will be coded into frontend
     path("", include("landing.urls")),
+
+    # Event app
+    path("pre_events/", include("pre_events.urls")),
+    path("competition/", include("competition.urls")),
+
+    # Default auth url (Would probably be removed soon)
     path("register/", user_views.register, name="register"),
     path(
         "login/",
@@ -32,6 +40,8 @@ urlpatterns = [
         auth_views.LogoutView.as_view(template_name="users/logout.html"),
         name="logout",
     ),
-    path("pre_events/", include("pre_events.urls")),
-    path("competition/", include("competition.urls")),
+
+    # JWT Auth URL
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
