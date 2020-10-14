@@ -1,10 +1,10 @@
 from django.urls import path
 from . import views
+from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     path('', views.home, name='pre-events-home'),
-    path('StrateGICC/', views.StrateGICC, name='StrateGICC'),
-    path('GICClass/', views.GICClass, name='GICClass'),
-    path('DialoGICC/', views.DialoGICC, name='DialoGICC'),
-    path('MiniCC/', views.MiniCC, name='MiniCC'),
+    path('info/<str:name>', views.PreeventInfo.as_view()),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
