@@ -9,8 +9,13 @@ https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started
 
 Harap diperhatikan dan install library terkait dengan:
     pip install djangorestframework-simplejwt
-Atau kalo pake linux yang versi pythonya harus disebut:
-    pip3 install djangorestframework-simplejwt
+    pip install django-crispy-forms
+Atau kalo pake linux yang versi pythonya harus disebut, ganti dengan pip3
+
+Ngetes JWT:
+(Via django shell)# User.objects.create_user('djarwotedjo', 'lennon@thebeatles.com', 'djarwoPass')
+
+(Via terminal)$ curl -X POST -H "Content-Type: application/json" -d '{"username": "djarwotedjo", "password": "djarwoPass"}' http://localhost:8000/api/token/
 
 Bikin view yang requires authentication:
 https://simpleisbetterthancomplex.com/tutorial/2018/12/19/how-to-use-jwt-authentication-with-django-rest-framework.html
