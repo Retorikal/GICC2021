@@ -3,26 +3,23 @@ from django.shortcuts import render
 from rest_framework import views
 from rest_framework.response import Response
 from pre_events.models import Preevent
-from pre_events.serializers import preevent_information
+from pre_events.serializers import Preevent_information
+from users.models import Participant
 
 class PreeventInfo(views.APIView):
-    def get_object(self, name):
-        try:
-            return Preevent.objects.get(name=name)
-        except Preevent.DoesNotExist:
-            raise Http404
-
-    def get(self, request, name, format=None):
-        event = self.get_object(name)
-        serializer = preevent_information(event)
+    def get(self, request, eventname, format=None):
+        event = Preevent.objects.get(name=eventname)
+        preEinfo = {"name":event.name, "reg_users":event.regis_users.count()}
+        serializer = Preevent_information(preEinfo)
         return Response(serializer.data)
+
+
 
 from django.http import HttpResponse
 
 def home(request):
     return HttpResponse('<h1>Pre-Events</h1>')
 '''
-
 def StrateGICC(request):
     return HttpResponse('<h1>StrateGICC</h1>')
 
