@@ -1,11 +1,22 @@
+# Login
 curl \
 	-X POST \
 	-H "Content-Type: application/json" \
-	-d '{"username": "davidattenborough", "password": "boatymcboatface"}' \
-	http://localhost:8000/token/obtain
+	-d '{"username": "juminten", "password": "pecintatedjo"}' \
+	http://localhost:8000/token/
 
+# Daftar
 curl \
 	-X POST \
-	-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX3BrIjoxLCJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiY29sZF9zdHVmZiI6IuKYgyIsImV4cCI6MTIzNDU2LCJqdGkiOiJmZDJmOWQ1ZTFhN2M0MmU4OTQ5MzVlMzYyYmNhOGJjYSJ9.NHlztMGER7UADHZJlxNG0WSi22a2KaYSfd1S-AuT7lU" \
-  	-d '{"name": "StrateGICC","action": "signup"}'
-  	http://localhost:8000/some-protected-view/
+	-H "Content-Type: application/json" \
+	-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjAzNzI3NDA0LCJqdGkiOiJmNzg5ZTg5MmJiYTY0MWZlYTNmMGMzZjA3NGRhMTBjYyIsInVzZXJfaWQiOjJ9._w8-lfIsmNlNgH-xmt5P13B4lRW_qWoxmiw6GWXTYcA" \
+  	-d '{"name": "GICClass","action": "signup"}'\
+  	http://localhost:8000/preevents/signup/
+
+# Mundur
+curl \
+	-X POST \
+	-H "Content-Type: application/json" \
+	-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjAzNzI2NDMxLCJqdGkiOiJlYTYzZmZlNjg2N2M0YWZhYjU2NWQ0MDI3NjBkODU2MyIsInVzZXJfaWQiOjJ9.sWa6WhuuTOSCtttRi5fvCfQSnh6ap0p2lcNeAFtbVwM" \
+  	-d '{"name": "GICClass","action": "withdraw"}'\
+  	http://localhost:8000/preevents/signup/

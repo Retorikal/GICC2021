@@ -20,11 +20,6 @@ class PreeventSignup(views.APIView):
 
         for event in events:
             preEInfos.append({"name":event.name, "reg_users":event.reg_users.count()})
-        
-        if not request.user.is_authenticated:
-            print("Anon.")
-        else:
-            print(request.user)
 
         serializer = PreInfoSerializer(preEInfos, many=True)
         return Response(serializer.data)
@@ -33,22 +28,24 @@ class PreeventSignup(views.APIView):
         deserializer = PreSignupSerializer(data = request.data)
 
         if request.user.is_authenticated:
-            e = Preevent.objects.get(name=deserializer.name)
-            p = request.user.participant
+            if deserializer.is_valid():
 
-            p.signedup_preevent = e
-            p.save()
+                action = deserializer.validated_data["action"]
+                e = Preevent.objects.get(name=deserializer.validated_data["name"])
+                p = request.user.participant
+
+                if action == "signup":
+                    p.signedup_preevent.add(e)
+                elif action == "withdraw":
+                    p.signedup_preevent.remove(e)
+
+                p.save()
+                
+                return Response(deserializer.data)
+            else:
+                return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST) # Harusnya forbidden
-
-
-        if deserializer.is_valid():
-            return Response(deserializer.data)
-        else:
-            return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-        
 
 def home(request):
     return HttpResponse('<h1>Pre-Events</h1>')

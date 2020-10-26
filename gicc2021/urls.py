@@ -22,11 +22,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 urlpatterns = [
     path("admin/", admin.site.urls),
 
-    # Might be removed: Landing views will be coded into frontend
-    path("", include("landing.urls")),
-
     # Event app
-    path("pre_events/", include("pre_events.urls")),
+    path("preevents/", include("pre_events.urls")),
     path("competition/", include("competition.urls")),
 
     # Default auth url (Would probably be removed soon)
@@ -43,6 +40,6 @@ urlpatterns = [
     ),
 
     # JWT Auth URL
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

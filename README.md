@@ -4,6 +4,9 @@ Repo buat kerja bareng website GICC 2021
 # Landing
 Homepage and such. Orang pertama kali masuk website, masuk ke page yang dipegang app Landing. Pokoknya kalo belum perlu login, arahnya kesini.
 
+# Referensi REST API
+https://docs.google.com/document/d/1uAhkyZE2rEQ51B1ZSnoqEZa90Kw1M95MyqPmJDGlAb4/edit
+
 # Authentication API
 https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html
 

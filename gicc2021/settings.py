@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "landing.apps.LandingConfig",
     "users.apps.UsersConfig",
     "pre_events.apps.PreEventsConfig",
     #"crispy_forms",

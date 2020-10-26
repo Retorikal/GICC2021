@@ -6,6 +6,7 @@ from pre_events.models import Preevent
 
 class Participant(models.Model):
     user = models.OneToOneField(User, related_name='participant', on_delete=models.CASCADE)
-    signedup_preevent = models.ForeignKey(Preevent, on_delete=models.CASCADE, related_name='reg_users', null=True)
+    signedup_preevent = models.ManyToManyField(Preevent, related_name='reg_users')
     
-    
+    def __str__(self):
+        return self.user.username    
