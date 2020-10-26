@@ -1,34 +1,55 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
+# Rest framework
+from django.http import Http404
 from rest_framework import views
 from rest_framework.response import Response
-from pre_events.models import Preevent
-from pre_events.serializers import Preevent_information
+from rest_framework import status
+
+# Models
+from pre_events.models import *
+from pre_events.serializers import *
 from users.models import Participant
 
-class PreeventInfo(views.APIView):
-    def get(self, request, eventname, format=None):
-        event = Preevent.objects.get(name=eventname)
-        preEinfo = {"name":event.name, "reg_users":event.regis_users.count()}
-        serializer = Preevent_information(preEinfo)
+class PreeventSignup(views.APIView):
+    def get(self, request, format=None):
+        #event = Preevent.objects.get(name=eventname)
+        events = Preevent.objects.all()
+        preEInfos= []
+
+        for event in events:
+            preEInfos.append({"name":event.name, "reg_users":event.reg_users.count()})
+        
+        if not request.user.is_authenticated:
+            print("Anon.")
+        else:
+            print(request.user)
+
+        serializer = PreInfoSerializer(preEInfos, many=True)
         return Response(serializer.data)
 
+    def post(self, request, format=None):
+        deserializer = PreSignupSerializer(data = request.data)
+
+        if request.user.is_authenticated:
+            e = Preevent.objects.get(name=deserializer.name)
+            p = request.user.participant
+
+            p.signedup_preevent = e
+            p.save()
+        else:
+            return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST) # Harusnya forbidden
 
 
-from django.http import HttpResponse
+        if deserializer.is_valid():
+            return Response(deserializer.data)
+        else:
+            return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+        
 
 def home(request):
     return HttpResponse('<h1>Pre-Events</h1>')
-'''
-def StrateGICC(request):
-    return HttpResponse('<h1>StrateGICC</h1>')
 
-def GICClass(request):
-    return HttpResponse('<h1>GICClass</h1>')
-
-def DialoGICC(request):
-    return HttpResponse('<h1>DialoGICC</h1>')
-
-def MiniCC(request):
-    return HttpResponse('<h1>MiniCC</h1>')
-'''
