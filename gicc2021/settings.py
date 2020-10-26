@@ -34,7 +34,10 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "landing.apps.LandingConfig",
     "users.apps.UsersConfig",
-    "crispy_forms",
+    "pre_events.apps.PreEventsConfig",
+    #"crispy_forms",
+    'rest_framework',
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

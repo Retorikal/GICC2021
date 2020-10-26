@@ -1,0 +1,11 @@
+curl \
+	-X POST \
+	-H "Content-Type: application/json" \
+	-d '{"username": "davidattenborough", "password": "boatymcboatface"}' \
+	http://localhost:8000/token/obtain
+
+curl \
+	-X POST \
+	-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX3BrIjoxLCJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiY29sZF9zdHVmZiI6IuKYgyIsImV4cCI6MTIzNDU2LCJqdGkiOiJmZDJmOWQ1ZTFhN2M0MmU4OTQ5MzVlMzYyYmNhOGJjYSJ9.NHlztMGER7UADHZJlxNG0WSi22a2KaYSfd1S-AuT7lU" \
+  	-d '{"name": "StrateGICC","action": "signup"}'
+  	http://localhost:8000/some-protected-view/
