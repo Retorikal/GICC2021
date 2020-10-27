@@ -12,7 +12,7 @@ class PreInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Preevent
-        fields = ['name', 'reg_users']
+        fields = ['name', 'desc', 'reg_users']
 
 class PreSignupSerializer(serializers.Serializer):
     name = serializers.CharField()

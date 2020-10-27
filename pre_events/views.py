@@ -19,7 +19,7 @@ class PreeventSignup(views.APIView):
         preEInfos= []
 
         for event in events:
-            preEInfos.append({"name":event.name, "reg_users":event.reg_users.count()})
+            preEInfos.append({"name":event.name, "desc":event.desc, "reg_users":event.reg_users.count()})
 
         serializer = PreInfoSerializer(preEInfos, many=True)
         return Response(serializer.data)
