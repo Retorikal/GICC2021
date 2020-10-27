@@ -4,10 +4,6 @@ from pre_events.models import Preevent
 
 # General participant information
 class Participant(models.Model):
-    TOPIC_CHOICES=[
-        ('OP', 'Operations'),
-    ]
-
     # Identity
     user = models.OneToOneField(User, related_name='participant', on_delete=models.CASCADE)
     # username
@@ -23,19 +19,18 @@ class Participant(models.Model):
     # Preevent-related fields
     signedup_preevent = models.ManyToManyField(Preevent, related_name='reg_users')
 
-    # Competition-related fields
-    is_competitor = models.BooleanField(default=False) # Udah daftar
-    adv_to_finals = models.BooleanField(default=False) # Keterangan lolos final
-    topic = models.CharField(max_length=31, choices=TOPIC_CHOICES)
-    teammates = models.ManyToManyField("self", blank=True) # Teammate kalo lolos
-    proposal = models.URLField(default="") # 
-
     def __str__(self):
         return self.user.username
 
-# Payment information ever made by this account
-class Payment(models.Model):
+# Validation information ever made by this account: Twibbons, transfers..
+class Validation(models.Model):
+    TYPE_CHOICES=[
+        ('TRF', 'Transfer'),
+        ('TWB', 'Twibbon'),
+    ]
+
     owner = models.ForeignKey(Participant, related_name='payments', on_delete=models.CASCADE)
-    purpose = models.CharField(max_length=255) # Nama pre-event atau "Competition"
+    event = models.CharField(max_length=255) # Nama pre-event atau "Competition"
+    purpose = models.CharField(max_length=31, choices=TYPE_CHOICES)
     proof = models.URLField(default="") # Link bukti transfer di file uploader, berupa gambar
     verified = models.BooleanField(default=False) # Pembayaran sudah dikroscek panit
