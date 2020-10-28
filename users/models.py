@@ -9,12 +9,14 @@ class Participant(models.Model):
     # username
     # first_name: Nama depan
     # last_name: nama lengkap
-    # email
     
     nim = models.CharField(max_length=8)
-    line = models.CharField(max_length=127)
     uni = models.CharField(max_length=255)
     major = models.CharField(max_length=255)
+
+    # Contact info + email on user model
+    phone_no = models.CharField(max_length=31)
+    line = models.CharField(max_length=127)
 
     # Preevent-related fields
     signedup_preevent = models.ManyToManyField(Preevent, related_name='reg_users')
@@ -27,10 +29,13 @@ class Validation(models.Model):
     TYPE_CHOICES=[
         ('TRF', 'Transfer'),
         ('TWB', 'Twibbon'),
+        ('KTM', 'Kartu Pelajar'),
+        ('PRO', 'Proposal'),
     ]
 
     owner = models.ForeignKey(Participant, related_name='payments', on_delete=models.CASCADE)
     event = models.CharField(max_length=255) # Nama pre-event atau "Competition"
     purpose = models.CharField(max_length=31, choices=TYPE_CHOICES)
+    info = models.TextField(default="") # 
     proof = models.URLField(default="") # Link bukti transfer di file uploader, berupa gambar
     verified = models.BooleanField(default=False) # Pembayaran sudah dikroscek panit

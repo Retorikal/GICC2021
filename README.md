@@ -33,11 +33,34 @@ Dropdown pre-events:
 * DialoGICC
 * MiniCC
 
-## Sign in Page
-* email
-* password
-* forget password
-* dont have an account? sign up
+## Sign in flow buat main event & pre event
+# Bikin account:
+* Username
+* Email
+* Nama depan
+* Nama lengkap
+* Password + Confirmation
+
+# Daftar main event:
+* Dari home page: di section detail lomba ada: link guidebook, penjelasan lomba dan tombol [SIGN UP]
+* Klik: diarahin ke signup page, lalu diarahin ke userpanel bagian Main event.
+* di userpanel main event ada link guidebook (iya, lagi), link twibbon, dan keterangan "Dengan melanjutkan, anda berarti telah setuju dengan persyaratan yang telah disebutkan di Guidebook." (atau kalo mau bahasa inggris sabi juga) + tombol [I'm ready to join GICC!]
+* Klik: accountnya bakal dibikinin objek Competitor di backend, dan dibawahnya bakal muncul tulisan "Please complete the following information" form informasi tambahan: NIM, nomor HP, sektor yang mau diambil, sama 3 upload field: Bukti pembayaran, bukti twibbon, dan foto KTM, paling bawah tombol save.
+* Ekstra gimik buat form informasi tambahan: kalau tombol save diklik, dia bikin request ke API di /competition/signup, dan melakukan hal berikut: 
+	* Waktu form dibuka, dia pre-filled dengan informasi yang sejauh ini udah disave (buat gambar, thumbnail+link)
+	* Kalau fieldnya udah lengkap, bakal muncul banner "We will verify your information soon. Stay tuned!"
+	* Kalau belum, masih bisa submit, tapi bannernya cuma "Information saved."
+
+# Daftar pre event:
+* Dari home page: di section detail preevent ada: penjelasan event dan tombol [SIGN UP]
+* Klik: diarahin ke signup page, lalu diarahin ke userpanel bagian Preevent tertentu.
+* di userpanel main event ada link guidebook (iya, lagi), link twibbon, dan keterangan "Dengan melanjutkan, anda berarti telah setuju dengan persyaratan yang telah disebutkan di Guidebook." (atau kalo mau bahasa inggris sabi juga) + tombol [I'm ready to join GICC!]
+* Klik: dibawahnya bakal muncul tulisan "Please complete the following information. Meanwhile, please join us at (link grup WA)" dan form informasi tambahan: univ, jurusan, upload field bukti pembayaran, + tombol save.
+* Ekstra gimik buat form informasi tambahan: kalau tombol save diklik, dia bikin request ke API di /preevent/signup, dan melakukan hal berikut: 
+	* Waktu form dibuka, dia pre-filled dengan informasi yang sejauh ini udah disave (buat gambar, thumbnail+link)
+	* Kalau fieldnya udah lengkap, bakal muncul banner "We will verify your information soon. Stay tuned!"
+	* Kalau belum, masih bisa submit, tapi bannernya cuma "Information saved."
+
 
 ## User Profile
 * Sesuai Django

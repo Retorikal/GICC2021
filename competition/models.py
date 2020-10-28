@@ -5,16 +5,16 @@ from users.models import Participant
 class Competitor(models.Model):
     SECTOR_CHOICES=[
         ('OP', 'Operations'),
+        ('MA', 'Marketing'),
+        ('DN', 'Dunno'),
     ]
 
 	Participant = models.OneToOneField(Participant, related_name='comp', on_delete=models.CASCADE)
 
 	# Prerequisite
-
-	# Informasi terbatas kompetitor
-
-	# Informasi prelim
     sector = models.CharField(max_length=31, choices=SECTOR_CHOICES)
+    
+    # Competition submission
     proposal = models.URLField(default="") 
 
     # Informasi final
