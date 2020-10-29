@@ -62,6 +62,9 @@ class ImageUploadParser(FileUploadParser):
 class UploadPayment(views.APIView):
     parser_class = (ImageUploadParser,)
 
+    def get(self, request, format=None):
+        return self.put(request)
+
     def put(self, request, format=None):
         if 'file' not in request.data:
             raise ParseError("Empty content")
