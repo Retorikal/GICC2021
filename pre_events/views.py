@@ -12,6 +12,10 @@ from pre_events.models import *
 from pre_events.serializers import *
 from users.models import Participant
 
+from rest_framework.exceptions import ParseError
+from rest_framework.parsers import FileUploadParser
+from PIL import Image
+
 class PreeventSignup(views.APIView):
     def get(self, request, format=None):
         #event = Preevent.objects.get(name=eventname)
@@ -49,4 +53,53 @@ class PreeventSignup(views.APIView):
 
 def home(request):
     return HttpResponse('<h1>Pre-Events</h1>')
+
+# Image Validation
+
+class ImageUploadParser(FileUploadParser):
+    media_type = 'image/*'
+
+class UploadPayment(views.APIView):
+    parser_class = (ImageUploadParser,)
+
+    def put(self, request, format=None):
+        if 'file' not in request.data:
+            raise ParseError("Empty content")
+
+        f = request.data['file']
+
+        try:
+            img = Image.open(f)
+            img.verify()
+        except:
+            raise ParseError("Unsupported image type")
+
+        Preevent.payment.save(f.name, f, save=True)
+        return Response(status=status.HTTP_201_CREATED)
+
+    def delete(self, request, format=None):
+        Preevent.payment.delete(save=True)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class UploadTwibbon(views.APIView):
+    parser_class = (ImageUploadParser,)
+
+    def put(self, request, format=None):
+        if 'file' not in request.data:
+            raise ParseError("Empty content")
+
+        f = request.data['file']
+
+        try:
+            img = Image.open(f)
+            img.verify()
+        except:
+            raise ParseError("Unsupported image type")
+
+        Preevent.twibbon.save(f.name, f, save=True)
+        return Response(status=status.HTTP_201_CREATED)
+
+    def delete(self, request, format=None):
+        Preevent.twibbon.delete(save=True)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 

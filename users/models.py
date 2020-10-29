@@ -10,13 +10,13 @@ class Participant(models.Model):
     # first_name: Nama depan
     # last_name: nama lengkap
     
-    nim = models.CharField(max_length=8)
-    uni = models.CharField(max_length=255)
-    major = models.CharField(max_length=255)
+    nim = models.CharField(max_length=8, null=True)
+    uni = models.CharField(max_length=255, null=True)
+    major = models.CharField(max_length=255, null=True)
 
     # Contact info + email on user model
-    phone_no = models.CharField(max_length=31)
-    line = models.CharField(max_length=127)
+    phone_no = models.CharField(max_length=31, null=True)
+    line = models.CharField(max_length=127, null=True)
 
     # Preevent-related fields
     signedup_preevent = models.ManyToManyField(Preevent, related_name='reg_users')
