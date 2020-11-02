@@ -1,92 +1,620 @@
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 15px;
-  padding: 0;
-  margin: 0;
-  line-height: 1.5;
-}
-
 .container {
-  width: 80%;
-  margin: auto;
-  overflow: hidden;
+  padding: 0.8em 1.2em;
 }
 
-ul {
-  margin: 0;
-  padding: 0;
+.logo {
+  width: 2.1em;
 }
 
-.title {
-  background-color: #213665;
-  color: white;
-  width: 100%;
-  padding: 10px 0;
-  margin: 30px 0;
-}
-
-.title h1 {
-  width: 80%;
-  margin: auto;
-  overflow: hidden;
+.hide-mobile {
+  display: none;
 }
 
 header {
-  padding-top: 30px;
-  min-height: 70px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8em 1.2em;
 }
 
-header a {
-  text-decoration: none;
-  color: black;
+.menu {
+  width: 25px;
+  margin: 0.5em auto 0.5em 25%;
+}
+.hero-li {
+  margin-bottom: 1.4em;
+}
+.hero-p {
+  font-weight: 100;
 }
 
-header li {
-  float: left;
-  display: inline;
-  padding: 0 20px 0 20px;
+.hero-span {
+  font-weight: 900;
 }
 
-header #home {
-  float: left;
+.title {
+  position: relative;
+  font-size: 14vw;
+  margin-bottom: 0.7em;
+  font-weight: bold;
 }
 
-header #home h1 {
+.title .shadow-1 {
+  position: absolute;
+  top: 5vw;
+  opacity: 0.15;
+}
+
+.title .shadow-2 {
+  position: absolute;
+  top: 10vw;
+  opacity: 0.05;
+}
+
+.blue-container {
+  background: #213665;
+  color: white;
+  margin-bottom: 1em;
+}
+
+.blue-container .container {
+  padding: 1.2em 1.2em;
+}
+
+.blue-container .container h2 {
+  margin: 0 auto;
+}
+
+.preevent li {
+  text-align: center;
+  margin-bottom: 3em;
+}
+
+.preevent img {
+  width: 70%;
+}
+
+.preevent h3 {
+  font-size: 2.5em;
+  margin: 0.4em 0;
+}
+
+.preevent p {
+  margin-top: -1em;
+}
+
+.landing-competition {
+  text-align: center;
+}
+
+.landing-competition-quote {
+  background: url("images/building-landing.jpg");
+  background-size: 100%;
+  color: white;
+  font-weight: bold;
+  font-size: 7vw;
+  padding: 0.1em 0;
+  background-position: 50% 15%;
+  margin-bottom: 0.8em;
+}
+
+.landing-competition-quote p {
+  padding: 0em 0em;
+  margin: 0.6em;
+  background: rgba(94, 94, 94, 0.5);
+}
+
+.landing-competition span {
+  font-weight: 900;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login .title {
+  margin-bottom: 0.7em;
+}
+
+.login .textbox {
+  margin: 0.3em 0;
+}
+
+.textbox {
+  width: 50%;
+}
+
+.textbox input {
+  border: none;
+  border-radius: 0.3em;
+  outline: none;
+  padding: 0.3em 0.3em;
+  background: #e0e0e0;
+  font-size: 1em;
+  color: #213665;
+  font-family: "Overpass";
+  width: 100%;
+}
+
+.forget-pw {
+  width: 50%;
+}
+
+.forget-pw ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.forget-pw ul li {
+  margin-right: -0.7em;
+}
+
+.login .login-btn {
+  margin-top: 1.5em;
+  width: 20%;
+  outline: none;
+  border: none;
+  padding: 0.3em 1em;
+  border-radius: 0.2em;
+  font-size: 1em;
+  background: #213665;
+  color: white;
+  font-family: "Overpass";
+}
+
+.profile .title {
+  font-size: 9vw;
+}
+
+.profile .title .shadow-1 {
+  top: 3vw;
+}
+
+.profile .title .shadow-2 {
+  top: 6vw;
+}
+
+.profile .textbox {
+  margin-bottom: 1em;
+  width: 75%;
+}
+
+.profile .textbox h4 {
+  margin: 1.3em 0 0.3em;
+  font-size: 1.5em;
+}
+
+.profile .textbox input {
+  margin: -2em 0;
+}
+
+.textbox p {
+  border: none;
+  border-radius: 0.3em;
+  outline: none;
+  padding: 0.3em 0.3em;
+  background: #e0e0e0;
+  font-size: 1em;
+  color: #213665;
+  font-family: "Overpass";
+  width: 100%;
+  margin: 0.5em 0;
+}
+
+.strategicc-hero p {
+  margin-bottom: 3em;
+}
+
+.strategicc-hero span {
+  font-weight: 900;
+}
+
+.strategicc-hero .speakers {
+  text-align: center;
+}
+
+.strategicc-hero .speakers img {
+  width: 35%;
+  border-radius: 50%;
+}
+
+.strategicc-hero .speakers h3 {
+  margin: 0;
+  padding: 0;
+}
+
+.strategicc-hero .speakers h4 {
+  margin: 0;
+  padding: 0;
+}
+
+.strategicc-hero .speakers li {
+  margin-bottom: 4em;
+}
+
+.strategicc-timeline {
+  text-align: center;
+  margin: 5em 0;
+}
+
+.strategicc-timeline h2 {
+  font-size: 2.5em;
+  margin: 0;
+  font-weight: 100;
+}
+
+.strategicc-timeline h1 {
+  font-size: 2.5em;
+  margin: 0;
+  font-weight: 900;
+}
+
+.strategicc-timeline button {
+  margin-top: 1.5em;
+
+  outline: none;
+  border: none;
+  padding: 0.7em 1em;
+  border-radius: 0.2em;
+  font-size: 1.5em;
+  background: #213665;
+  color: white;
+  font-family: "Overpass";
+}
+
+.minicc-timeline {
+  text-align: center;
+  margin: 5em 0;
+}
+
+.minicc-timeline h2 {
+  font-size: 2.5em;
+  margin: 0;
+  font-weight: 100;
+}
+
+.minicc-timeline h1 {
+  font-size: 2.5em;
+  margin: 0;
+  font-weight: 900;
+}
+
+.minicc-timeline button {
+  margin: 1em;
+  outline: none;
+  border: none;
+  padding: 0.4em 1em;
+  border-radius: 0.2em;
+  font-size: 1.1em;
+  background: #213665;
+  color: white;
+  font-family: "Overpass";
+  width: 40%;
+}
+
+.competition-hero {
+  margin-bottom: 9em;
+}
+
+.competition-hero p {
+  font-size: 1.2em;
+}
+
+.competition-hero span {
+  font-weight: 900;
+}
+
+.competition-guidelines {
+  text-align: center;
+}
+
+.competition-guidelines p {
+  margin-top: -1em;
+}
+
+.competition-guidelines li {
+  margin-bottom: 4em;
+}
+
+.competition-awards {
+  text-align: center;
+  margin: 1em 0;
+}
+
+.competition-awards h2 {
+  font-size: 2.5em;
+  margin: 0;
+  font-weight: 100;
+}
+
+.competition-awards h1 {
+  font-size: 2.5em;
+  margin: 0;
+  font-weight: 900;
+}
+
+.competition-awards img {
+  width: 35%;
+  border-radius: 50%;
+}
+
+.competition-awards h3 {
+  padding: 0;
+  margin: 0;
+}
+.competition-awards h4 {
+  padding: 0;
   margin: 0;
 }
 
-header nav {
-  float: right;
-  margin-top: 10px;
+.competition-awards li {
+  margin: 3em 0;
 }
 
-#description h1 {
-  font-size: 55px;
+.competition-hero .guidebook-button {
+  display: flex;
+  justify-content: center;
 }
 
-#description .desc-box {
-  float: left;
-  width: 30%;
-  padding: 10px 10px 10px 0;
-}
-
-#pre .pre-box img {
-  width: 200px;
-}
-
-#pre .pre-box {
-  float: left;
-  width: 20%;
-  margin-right: 40px;
-}
-
-#competition p {
+.competition-hero .guidebook-button button {
+  margin-top: 1.5em;
+  outline: none;
+  border: none;
+  padding: 0.3em 1em;
+  border-radius: 0.2em;
+  font-size: 1.2em;
+  background: #213665;
+  color: white;
+  font-family: "Overpass";
   text-align: center;
-  width: 70%;
-  padding-left: 180px;
-  font-size: 20px;
 }
-#competition img {
-  padding-left: 180px;
-  width: 750px;
+
+@media only screen and (min-width: 650px) {
+  .container {
+    padding: 1.6em 6em;
+  }
+
+  .hide-desktop {
+    display: none;
+  }
+
+  .hide-mobile {
+    display: initial;
+  }
+
+  header {
+    padding: 1.6em 3em;
+  }
+
+  header .logo {
+    width: 3.5em;
+  }
+
+  header nav {
+    margin-top: 1.4em;
+  }
+
+  nav ul {
+    font-size: 1.3em;
+  }
+
+  nav ul li {
+    display: inline;
+    padding: 4em 1.5em;
+  }
+
+  .title {
+    font-size: 9vw;
+  }
+
+  .title .shadow-1 {
+    top: 3vw;
+  }
+
+  .title .shadow-2 {
+    top: 6vw;
+  }
+
+  .hero ul {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .hero p {
+    font-size: 1.4em;
+  }
+
+  .hero ul li {
+    width: 30%;
+  }
+
+  .hero {
+    padding-bottom: 5em;
+  }
+
+  .preevent ul {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+  }
+
+  .preevent li {
+    text-align: justify;
+    width: 22%;
+  }
+
+  .preevent p {
+    font-size: 1.2em;
+  }
+
+  .preevent img {
+    width: 100%;
+  }
+
+  .preevent .learn-more {
+    font-size: 1.2em;
+    font-weight: 700;
+  }
+
+  .landing-competition {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ld-comp-quote-top {
+    font-size: 1.7em;
+    width: 70%;
+  }
+
+  .landing-competition-quote p {
+    font-size: 0.7em;
+  }
+
+  .landing-competition .learn-more {
+    font-size: 2em;
+  }
+
+  .competition-hero p {
+    font-size: 2em;
+  }
+
+  .competition-hero .guidebook-button button {
+    margin-top: 1.5em;
+    padding: 0.6em 2em;
+    border-radius: 0.2em;
+    font-size: 2em;
+  }
+
+  .strategicc-timeline h2 {
+    font-size: 4em;
+  }
+
+  .strategicc-timeline h1 {
+    font-size: 4em;
+  }
+
+  .strategicc-timeline button {
+    margin-top: 1.5em;
+    padding: 0.6em 2em;
+    border-radius: 0.2em;
+    font-size: 2em;
+  }
+
+  .competition-awards h2 {
+    font-size: 4em;
+  }
+
+  .competition-awards h1 {
+    font-size: 4em;
+  }
+
+  .competition-awards ul {
+    display: flex;
+    justify-content: center;
+  }
+
+  .competition-awards ul li {
+    width: 30%;
+  }
+
+  .competition-awards img {
+    width: 50%;
+  }
+
+  .competition-awards h3 {
+    font-size: 2.5em;
+  }
+
+  .competition-awards h4 {
+    font-size: 2em;
+    font-weight: 100;
+  }
+
+  .login .textbox {
+    margin: 0.3em 0;
+  }
+
+  .textbox {
+    width: 35%;
+  }
+
+  .textbox input {
+    padding: 0.6em;
+    font-size: 1.3em;
+    width: 100%;
+  }
+
+  .forget-pw {
+    width: 35%;
+  }
+
+  .forget-pw ul li {
+    margin-right: -0.7em;
+    font-size: 1.3em;
+  }
+
+  .login .login-btn {
+    margin-top: 1.5em;
+    width: 20%;
+    outline: none;
+    border: none;
+    padding: 0.7em 1em;
+    font-size: 1.5em;
+  }
+
+  .profile .title {
+    font-size: 7.5vw;
+  }
+
+  .profile .title .shadow-1 {
+    top: 2.5vw;
+  }
+
+  .profile .title .shadow-2 {
+    top: 5vw;
+  }
+
+  .strategicc-hero p {
+    font-size: 1.6em;
+  }
+
+  .strategicc-hero .speakers ul {
+    display: flex;
+    justify-content: center;
+  }
+
+  .strategicc-hero .speakers ul li {
+    width: 33%;
+  }
+
+  .strategicc-hero .speakers img {
+    width: 50%;
+  }
+
+  .strategicc-hero .speakers h3 {
+    font-size: 2.5em;
+  }
+
+  .strategicc-hero .speakers h4 {
+    font-size: 2em;
+    font-weight: 100;
+  }
+
+  .minicc-timeline h2 {
+    font-size: 4em;
+  }
+
+  .minicc-timeline h1 {
+    font-size: 4em;
+  }
+
+  .minicc-timeline button {
+    margin-top: 1.5em;
+    padding: 0.6em 2em;
+    border-radius: 0.2em;
+    font-size: 2em;
+  }
 }
