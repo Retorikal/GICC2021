@@ -5,7 +5,7 @@ import Minicc_Timeline from "../components/Minicc_Timeline";
 
 const Minicc = () => {
   return (
-    <div>
+    <div className = "content">
       <Minicc_Hero />
       <BlueContainer title={"Timeline"} />
       <Minicc_Timeline />

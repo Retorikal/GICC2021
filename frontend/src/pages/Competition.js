@@ -7,7 +7,7 @@ import potrait_1 from "../images/potrait-1.jpg";
 
 const Competition = () => {
   return (
-    <div>
+    <div className="content">
       <div className="container">
         <div className="competition-hero">
           <Title text={"Competition"} />

@@ -5,7 +5,7 @@ import Strategicc_Timeline from "../components/Strategicc_Timeline";
 
 const Strategicc = () => {
   return (
-    <div>
+    <div className="content">
       <Strategicc_Hero />
       <BlueContainer title={"Timeline"} />
       <Strategicc_Timeline />

@@ -6,7 +6,7 @@ import Landing_Competition from "../components/Landing_Competition";
 
 const Landing = () => {
   return (
-    <div>
+    <div className="content">
       <Hero />
       <BlueContainer title={"Pre Events"} />
       <Landing_Preevent />

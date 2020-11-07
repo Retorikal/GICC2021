@@ -19,7 +19,9 @@ from users import views as user_views
 from django.contrib.auth import views as auth_views
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-urlpatterns = [
+
+url_root = "app/"
+url_list = [
     path("admin/", admin.site.urls),
 
     # Event app
@@ -42,4 +44,8 @@ urlpatterns = [
     # JWT Auth URL
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+]
+
+urlpatterns = [
+    path(url_root, include(url_list)),
 ]

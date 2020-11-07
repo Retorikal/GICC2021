@@ -4,7 +4,7 @@ import Title from "../components/Title";
 
 const Login = () => {
   return (
-    <div className="container">
+    <div className="content">
       <div className="login">
         <Title text={"Sign in"} />
         <div className="textbox">
@@ -24,10 +24,10 @@ const Login = () => {
         <div className="forget-pw">
           <ul>
             <li>
-              <Link>forgot password?</Link>
+              <Link to="/register">I haven't made an account</Link>
             </li>
             <li>
-              <Link>sign up here</Link>
+              <Link>I forgot my password</Link>
             </li>
           </ul>
         </div>

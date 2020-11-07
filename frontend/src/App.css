@@ -1,5 +1,27 @@
+*{
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+header {
+  position: fixed;
+  background-color: #ffffff;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8em 1.2em;
+}
+
+.content {
+  padding: 3em 0em 0em;
+}
+
 .container {
   padding: 0.8em 1.2em;
+}
+
+.container h2{
+  text-align: center;
 }
 
 .logo {
@@ -8,12 +30,6 @@
 
 .hide-mobile {
   display: none;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.8em 1.2em;
 }
 
 .menu {
@@ -53,11 +69,11 @@ header {
 .blue-container {
   background: #213665;
   color: white;
-  margin-bottom: 1em;
+  margin: 0em -7em;
 }
 
 .blue-container .container {
-  padding: 1.2em 1.2em;
+  padding: 0.75em 0em;
 }
 
 .blue-container .container h2 {
@@ -122,7 +138,7 @@ header {
 }
 
 .textbox {
-  width: 50%;
+  width: 20em;
 }
 
 .textbox input {
@@ -138,20 +154,20 @@ header {
 }
 
 .forget-pw {
-  width: 50%;
+  text-align: center;
+  margin: 0.3em 0;
 }
 
 .forget-pw ul {
-  display: flex;
   justify-content: space-between;
 }
 
 .forget-pw ul li {
-  margin-right: -0.7em;
+  margin: 1em;
 }
 
 .login .login-btn {
-  margin-top: 1.5em;
+  margin-top: 0.5em;
   width: 20%;
   outline: none;
   border: none;
@@ -370,9 +386,9 @@ header {
   text-align: center;
 }
 
-@media only screen and (min-width: 650px) {
+@media only screen and (min-width: 768px) {
   .container {
-    padding: 1.6em 6em;
+    padding: 1.6em 0em;
   }
 
   .hide-desktop {
@@ -383,16 +399,20 @@ header {
     display: initial;
   }
 
+  .content {
+    padding: 5em 10em 0em;
+  }
+
   header {
-    padding: 1.6em 3em;
+    padding: 0.8em 10em;
   }
 
   header .logo {
-    width: 3.5em;
+    width: 2.5em;
   }
 
   header nav {
-    margin-top: 1.4em;
+    margin: auto 0;
   }
 
   nav ul {
@@ -401,7 +421,7 @@ header {
 
   nav ul li {
     display: inline;
-    padding: 4em 1.5em;
+    padding: 2em 1em;
   }
 
   .title {
@@ -535,10 +555,7 @@ header {
 
   .login .textbox {
     margin: 0.3em 0;
-  }
-
-  .textbox {
-    width: 35%;
+    width: 30em;
   }
 
   .textbox input {
@@ -547,17 +564,11 @@ header {
     width: 100%;
   }
 
-  .forget-pw {
-    width: 35%;
-  }
-
   .forget-pw ul li {
-    margin-right: -0.7em;
     font-size: 1.3em;
   }
 
   .login .login-btn {
-    margin-top: 1.5em;
     width: 20%;
     outline: none;
     border: none;

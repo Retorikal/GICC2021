@@ -5,7 +5,7 @@ import Classgicc_Timeline from "../components/Classgicc_Timeline";
 
 const Classgicc = () => {
   return (
-    <div>
+    <div className = "content">
       <Classgicc_Hero />
       <BlueContainer title={"Timeline"} />
       <Classgicc_Timeline />

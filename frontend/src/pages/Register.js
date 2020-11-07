@@ -4,7 +4,7 @@ import Title from "../components/Title";
 
 const Register = () => {
   return (
-    <div className="container">
+    <div className="content">
       <div className="login">
         <Title text={"Register"} />
         <div className="textbox">
@@ -40,11 +40,11 @@ const Register = () => {
         <div className="forget-pw">
           <ul>
             <li>
-              <Link>Already have account ? Sign in here</Link>
+              <Link to="/login">Already made an account? Sign in here</Link>
             </li>
           </ul>
         </div>
-        <input className="login-btn" type="button" value="Login" />
+        <input className="login-btn" type="button" value="Sign up" />
       </div>
     </div>
   );
