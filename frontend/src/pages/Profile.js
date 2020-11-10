@@ -2,7 +2,7 @@ import React from "react";
 import Title from "../components/Title";
 
 const Profile = () => {
-  const username = "adminadminadmin";
+  const username = "admin";
   const email = "admin@company.com";
   const fullname = "Admin Admin";
   const paymentStatus = true;

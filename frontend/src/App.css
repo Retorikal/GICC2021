@@ -1,4 +1,4 @@
-*{
+* {
   box-sizing: border-box;
   vertical-align: middle;
 }
@@ -12,6 +12,10 @@ header {
   padding: 0.8em 1.2em;
 }
 
+header a {
+  color: #213665;
+}
+
 .content {
   padding: 3em 0em 0em;
 }
@@ -20,7 +24,7 @@ header {
   padding: 0.8em 1.2em;
 }
 
-.container h2{
+.container h2 {
   text-align: center;
 }
 
@@ -627,5 +631,34 @@ header {
     padding: 0.6em 2em;
     border-radius: 0.2em;
     font-size: 2em;
+  }
+
+  .profile-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile-left,
+  .profile-right {
+    width: 100%;
+  }
+
+  .profile .textbox {
+    margin-bottom: 1em;
+    width: 80%;
+  }
+
+  .profile .textbox h4 {
+    margin: 1.3em 0 0.3em;
+    font-size: 1.5em;
+  }
+
+  .profile .textbox input {
+    margin: 0em 0 0;
+  }
+
+  .profile-right p {
+    font-size: 1.2em;
+    padding: 0.7em 0.3em;
   }
 }
