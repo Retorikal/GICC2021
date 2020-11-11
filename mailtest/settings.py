@@ -99,6 +99,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+#Email Setup
+EMAIL_BACKEND = ‘django.core.mail.backends.smtp.EmailBackend’
+EMAIL_HOST = ‘mail.ganeshaicc.my.id’
+EMAIL_USE_SSL = True
+EMAIL_PORT = 465
+EMAIL_HOST_USER = ‘hilmifaww@ganeshaicc.my.id’
+EMAIL_HOST_PASSWORD = ‘muridhilmi27’
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
