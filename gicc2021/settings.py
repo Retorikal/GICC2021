@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = "2ec-1o4#z2%tuy&x*&h4sd7t$%zgt=21$98dj3-$8(9snea3wn"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG =  False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["ganeshaicc.my.id"]
 
 
 # Application definition
@@ -155,11 +155,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = "/static/"
+MEDIA_URL = '/media/'
+
+STATICFILES_DIRS= [BASE_DIR+"/assets",]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-MEDIA_URL = '/media/'
+
 LOGIN_REDIRECT_URL = "landing-home"
