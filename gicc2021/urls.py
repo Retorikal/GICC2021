@@ -20,7 +20,7 @@ from django.contrib.auth import views as auth_views
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
-url_root = "app/"
+url_root = ""
 url_list = [
     path("admin/", admin.site.urls),
 
