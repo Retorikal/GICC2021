@@ -27,9 +27,9 @@ url_list = [
     # Event app
     path("preevents/", include("pre_events.urls")),
     path("competition/", include("competition.urls")),
+    path("user/", include("users.urls")),
 
     # Default auth url (Would probably be removed soon)
-    path("register/", user_views.register, name="register"),
     path(
         "login/",
         auth_views.LoginView.as_view(template_name="users/login.html"),

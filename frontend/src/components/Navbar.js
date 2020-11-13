@@ -10,7 +10,7 @@ const Navbar = () => {
         <img src={logo} alt="GICC" className="logo" />
       </Link>
       <nav>
-        <Link className="hide-desktop">
+        <Link to="/" className="hide-desktop">
           <img src={ham} alt="toggle menu" className="menu" id="menu" />
         </Link>
         <ul className="show-desktop hide-mobile">

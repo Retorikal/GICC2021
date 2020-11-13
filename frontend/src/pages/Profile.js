@@ -1,12 +1,13 @@
 import React from "react";
 import Title from "../components/Title";
 
-const Profile = () => {
-  const username = "admin";
+const Profile = (props) => {
+  const username = "adminadminadmin";
   const email = "admin@company.com";
   const fullname = "Admin Admin";
   const paymentStatus = true;
   const fileSubmission = true;
+
   return (
     <div className="content">
       <div className="container">

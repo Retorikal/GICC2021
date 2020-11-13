@@ -1,20 +1,31 @@
 from rest_framework import serializers
-from .models import *
+from django.contrib.auth.models import User
+from . models import *
 
-class Preevent(models.Model):
+class StatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Participant
-        ordering = [
-        	'user',
-        	'nim',
-        	'line',
-        	'uni',
-        	'major',
-        	'signedup_preevent',
-        	'paid_preevent',
-        	'is_competitor',
-        	'adv_to_finals',
-        	'paid_verified',
-        	'paid_competitor',
-        	'proposal',
+        fields = [
+            'user',
+            'nim',
+            'uni',
+            'major',
+
+            'line',
+            'phone_no',
+
+            'signedup_preevent',
         ]
+
+class SignupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'password',
+            'first_name',
+            'last_name',
+            'email',
+        ]
+
+

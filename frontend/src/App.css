@@ -12,7 +12,11 @@ header {
   padding: 0.8em 1.2em;
 }
 
-header a {
+a:link {
+  color: #213665;
+}
+
+a:visited {
   color: #213665;
 }
 
