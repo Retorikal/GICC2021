@@ -1,18 +1,19 @@
 import React, {Component} from "react";
 import { Route, BrowserRouter as Router } from "react-router-dom";
+import AuthContextProvider, {useAuth, AuthContext} from "context/Auth.js";
 
-import Navbar from "./components/Navbar";
-import Landing from "./pages/Landing";
-import Preevent from "./pages/Preevent";
-import Competition from "./pages/Competition";
-import Login from "./pages/Login";
-import Profile from "./pages/Profile";
-import Strategicc from "./pages/Strategicc";
-import Classgicc from "./pages/Classgicc";
-import Minicc from "./pages/Minicc";
-import Register from "./pages/Register";
+import Navbar from "components/Navbar";
+import Landing from "pages/Landing";
+import Preevent from "pages/Preevent";
+import Competition from "pages/Competition";
+import Login from "pages/Login";
+import Profile from "pages/Profile";
+import Strategicc from "pages/Strategicc";
+import Classgicc from "pages/Classgicc";
+import Minicc from "pages/Minicc";
+import Register from "pages/Register";
 
-import "./App.css";
+import "App.css";
 
 /*async function authenticate(user, pass){
   let url = "/app/token/";
@@ -57,18 +58,20 @@ class App extends Component{
 
   render(){
     return (
-      <Router>
-        <Navbar />
-        <Route exact path="/" component={Landing} />
-        <Route path="/competition" component={Competition} />
-        <Route path="/preevent" component={Preevent} />
-        <Route path="/strategicc" component={Strategicc} />
-        <Route path="/classgicc" component={Classgicc} />
-        <Route path="/minicc" component={Minicc} />
-        <Route path="/login" component={Login} />
-        <Route path="/profile" render={() => <Profile token={this.state.access}/>} />
-        <Route path="/register" component={Register} />
-      </Router>
+      <AuthContextProvider>
+        <Router>
+          <Navbar />
+          <Route exact path="/" component={Landing} />
+          <Route path="/competition" component={Competition} />
+          <Route path="/preevent" component={Preevent} />
+          <Route path="/strategicc" component={Strategicc} />
+          <Route path="/classgicc" component={Classgicc} />
+          <Route path="/minicc" component={Minicc} />
+          <Route path="/login" component={Login} />
+          <Route path="/profile" render={() => <Profile token={this.state.access}/>} />
+          <Route path="/register" component={Register} />
+        </Router>
+      </AuthContextProvider>
     );
   }
 }

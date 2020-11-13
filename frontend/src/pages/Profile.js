@@ -1,5 +1,6 @@
 import React from "react";
 import Title from "../components/Title";
+import { AuthContext } from "context/Auth";
 
 const Profile = (props) => {
   const username = "adminadminadmin";
@@ -45,6 +46,11 @@ const Profile = (props) => {
               </div>
             </div>
           </div>
+          <AuthContext.Consumer>
+            {value =>{
+              return (<button onClick={value.logout}>Logout</button>);
+            }}  
+          </AuthContext.Consumer>
         </div>
       </div>
     </div>

@@ -39,24 +39,42 @@ export default class AuthContextProvider extends Component{
       refresh:"",
       auth_error:1, // 0 for authenticated, 1 normally logged out, rest: HTTP error.
       // Exposed functions
-      signup: this.signUp,
-      login: this.authenticate,
-      logout: this.logOut,
+      signup: () => this.signUp(),
+      login: () => this.authenticate(),
+      logout: () => this.logOut(),
     }
   }
 
-  saveToken(data){
-    // Saves token to state and storage
-    localStorage.setItem("tokens", JSON.stringify(data));
-    this.setState(data);
+  componentDidMount(){
+    // Automatically fetch old tokens when component is loaded
+    this.fetchToken(()=>{
+      if(this.state.auth_error == 0){
+        console.log("Snugly authed uwu");
+      } else{
+        this.authenticate("juminten", "pecintatedjo").then(data => {
+          console.log(data);
+        });
+      }
+    });
+
   }
 
-  fetchToken(){
+  saveToken(data, callback=() => {}){
+    // Saves token to state and storage
+    localStorage.setItem("tokens", JSON.stringify(data));
+    this.setState(data, callback);
+  }
+
+  fetchToken(callback=() => {}){
     // Gets token from local, saves it to state
     let data = JSON.parse(localStorage.getItem("tokens"));
-    this.setState(data);
+    this.setState(data, callback);
 
     return data;
+  }
+
+  logOut(){
+    this.saveToken({access:"", refresh:"", auth_error:1});
   }
 
   async signup(){
@@ -89,11 +107,6 @@ export default class AuthContextProvider extends Component{
     }
     
     return data;
-  }
-
-  logOut(){
-    let data = {access:"", refresh:"", auth_error:1};
-    this.saveToken(data);
   }
 
   render(){
