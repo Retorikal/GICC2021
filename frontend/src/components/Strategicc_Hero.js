@@ -1,6 +1,6 @@
 import React from "react";
-import Title from "../components/Title";
-import potrait_1 from "../images/potrait-1.jpg";
+import Title from "components/Title";
+import potrait_1 from "images/potrait-1.jpg";
 
 const Strategicc_Hero = () => {
   return (

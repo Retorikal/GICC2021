@@ -1,5 +1,5 @@
 import React from "react";
-import Title from "../components/Title";
+import Title from "components/Title";
 import { AuthContext } from "context/Auth";
 
 const Profile = (props) => {

@@ -37,10 +37,10 @@ export default class AuthContextProvider extends Component{
     this.state={
       access:"",
       refresh:"",
-      auth_error:1, // 0 for authenticated, 1 normally logged out, rest: HTTP error.
+      error:1, // 0 for authenticated, 1 normally logged out, rest: HTTP error.
       // Exposed functions
       signup: () => this.signUp(),
-      login: () => this.authenticate(),
+      login: async (user, pass) => {return this.authenticate(user, pass)},
       logout: () => this.logOut(),
     }
   }
@@ -48,13 +48,13 @@ export default class AuthContextProvider extends Component{
   componentDidMount(){
     // Automatically fetch old tokens when component is loaded
     this.fetchToken(()=>{
-      if(this.state.auth_error == 0){
-        console.log("Snugly authed uwu");
-      } else{
+      if(this.state.error == 0){
+        console.log("Authenticated");
+      } /*else{
         this.authenticate("juminten", "pecintatedjo").then(data => {
           console.log(data);
         });
-      }
+      }*/
     });
 
   }
@@ -74,14 +74,37 @@ export default class AuthContextProvider extends Component{
   }
 
   logOut(){
-    this.saveToken({access:"", refresh:"", auth_error:1});
+    this.saveToken({access:"", refresh:"", error:1});
   }
 
-  async signup(){
+  async signup(credentials){
+    // Takes signup information: email, password, first_name, last_name
+    let url = "/app/token/";
+    let init = {
+      method: 'POST',
+      mode: 'cors',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(credentials)
+    };
+    let response = await fetch(url, init);
+    let data = "";
+
+    if (response.status > 400){
+      data = { 
+        access: "",
+        error: response.status
+      }; // Sets error.
+      this.saveToken(data);
+    } else {
+      data = response.json();
+      this.saveToken({data, error: 0});
+    }
     
+    return data;
   }
 
   async authenticate(user, pass){
+    // Gets user token and refresh
     let url = "/app/token/";
     let init = {
       method: 'POST',
@@ -98,12 +121,12 @@ export default class AuthContextProvider extends Component{
     if (response.status > 400){
       data = { 
         access: "",
-        auth_error: response.status
+        error: response.status
       }; // Sets error.
       this.saveToken(data);
     } else {
       data = response.json();
-      this.saveToken({data, auth_error: 0});
+      this.saveToken({data, error: 0});
     }
     
     return data;

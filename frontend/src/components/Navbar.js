@@ -23,7 +23,7 @@ const Navbar = () => {
           <li> <Link to="/minicc">MiniCC</Link> </li>
           <AuthContext.Consumer>
             {value =>{
-              if (value.auth_error == 0)
+              if (value.error == 0)
                 return (<li><Link to="/profile">Profile</Link></li>);
               else
                 return (<li><Link to="/login">Sign in</Link></li>);
