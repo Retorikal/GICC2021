@@ -1,0 +1,28 @@
+# Login
+curl \
+	-X POST \
+	-H "Content-Type: application/json" \
+	-d '{"username": "juminten", "password": "pecintatedjo"}' \
+	http://localhost:8000/app/token/
+
+# Daftar
+curl \
+	-X POST \
+	-H "Content-Type: application/json" \
+	-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjAzNzI3NDA0LCJqdGkiOiJmNzg5ZTg5MmJiYTY0MWZlYTNmMGMzZjA3NGRhMTBjYyIsInVzZXJfaWQiOjJ9._w8-lfIsmNlNgH-xmt5P13B4lRW_qWoxmiw6GWXTYcA" \
+  	-d '{"name": "GICClass","action": "signup"}'\
+  	http://localhost:8000/preevents/signup/
+
+# Mundur
+curl \
+	-X POST \
+	-H "Content-Type: application/json" \
+	-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjAzNzI2NDMxLCJqdGkiOiJlYTYzZmZlNjg2N2M0YWZhYjU2NWQ0MDI3NjBkODU2MyIsInVzZXJfaWQiOjJ9.sWa6WhuuTOSCtttRi5fvCfQSnh6ap0p2lcNeAFtbVwM" \
+  	-d '{"name": "GICClass","action": "withdraw"}'\
+  	http://localhost:8000/preevents/signup/
+
+curl \
+	-X POST \
+	-H "Content-Type: application/json" \
+	-d '{"username": "juminten", "password": "pecintatedjo", "first_name":"jumi", "last_name":"nten", "email":"juminten@hatitedjo.com"}' \
+	http://localhost:8000/app/user/signup
