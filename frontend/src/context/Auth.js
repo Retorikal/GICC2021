@@ -39,9 +39,10 @@ export default class AuthContextProvider extends Component{
       refresh:"",
       error:1, // 0 for authenticated, 1 normally logged out, rest: HTTP error.
       // Exposed functions
-      signup: () => this.signUp(),
-      login: async (user, pass) => {return this.authenticate(user, pass)},
-      logout: () => this.logOut(),
+      signup: async (credentials) => {return await this.signup(credentials)},
+      login: async (user, pass) => {return await this.authenticate(user, pass)},
+      authenticator: request => {return this.appendToken(request)},
+      logout: () => this.logOut()
     }
   }
 
@@ -115,6 +116,7 @@ export default class AuthContextProvider extends Component{
         'password': pass
       })
     };
+
     let response = await fetch(url, init);
     let data = "";
 
@@ -123,13 +125,45 @@ export default class AuthContextProvider extends Component{
         access: "",
         error: response.status
       }; // Sets error.
-      this.saveToken(data);
     } else {
-      data = response.json();
-      this.saveToken({data, error: 0});
+      data = await response.json();
+      data.error = 0;
     }
-    
+
+    this.saveToken(data);
     return data;
+  }
+
+  async getInfo(){
+    // Gets all user information data
+    let url = "/app/user/";
+    let init = {
+      method: 'GET',
+      mode: 'cors',
+      headers: {'Content-Type': 'application/json'},
+    };
+
+    let response = await fetch(url, init);
+    let data = "";
+
+    if (response.status > 400){
+      data = {
+        error: response.status
+      }; // Sets error.
+      this.setState(data);
+    } 
+    else {
+      data = response.json();
+      this.setState({data, error: 0});
+    }
+  }
+
+  // Fungsi nambahin token untuk request header buat page yang butuh authentication
+  appendToken(request){
+    let token = "Bearer " + this.state.access;
+    console.log(this.state);
+    console.log(this.state.access);
+    request.headers.Authorization = "Bearer " + this.state.access;
   }
 
   render(){

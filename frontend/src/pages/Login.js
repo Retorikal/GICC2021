@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import {AuthContext} from "context/Auth.js";
+import { Link, Redirect } from "react-router-dom";
+import { AuthContext } from "context/Auth.js";
 import Title from "components/Title";
 
 class Login extends Component{
@@ -20,13 +20,19 @@ class Login extends Component{
     this.setState({pass: e.target.value});
   }
 
-  onLoginClick(callback){
-    callback(this.state.user, this.state.pass).then(() =>{
-      window.location.replace("/profile");
+  onLoginClick(login){
+    console.log("Logging in");
+    login(this.state.user, this.state.pass).then(result =>{
+      if (result.error == 0) {
+        this.setState({redirect: true});
+      }
     });
   }
 
   render(){
+    if (this.state.redirect) {
+      return <Redirect to="/profile" />
+    }
     return (
       <div className="content">
       <form>

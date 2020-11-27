@@ -4,8 +4,9 @@ from django.http import HttpResponse
 # Rest framework
 from django.http import Http404
 from rest_framework import views
-from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 # Models
 from users.models import *
@@ -25,3 +26,10 @@ class Signup(views.APIView):
     def post(self, request, format=None):
         self.addUser(request.data)
         return Response(request.data, status=status.HTTP_201_CREATED)
+
+class Files(views.APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, format=None):
+        content = {'message': request.user.username}
+        return Response(content)
