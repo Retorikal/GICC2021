@@ -35,46 +35,48 @@ class Login extends Component{
     }
     return (
       <div className="content">
-      <form>
-        <div className="login">
-          <Title text={"Sign in"} />
-          <div className="textbox">
-            <input
-              type="text"
-              id="username"
-              name="username"
-              placeholder="Username"
-              className="login-input"
-              onChange={e => {this.onUserChange(e)}}
-            />
+        <div className="flex-container vertical-center">
+          <div className="flex-left flex-container">
+            <Title text={"Sign in"} center={true}/>
           </div>
-          <div className="textbox">
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Password"
-              className="login-input"
-              onChange={e => {this.onPassChange(e)}}
-            />
-          </div>
-          <AuthContext.Consumer>
-            {value => {
-              return (<button className="login-btn" type="button" onClick={() => {this.onLoginClick(value.login)}}>Login</button>);
-            }}
-          </AuthContext.Consumer>
-          <div className="forget-pw">
-            <ul>
-              <li>
-                <Link to="/register">I haven't made an account</Link>
-              </li>
-              <li>
-                <Link to="/">I forgot my password</Link>
-              </li>
-            </ul>
+          <div className="login flex-right">
+            <div className="textbox">
+              <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Username"
+                className="login-input"
+                onChange={e => {this.onUserChange(e)}}
+              />
+            </div>
+            <div className="textbox">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                className="login-input"
+                onChange={e => {this.onPassChange(e)}}
+              />
+            </div>
+            <AuthContext.Consumer>
+              {value => {
+                return (<button className="login-btn" type="button" onClick={() => {this.onLoginClick(value.login)}}>Login</button>);
+              }}
+            </AuthContext.Consumer>
+            <div className="forget-pw">
+              <ul>
+                <li>
+                  <Link to="/register">I haven't made an account</Link>
+                </li>
+                <li>
+                  <Link to="/">I forgot my password</Link>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </form>
       </div>
     );
   }

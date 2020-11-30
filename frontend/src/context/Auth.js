@@ -80,7 +80,7 @@ export default class AuthContextProvider extends Component{
 
   async signup(credentials){
     // Takes signup information: email, password, first_name, last_name
-    let url = "/app/token/";
+    let url = "/app/user/signup/";
     let init = {
       method: 'POST',
       mode: 'cors',
@@ -92,15 +92,13 @@ export default class AuthContextProvider extends Component{
 
     if (response.status > 400){
       data = { 
-        access: "",
         error: response.status
       }; // Sets error.
-      this.saveToken(data);
     } else {
-      data = response.json();
-      this.saveToken({data, error: 0});
+      data = await response.json();
+      data.error = 0;
     }
-    
+
     return data;
   }
 
@@ -161,8 +159,6 @@ export default class AuthContextProvider extends Component{
   // Fungsi nambahin token untuk request header buat page yang butuh authentication
   appendToken(request){
     let token = "Bearer " + this.state.access;
-    console.log(this.state);
-    console.log(this.state.access);
     request.headers.Authorization = "Bearer " + this.state.access;
   }
 

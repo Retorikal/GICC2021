@@ -394,6 +394,10 @@ a:visited {
   text-align: center;
 }
 
+.vertical-center{
+  margin-top : 5em;
+}
+
 @media only screen and (min-width: 768px) {
   .container {
     padding: 1.6em 0em;
@@ -643,13 +647,13 @@ a:visited {
     font-size: 2em;
   }
 
-  .profile-container {
+  .flex-container {
     display: flex;
     justify-content: center;
   }
 
-  .profile-left,
-  .profile-right {
+  .flex-left,
+  .flex-right {
     width: 100%;
   }
 
@@ -670,5 +674,9 @@ a:visited {
   .profile-right p {
     font-size: 1.2em;
     padding: 0.7em 0.3em;
+  }
+
+  .vertical-center{
+    margin-top : 8em;
   }
 }

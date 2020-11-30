@@ -12,24 +12,44 @@ from rest_framework.permissions import IsAuthenticated
 from users.models import *
 from users.serializers import *
 from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import *
+
+# Errors
+from django.db import IntegrityError
 
 class Signup(views.APIView):
     def addUser(self, data):
         user = User()
         deserializer = SignupSerializer(user, data = data)
 
-        if deserializer.is_valid():
-            deserializer.save()
-            user.set_password(deserializer.validated_data["password"])
-            user.save()
+        try:
+            if deserializer.is_valid(raise_exception=True):
+                validate_password(deserializer.validated_data["password"])
+            
+                deserializer.save()
+                user.set_password(deserializer.validated_data["password"])
+                user.save()
+        except Exception as e:
+            raise
 
     def post(self, request, format=None):
-        self.addUser(request.data)
-        return Response(request.data, status=status.HTTP_201_CREATED)
+        try:
+            self.addUser(request.data)
+            return Response(request.data, status=status.HTTP_201_CREATED)
+        # TODO: Handle exception buat password jelek, email dobel, atau username taken
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_403_FORBIDDEN)
+
+class Verify(views.APIView):
+    def get(self, data):
+        return Response({'status': 'ok'}, status=status.HTTP_200_OK)
 
 class Files(views.APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request, format=None):
+        file_val = Validation(owner=request.user.participant, file=request.FILES["file"])
+        file_val.save()
+
         content = {'message': request.user.username}
         return Response(content)

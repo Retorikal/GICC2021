@@ -5,7 +5,6 @@ import { AuthContext } from "context/Auth";
 class FileSubmit extends Component{
   onFileChange(e){
     this.setState({file: e.target.files[0]});
-    console.log(e);
   }
 
   titleString(){
@@ -26,7 +25,6 @@ class FileSubmit extends Component{
     let formData = new FormData();
     formData.append("file", this.state.file, "payment");
     formData.append("type", this.props.name);
-    formData.append("token", "uwu")
     let init = {
       method: 'POST',
       body: formData,
@@ -51,7 +49,7 @@ class FileSubmit extends Component{
 }
 
 const Profile = (props) => {
-  const username = "adminadminadmin";
+  const username = "Bapaklo";
   const email = "admin@company.com";
   const fullname = "Admin Admin";
   const paymentStatus = true;
@@ -64,8 +62,8 @@ const Profile = (props) => {
           {auth =>{
           return (<div className="profile">
             <Title text={`Hi, ${username}`} />
-            <div className="profile-container">
-              <div className="profile-left">
+            <div className="flex-container">
+              <div className="flex-left">
                 <div className="textbox">
                   <h4>Username</h4>
                   <input type="text" value={username} />
@@ -79,7 +77,7 @@ const Profile = (props) => {
                   <input type="text" value={fullname} />
                 </div>
               </div>
-              <div className="profile-right">
+              <div className="flex-right">
                 <FileSubmit name="payment" authenticator={auth.authenticator}/>
                 <FileSubmit name="proposal"/>
                 <FileSubmit name="id_card"/>
