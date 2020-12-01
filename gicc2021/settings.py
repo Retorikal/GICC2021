@@ -163,3 +163,17 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = "landing-home"
+
+
+#EMAIL THINGS
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
+MAILER_EMAIL_BACKEND = EMAIL_BACKEND  
+EMAIL_HOST = 'mail.ganeshaicc.my.id'  
+EMAIL_HOST_PASSWORD = 'pass'  
+EMAIL_HOST_USER = 'email@ganeshaicc.my.id'  
+EMAIL_PORT = 465  
+EMAIL_USE_SSL = True  
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
