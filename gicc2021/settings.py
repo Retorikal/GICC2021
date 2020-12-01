@@ -174,6 +174,10 @@ EMAIL_HOST_PASSWORD = 'pass'
 EMAIL_HOST_USER = 'email@ganeshaicc.my.id'  
 EMAIL_PORT = 465  
 EMAIL_USE_SSL = True  
+<<<<<<< HEAD
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
+=======
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+>>>>>>> master3
