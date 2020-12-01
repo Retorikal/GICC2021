@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     #"crispy_forms",
     'rest_framework',
 
-    'drf_yasg',
-
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -165,6 +163,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = "landing-home"
+
 
 #EMAIL THINGS
 
