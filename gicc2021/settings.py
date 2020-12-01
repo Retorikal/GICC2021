@@ -168,8 +168,13 @@ LOGIN_REDIRECT_URL = "landing-home"
 
 #EMAIL THINGS
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EAMIL_PORT =587
-EMAIL_HOST_USER = '16520055@std.stei.itb.ac.id'
-EMAIL_HOST_PASSWORD = 'Python277'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
+MAILER_EMAIL_BACKEND = EMAIL_BACKEND  
+EMAIL_HOST = 'mail.ganeshaicc.my.id'  
+EMAIL_HOST_PASSWORD = 'pass'  
+EMAIL_HOST_USER = 'email@ganeshaicc.my.id'  
+EMAIL_PORT = 465  
+EMAIL_USE_SSL = True  
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
