@@ -18,6 +18,10 @@ class Participant(models.Model):
     phone_no = models.CharField(max_length=31, null=True)
     line = models.CharField(max_length=127, null=True)
 
+    #verifier
+    is_verified = models.BooleanField(null=True)
+    verify_code = models.CharField(max_length=255, null=True)
+
     # Preevent-related fields
     signedup_preevent = models.ManyToManyField(Preevent, related_name='reg_users')
 
