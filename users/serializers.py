@@ -29,3 +29,4 @@ class SignupSerializer(serializers.ModelSerializer):
         ]
 
 
+
