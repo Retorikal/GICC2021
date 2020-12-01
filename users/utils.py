@@ -3,7 +3,6 @@ from django.core.mail import EmailMessage
 
 import threading
 
-
 class EmailThread(threading.Thread):
 
     def __init__(self, email):

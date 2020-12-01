@@ -43,3 +43,4 @@ class Validation(models.Model):
     info = models.TextField(default="") # 
     proof = models.URLField(default="") # Link bukti transfer di file uploader, berupa gambar
     verified = models.BooleanField(default=False) # Pembayaran sudah dikroscek panit
+

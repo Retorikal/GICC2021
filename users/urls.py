@@ -10,4 +10,5 @@ urlpatterns = [
     path('email-verify/', VerifyEmail.as_view(), name="email-verify"),
 ]
 
+
 urlpatterns = format_suffix_patterns(urlpatterns)
