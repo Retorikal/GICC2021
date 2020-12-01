@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     #"crispy_forms",
     'rest_framework',
 
-    'drf_yasg',
-
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -165,11 +163,3 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = "landing-home"
-
-#EMAIL THINGS
-
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EAMIL_PORT =587
-EMAIL_HOST_USER = '16520055@std.stei.itb.ac.id'
-EMAIL_HOST_PASSWORD = 'Python277'
