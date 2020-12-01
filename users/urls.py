@@ -7,4 +7,5 @@ urlpatterns = [
     path('files/', views.Files.as_view())
 ]
 
+
 urlpatterns = format_suffix_patterns(urlpatterns)
