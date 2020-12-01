@@ -18,10 +18,6 @@ class Participant(models.Model):
     phone_no = models.CharField(max_length=31, null=True)
     line = models.CharField(max_length=127, null=True)
 
-    #verifier
-    is_verified = models.BooleanField(null=True)
-    verify_code = models.CharField(max_length=255, null=True)
-
     # Preevent-related fields
     signedup_preevent = models.ManyToManyField(Preevent, related_name='reg_users')
 
@@ -37,9 +33,11 @@ class Validation(models.Model):
         ('PRO', 'Proposal'),
     ]
 
+    def savedFileName(self, filename):
+        return 'userfiles/{0}/{1}'.format(self.owner.user.username, filename)
+
     owner = models.ForeignKey(Participant, related_name='payments', on_delete=models.CASCADE)
     event = models.CharField(max_length=255) # Nama pre-event atau "Competition"
     purpose = models.CharField(max_length=31, choices=TYPE_CHOICES)
-    info = models.TextField(default="") # 
-    proof = models.URLField(default="") # Link bukti transfer di file uploader, berupa gambar
+    file = models.FileField(upload_to=savedFileName, default=None) # Link bukti transfer di file uploader, berupa gambar
     verified = models.BooleanField(default=False) # Pembayaran sudah dikroscek panit

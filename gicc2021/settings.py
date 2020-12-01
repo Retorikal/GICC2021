@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     #"crispy_forms",
     'rest_framework',
 
-    'drf_yasg',
-
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -166,6 +164,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = "landing-home"
 
+
 #EMAIL THINGS
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
@@ -175,4 +174,9 @@ EMAIL_HOST_PASSWORD = 'pass'
 EMAIL_HOST_USER = 'email@ganeshaicc.my.id'  
 EMAIL_PORT = 465  
 EMAIL_USE_SSL = True  
+
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
