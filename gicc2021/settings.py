@@ -170,8 +170,8 @@ LOGIN_REDIRECT_URL = "landing-home"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND  
 EMAIL_HOST = 'mail.ganeshaicc.my.id'  
-EMAIL_HOST_PASSWORD = 'pass'  
-EMAIL_HOST_USER = 'email@ganeshaicc.my.id'  
+EMAIL_HOST_PASSWORD = '57k3DM638RHSHp9'  
+EMAIL_HOST_USER = 'hilmifaww@ganeshaicc.my.id'  
 EMAIL_PORT = 465  
 EMAIL_USE_SSL = True  
 
