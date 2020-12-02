@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path('signup/', views.Signup.as_view()),
     path('files/', views.Files.as_view())
+    path('email-verify/', VerifyEmail.as_view(), name="email-verify"),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
