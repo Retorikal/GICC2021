@@ -22,7 +22,6 @@ class Participant(models.Model):
     is_verified = models.BooleanField(null=True)
     verify_code = models.CharField(max_length=255, null=True)
 
-
     # Preevent-related fields
     signedup_preevent = models.ManyToManyField(Preevent, related_name='reg_users')
 
@@ -30,7 +29,7 @@ class Participant(models.Model):
         return self.user.username
 
 # Validation information ever made by this account: Twibbons, transfers..
-class Validation(models.Model):
+class ParticipantFiles(models.Model):
     TYPE_CHOICES=[
         ('TRF', 'Transfer'),
         ('TWB', 'Twibbon'),
@@ -41,7 +40,7 @@ class Validation(models.Model):
     def savedFileName(self, filename):
         return 'userfiles/{0}/{1}'.format(self.owner.user.username, filename)
 
-    owner = models.ForeignKey(Participant, related_name='payments', on_delete=models.CASCADE)
+    owner = models.ForeignKey(Participant, related_name='files', on_delete=models.CASCADE)
     event = models.CharField(max_length=255) # Nama pre-event atau "Competition"
     purpose = models.CharField(max_length=31, choices=TYPE_CHOICES)
     file = models.FileField(upload_to=savedFileName, default=None) # Link bukti transfer di file uploader, berupa gambar

@@ -2,11 +2,24 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from . models import *
 
-class StatusSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+        ]
+
+class ParticipantSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
     class Meta:
         model = Participant
         fields = [
             'user',
+
             'nim',
             'uni',
             'major',
@@ -14,7 +27,9 @@ class StatusSerializer(serializers.ModelSerializer):
             'line',
             'phone_no',
 
-            'signedup_preevent',
+            'is_verified',
+
+            #'files'
         ]
 
 class SignupSerializer(serializers.ModelSerializer):
@@ -23,6 +38,17 @@ class SignupSerializer(serializers.ModelSerializer):
 
     default_error_messages = {
         'username': 'The username should only contain alphanumeric characters'}
+
+    def validate(self, attrs):
+        email = attrs.get('email', '')
+        username = attrs.get('username', '')
+
+        if not username.isalnum():
+            raise serializers.ValidationError(self.default_error_messages)
+        return attrs
+
+    def create(self, validated_data):
+        return User.objects.create_user(**validated_data)
 
     class Meta:
         model = User
@@ -33,17 +59,6 @@ class SignupSerializer(serializers.ModelSerializer):
             'last_name',
             'email',
         ]
-    def validate(self, attrs):
-        email = attrs.get('email', '')
-        username = attrs.get('username', '')
-
-        if not username.isalnum():
-            raise serializers.ValidationError(
-                self.default_error_messages)
-        return attrs
-
-    def create(self, validated_data):
-        return User.objects.create_user(**validated_data)
    
 
 class EmailVerificationSerializer(serializers.ModelSerializer):

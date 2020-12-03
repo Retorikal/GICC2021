@@ -80,9 +80,9 @@ export default class AuthContextProvider extends Component{
 
   async signup(credentials){
     // Takes signup information: email, password, first_name, last_name
-    let url = "/app/user/signup/";
+    let url = "/app/user/";
     let init = {
-      method: 'POST',
+      method: 'PUT',
       mode: 'cors',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(credentials)
@@ -128,7 +128,10 @@ export default class AuthContextProvider extends Component{
       data.error = 0;
     }
 
-    this.saveToken(data);
+    this.saveToken(data, ()=>{
+      this.getInfo();
+    });
+    
     return data;
   }
 
@@ -140,20 +143,25 @@ export default class AuthContextProvider extends Component{
       mode: 'cors',
       headers: {'Content-Type': 'application/json'},
     };
+    this.appendToken(init)
 
     let response = await fetch(url, init);
     let data = "";
 
     if (response.status > 400){
-      data = {
+      data = { 
+        access: "",
         error: response.status
       }; // Sets error.
-      this.setState(data);
-    } 
-    else {
-      data = response.json();
-      this.setState({data, error: 0});
+    } else {
+      data = await response.json();
+      data.error = 0;
     }
+
+    console.log(data)
+
+    this.setState(data);
+    return data;
   }
 
   // Fungsi nambahin token untuk request header buat page yang butuh authentication

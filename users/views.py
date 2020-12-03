@@ -14,13 +14,12 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 
-
 import jwt
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 
 #serializers
-from .serializers import SignupSerializer, EmailVerificationSerializer
+from .serializers import SignupSerializer, EmailVerificationSerializer, ParticipantSerializer
 
 # Models
 from users.models import *
@@ -33,63 +32,70 @@ from .utils import Util
 
 # Errors
 from django.db import IntegrityError
+import re
 
-class Signup(views.APIView):
-    def addUser(self, data, request):
+class Usermanage(views.APIView):
+    # Send validation email
+    def sendVerifMail(self, user, request):
+        token = RefreshToken.for_user(user).access_token
+        current_site = get_current_site(request).domain
+        relativeLink = reverse('email-verify')
+        absurl = 'http://'+current_site+relativeLink+"?token="+str(token)
+        email_body = 'Hi '+user.username + \
+            ' Use the link below to verify your email \n' + absurl
+        datum = {'email_body': email_body, 'to_email': user.email,
+                'email_subject': 'Verify your email'}
+
+        Util.send_email(datum)
+
+    # Add new user
+    def addUser(self, request):
         user = User()
-        deserializer = SignupSerializer(user, data = data)
+        deserializer = SignupSerializer(user, data = request.data)
 
         try:
-            if deserializer.is_valid(raise_exception=True):
-                validate_password(deserializer.validated_data["password"])
+            # Validation
+            deserializer.is_valid(raise_exception=True)
+            if User.objects.filter(email=deserializer.validated_data["email"]).exists():
+                raise Exception("'That email address is already taken.'")
+            validate_password(deserializer.validated_data["password"])
+
+            # Save user
+            deserializer.save()
+            user.set_password(deserializer.validated_data["password"])
+            user.save()
+
+            # Send verification Email
+            self.sendVerifMail(user, request)
             
-                deserializer.save()
-                user.set_password(deserializer.validated_data["password"])
-                user.save()
-
-                ### ADD ###
-                deserializer.is_valid(raise_exception=True)
-                deserializer.save()
-                user_data = deserializer.data
-                user = User.objects.get(email=user_data['email'])
-                token = RefreshToken.for_user(user).access_token
-                current_site = get_current_site(request).domain
-                relativeLink = reverse('email-verify')
-                absurl = 'http://'+current_site+relativeLink+"?token="+str(token)
-                email_body = 'Hi '+user.username + \
-                    ' Use the link below to verify your email \n' + absurl
-                datum = {'email_body': email_body, 'to_email': user.email,
-                        'email_subject': 'Verify your email'}
-
-                Util.send_email(datum)
-            
-
-                    ### ADD ###
-
         except Exception as e:
             raise
 
-    def post(self, request, format=None):
+    # PUT response: create new user            
+    def put(self, request, format=None):
         try:
-            self.addUser(request.data)
+            self.addUser(request)
             return Response(request.data, status=status.HTTP_201_CREATED)
         # TODO: Handle exception buat password jelek, email dobel, atau username taken
         except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_403_FORBIDDEN)
+            print(str(e))
+            # Get quotation enclosed parts of the error to send back
+            return Response({'error': re.findall(r"'(([\w\. ]){10,100})'", str(e))}, status=status.HTTP_403_FORBIDDEN)
 
-class Verify(views.APIView):
-    def get(self, data):
-        return Response({'status': 'ok'}, status=status.HTTP_200_OK)
+    # GET response: general information about the user        
+    def get(self, request, format=None):
+        serializer = ParticipantSerializer(request.user.participant)
+        return Response(serializer.data)
 
 class Files(views.APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request, format=None):
-        file_val = Validation(owner=request.user.participant, file=request.FILES["file"])
+        file_val = ParticipantFiles(owner=request.user.participant, file=request.FILES["file"])
         file_val.save()
 
         content = {'message': request.user.username}
-        return Response(content)
+        return Response(content, status=status.HTTP_201_CREATED)
 
 class VerifyEmail(views.APIView):
     serializer_class = EmailVerificationSerializer
