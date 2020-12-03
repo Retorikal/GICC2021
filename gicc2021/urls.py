@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from users import views as user_views
 from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from users import views as user_views
+from gicc2021 import settings
 
 
 url_root = "app/"
@@ -48,4 +50,4 @@ url_list = [
 
 urlpatterns = [
     path(url_root, include(url_list)),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
