@@ -1,4 +1,3 @@
-import Popup from "components/Popup/Popup";
 import React, { createContext, useContext, useState } from "react";
 
 export const PopupContext = createContext();
