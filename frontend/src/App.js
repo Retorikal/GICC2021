@@ -1,6 +1,6 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { Route, BrowserRouter as Router } from "react-router-dom";
-import AuthContextProvider, {useAuth, AuthContext} from "context/Auth.js";
+import AuthContextProvider, { useAuth, AuthContext } from "context/Auth.js";
 
 import Navbar from "components/Navbar";
 import Landing from "pages/Landing";
@@ -14,6 +14,8 @@ import Minicc from "pages/Minicc";
 import Register from "pages/Register";
 
 import "App.css";
+import PopupTest from "pages/PopupTest";
+import PopupContextProvider from "context/PopupContext";
 
 /*async function authenticate(user, pass){
   let url = "/app/token/";
@@ -41,37 +43,48 @@ import "App.css";
   return data;
 }*/
 
-class App extends Component{
-  constructor(props){
+class App extends Component {
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       access: "",
-      refresh: ""
-    }
+      refresh: "",
+    };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     // Do initial authentication here
-
     //authenticate("juminten", "pecintatedjo").then(data => {this.setState(() => {return data;})});
   }
 
-  render(){
+  render() {
     return (
-      <AuthContextProvider>
-        <Router>
-          <Navbar />
-          <Route exact path="/" component={Landing} />
-          <Route path="/competition" component={Competition} />
-          <Route path="/preevent" component={Preevent} />
-          <Route path="/strategicc" component={Strategicc} />
-          <Route path="/classgicc" component={Classgicc} />
-          <Route path="/minicc" component={Minicc} />
-          <Route path="/login" component={Login} />
-          <Route path="/profile" render={() => <Profile token={this.state.access}/>} />
-          <Route path="/register" component={Register} />
-        </Router>
-      </AuthContextProvider>
+      <>
+        <PopupContextProvider>
+          {/* <div>
+            <Router>
+              <Route path="/" component={PopupTest} />
+            </Router>
+          </div> */}
+          <AuthContextProvider>
+            <Router>
+              <Navbar />
+              <Route exact path="/landing" component={Landing} />
+              <Route path="/competition" component={Competition} />
+              <Route path="/preevent" component={Preevent} />
+              <Route path="/strategicc" component={Strategicc} />
+              <Route path="/classgicc" component={Classgicc} />
+              <Route path="/minicc" component={Minicc} />
+              <Route path="/login" component={Login} />
+              <Route
+                path="/profile"
+                render={() => <Profile token={this.state.access} />}
+              />
+              <Route path="/register" component={Register} />
+            </Router>
+          </AuthContextProvider>
+        </PopupContextProvider>
+      </>
     );
   }
 }
