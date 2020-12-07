@@ -8,7 +8,7 @@ from django.contrib.auth.password_validation import *
 
 # Rest framework
 from django.http import Http404
-from rest_framework import views
+from rest_framework import views, generics
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -34,7 +34,7 @@ from .utils import Util
 from django.db import IntegrityError
 import re
 
-class Usermanage(views.APIView):
+class Usermanage(generics.GenericAPIView):
     # Send validation email
     def sendVerifMail(self, user, request):
         token = RefreshToken.for_user(user).access_token
@@ -49,7 +49,7 @@ class Usermanage(views.APIView):
         Util.send_email(datum)
 
     # Add new user
-    def addUser(self, request):
+    def post(self, request):
         user = User()
         deserializer = SignupSerializer(user, data = request.data)
 
@@ -67,6 +67,7 @@ class Usermanage(views.APIView):
 
             # Send verification Email
             self.sendVerifMail(user, request)
+            return Response(deserializer.data, status=status.HTTP_201_CREATED)
             
         except Exception as e:
             raise

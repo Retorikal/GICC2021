@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "pre_events.apps.PreEventsConfig",
     "competition.apps.CompetitionConfig",
-    #"crispy_forms",
+    "crispy_forms",
     'rest_framework',
 
     "django.contrib.admin",
