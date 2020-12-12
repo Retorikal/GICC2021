@@ -66,7 +66,18 @@ class Usermanage(generics.GenericAPIView):
             user.save()
 
             # Send verification Email
-            self.sendVerifMail(user, request)
+            #self.sendVerifMail(user, request)
+            token = RefreshToken.for_user(user).access_token
+            current_site = get_current_site(request).domain
+            relativeLink = reverse('email-verify')
+            absurl = 'http://'+current_site+relativeLink+"?token="+str(token)
+            email_body = 'Hi '+user.username + \
+            ' Use the link below to verify your email \n' + absurl
+            datum = {'email_body': email_body, 'to_email': user.email,
+                'email_subject': 'Verify your email'}
+
+            Util.send_email(datum)
+
             return Response(deserializer.data, status=status.HTTP_201_CREATED)
             
         except Exception as e:
