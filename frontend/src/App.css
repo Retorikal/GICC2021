@@ -1,4 +1,4 @@
-*{
+* {
   box-sizing: border-box;
   vertical-align: middle;
 }
@@ -12,6 +12,14 @@ header {
   padding: 0.8em 1.2em;
 }
 
+a:link {
+  color: #213665;
+}
+
+a:visited {
+  color: #213665;
+}
+
 .content {
   padding: 3em 0em 0em;
 }
@@ -20,7 +28,7 @@ header {
   padding: 0.8em 1.2em;
 }
 
-.container h2{
+.container h2 {
   text-align: center;
 }
 
@@ -66,10 +74,19 @@ header {
   opacity: 0.05;
 }
 
+.clickable:hover{
+  background: white;
+  color: #213665;
+
+  border-width: 3px;
+  border-style: solid;
+  border-color: #213665;
+}
+
 .blue-container {
   background: #213665;
   color: white;
-  margin: 0em -7em;
+  margin: 0em 0em;
 }
 
 .blue-container .container {
@@ -196,13 +213,63 @@ header {
   width: 75%;
 }
 
-.profile .textbox h4 {
+.profile h3 {
   margin: 1.3em 0 0.3em;
+  font-size: 2em;
+}
+
+.profile .textbox h4 {
+  margin: 1em 0 0.3em;
   font-size: 1.5em;
 }
 
 .profile .textbox input {
   margin: -2em 0;
+}
+
+.profile .button{
+  background: #213665;
+  color: white;
+  font-family: "Overpass";
+  width: 30%;
+}
+
+.profile .agreement h4{
+  margin: 1em 0 0.3em;
+  font-size: 1.5em;
+}
+
+.profile .agreement .button{
+  background: #213665;
+  color: white;
+  font-family: "Overpass";
+  width: 50%;
+}
+
+.profile .agreement p{
+  border: none;
+  border-radius: 0.3em;
+  outline: none;
+  padding: 0.3em 0.3em;
+  background: #e0e0e0;
+  font-size: 1em;
+  color: #213665;
+  font-family: "Overpass";
+  width: 100%;
+  margin: 0.5em 0;
+  text-align: center;
+}
+
+.profile .agreement .button-container{
+  margin-top: 2em;
+}
+
+.profile .agreement a{
+  margin-left: 1em;
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-align: center;
 }
 
 .textbox p {
@@ -386,6 +453,15 @@ header {
   text-align: center;
 }
 
+.vertical-center{
+  margin-top : 5em;
+}
+
+.flex-horizontal{
+  display:flex;
+  flex-direction: row;
+}
+
 @media only screen and (min-width: 768px) {
   .container {
     padding: 1.6em 0em;
@@ -401,6 +477,12 @@ header {
 
   .content {
     padding: 5em 10em 0em;
+  }
+
+  .blue-container {
+    background: #213665;
+    color: white;
+    margin: 0em -7em;
   }
 
   header {
@@ -627,5 +709,43 @@ header {
     padding: 0.6em 2em;
     border-radius: 0.2em;
     font-size: 2em;
+  }
+
+  .flex-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .flex-left,
+  .flex-right {
+    width: 100%;
+  }
+
+  .profile .textbox {
+    margin-bottom: 1em;
+    width: 80%;
+  }
+
+  .profile h3 {
+    margin: 1.3em 0 0.3em;
+    font-size: 2em;
+  }
+
+  .profile .textbox h4 {
+    margin: 1.3em 0 0.3em;
+    font-size: 1.5em;
+  }
+
+  .profile .textbox input {
+    margin: 0em 0 0;
+  }
+
+  .profile-right p {
+    font-size: 1.2em;
+    padding: 0.7em 0.3em;
+  }
+
+  .vertical-center{
+    margin-top : 8em;
   }
 }

@@ -14,7 +14,7 @@ const Landing_Competition = () => {
         <div className="landing-competition-quote">
           <p>You will work to solve the problem of company X in the finals</p>
         </div>
-        <Link className="learn-more">{"Learn More >"}</Link>
+        <Link to="/competition" className="learn-more">{"Learn More >"}</Link>
       </div>
     </div>
   );

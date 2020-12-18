@@ -1,16 +1,132 @@
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from .forms import UserRegisterForm
+from django.shortcuts import render
+from django.http import HttpResponse
 
+from django.contrib.sites.shortcuts import get_current_site
+from django.urls import reverse
+from django.conf import settings
+from django.contrib.auth.password_validation import *
 
-def register(request):
-    if request.method == "POST":
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get("username")
-            messages.success(request, f"Account created for {username}!")
-            return redirect("login")
-    else:
-        form = UserRegisterForm()
-    return render(request, "users/register.html", {"form": form})
+# Rest framework
+from django.http import Http404
+from rest_framework import views, generics
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.parsers import JSONParser
+
+import jwt
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
+
+#serializers
+from .serializers import SignupSerializer, EmailVerificationSerializer, ParticipantSerializer
+
+# Models
+from users.models import *
+from users.serializers import *
+from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import *
+
+#utils
+from .utils import Util
+
+# Errors
+from django.db import IntegrityError
+import re
+
+class Usermanage(generics.GenericAPIView):
+    # Add new user
+    def addUser(self, request):
+        user = User()
+        deserializer = SignupSerializer(user, data = request.data)
+
+        try:
+            # Validation
+            deserializer.is_valid(raise_exception=True)
+            if User.objects.filter(email=deserializer.validated_data["email"]).exists():
+                raise Exception("'That email address is already taken.'")
+            validate_password(deserializer.validated_data["password"])
+
+            # Save user
+            deserializer.save()
+            user.set_password(deserializer.validated_data["password"])
+            user.save()
+
+            # Save participant
+            participant = Participant(user=user)
+            participant.save()
+
+            # Send verification Email
+            token = RefreshToken.for_user(user).access_token
+            current_site = get_current_site(request).domain
+            relativeLink = reverse('email-verify')
+            absurl = 'http://'+current_site+relativeLink+"?token="+str(token)
+            email_body = 'Hi '+user.username + \
+            ' Use the link below to verify your email \n' + absurl
+            datum = {'email_body': email_body, 'to_email': user.email,
+                'email_subject': 'Verify your email'}
+
+            Util.send_email(datum)
+
+            return Response(deserializer.data, status=status.HTTP_201_CREATED)
+            
+        except Exception as e:
+            raise
+
+    # PUT response: create new user            
+    def put(self, request, format=None):
+        try:
+            self.addUser(request)
+            return Response(request.data, status=status.HTTP_201_CREATED)
+        # TODO: Handle exception buat password jelek, email dobel, atau username taken
+        except Exception as e:
+            print(str(e))
+            # Get quotation enclosed parts of the error to send back
+            return Response({'error': re.findall(r"'(([\w\. ]){10,100})'", str(e))}, status=status.HTTP_403_FORBIDDEN)
+
+    # POST response: update data
+    def post(self, request, format=None):
+        deserializer = ParticipantSerializer(request.user.participant, request.data)
+
+        if deserializer.is_valid:
+            deserializer.save()
+            return Response(serializer.data)
+        else:
+            return Response({'error':'error'},status=status.HTTP_400_BAD_REQUEST)
+
+    # GET response: general information about the user
+    def get(self, request, format=None):
+        serializer = ParticipantSerializer(request.user.participant)
+        return Response(serializer.data)
+
+class Files(views.APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, format=None):
+        file_val = ParticipantFile(owner=request.user.participant, file=request.FILES["file"], purpose=request.POST.get('purpose'))
+        file_val.save()
+
+        content = {'success': request.POST.get('purpose')}
+        return Response(content, status=status.HTTP_201_CREATED)
+
+class VerifyEmail(views.APIView):
+    serializer_class = EmailVerificationSerializer
+
+    token_param_config = openapi.Parameter(
+        'token', in_=openapi.IN_QUERY, description='Description', type=openapi.TYPE_STRING)
+
+    @swagger_auto_schema(manual_parameters=[token_param_config])
+    def get(self, request):
+        token = request.GET.get('token')
+        try:
+            payload = jwt.decode(token, settings.SECRET_KEY)
+            user = User.objects.get(id=payload['user_id'])
+            if not user.is_verified:
+                user.is_verified = True
+                user.save()
+            return Response({'email': 'Successfully activated'}, status=status.HTTP_200_OK)
+        except jwt.ExpiredSignatureError as identifier:
+            return Response({'error': 'Activation Expired'}, status=status.HTTP_400_BAD_REQUEST)
+        except jwt.exceptions.DecodeError as identifier:
+            return Response({'error': 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)

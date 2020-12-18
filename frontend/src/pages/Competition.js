@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import BlueContainer from "../components/BlueContainer";
-import Landing_Competition from "../components/Landing_Competition";
-import Title from "../components/Title";
-import potrait_1 from "../images/potrait-1.jpg";
+import BlueContainer from "components/BlueContainer";
+import Landing_Competition from "components/Landing_Competition";
+import Title from "components/Title";
+import potrait_1 from "images/potrait-1.jpg";
 
 const Competition = () => {
   return (

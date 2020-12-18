@@ -3,7 +3,14 @@ curl \
 	-X POST \
 	-H "Content-Type: application/json" \
 	-d '{"username": "juminten", "password": "pecintatedjo"}' \
-	http://localhost:8000/token/
+	http://localhost:8000/app/token/
+
+# Refresh
+curl \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX3BrIjoxLCJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImNvbGRfc3R1ZmYiOiLimIMiLCJleHAiOjIzNDU2NywianRpIjoiZGUxMmY0ZTY3MDY4NDI3ODg5ZjE1YWMyNzcwZGEwNTEifQ.aEoAYkSJjoWH1boshQAaTkf8G3yn0kapko6HFRt7Rh4"}' \
+  http://localhost:8000/api/token/refresh/
 
 # Daftar
 curl \
@@ -20,3 +27,9 @@ curl \
 	-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjAzNzI2NDMxLCJqdGkiOiJlYTYzZmZlNjg2N2M0YWZhYjU2NWQ0MDI3NjBkODU2MyIsInVzZXJfaWQiOjJ9.sWa6WhuuTOSCtttRi5fvCfQSnh6ap0p2lcNeAFtbVwM" \
   	-d '{"name": "GICClass","action": "withdraw"}'\
   	http://localhost:8000/preevents/signup/
+
+curl \
+	-X POST \
+	-H "Content-Type: application/json" \
+	-d '{"username": "juminten", "password": "pecintatedjo", "first_name":"jumi", "last_name":"nten", "email":"juminten@hatitedjo.com"}' \
+	http://localhost:8000/app/user/signup

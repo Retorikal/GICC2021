@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from users import views as user_views
 from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from users import views as user_views
+from gicc2021 import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -25,9 +27,9 @@ urlpatterns = [
     # Event app
     path("preevents/", include("pre_events.urls")),
     path("competition/", include("competition.urls")),
+    path("user/", include("users.urls")),
 
     # Default auth url (Would probably be removed soon)
-    path("register/", user_views.register, name="register"),
     path(
         "login/",
         auth_views.LoginView.as_view(template_name="users/login.html"),

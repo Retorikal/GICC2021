@@ -1,8 +1,8 @@
 import React from "react";
-import Hero from "../components/Hero";
-import BlueContainer from "../components/BlueContainer";
-import Landing_Preevent from "../components/Landing_Preevent";
-import Landing_Competition from "../components/Landing_Competition";
+import Hero from "components/Hero";
+import BlueContainer from "components/BlueContainer";
+import Landing_Preevent from "components/Landing_Preevent";
+import Landing_Competition from "components/Landing_Competition";
 
 const Landing = () => {
   return (

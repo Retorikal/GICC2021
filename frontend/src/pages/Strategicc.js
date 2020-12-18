@@ -1,7 +1,7 @@
 import React from "react";
-import BlueContainer from "../components/BlueContainer";
-import Strategicc_Hero from "../components/Strategicc_Hero";
-import Strategicc_Timeline from "../components/Strategicc_Timeline";
+import BlueContainer from "components/BlueContainer";
+import Strategicc_Hero from "components/Strategicc_Hero";
+import Strategicc_Timeline from "components/Strategicc_Timeline";
 
 const Strategicc = () => {
   return (

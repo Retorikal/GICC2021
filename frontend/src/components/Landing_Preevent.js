@@ -1,8 +1,8 @@
 import React from "react";
-import strategicc_landing from "../images/strategicc-landing.jpg";
-import giccclass_landing from "../images/gicclass-landing.jpg";
-import dialogicc_landing from "../images/dialogicc-landing.jpg";
-import minicc_landing from "../images/minicc-landing.jpg";
+import strategicc_landing from "images/strategicc-landing.jpg";
+import giccclass_landing from "images/gicclass-landing.jpg";
+import dialogicc_landing from "images/dialogicc-landing.jpg";
+import minicc_landing from "images/minicc-landing.jpg";
 
 const Landing_Preevent = () => {
   return (

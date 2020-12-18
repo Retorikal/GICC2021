@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "pre_events.apps.PreEventsConfig",
     "competition.apps.CompetitionConfig",
-    #"crispy_forms",
+    "crispy_forms",
     'rest_framework',
 
     "django.contrib.admin",
@@ -166,3 +166,20 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 
 LOGIN_REDIRECT_URL = "landing-home"
+
+
+#EMAIL THINGS
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
+MAILER_EMAIL_BACKEND = EMAIL_BACKEND  
+EMAIL_HOST = 'mail.ganeshaicc.my.id'  
+EMAIL_HOST_PASSWORD = '57k3DM638RHSHp9'  
+EMAIL_HOST_USER = 'hilmifaww@ganeshaicc.my.id'  
+EMAIL_PORT = 465  
+EMAIL_USE_SSL = True  
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+

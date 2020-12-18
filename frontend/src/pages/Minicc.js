@@ -1,7 +1,7 @@
 import React from "react";
-import BlueContainer from "../components/BlueContainer";
-import Minicc_Hero from "../components/Minicc_Hero";
-import Minicc_Timeline from "../components/Minicc_Timeline";
+import BlueContainer from "components/BlueContainer";
+import Minicc_Hero from "components/Minicc_Hero";
+import Minicc_Timeline from "components/Minicc_Timeline";
 
 const Minicc = () => {
   return (
