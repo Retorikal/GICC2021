@@ -94,6 +94,9 @@ DATABASES = {
         'PORT': '3306',
         'USER': 'ganeshai_admin',
         'PASSWORD': 'icc_ganesha_2021_bisa'
+        'OPTIONS': {
+            'sql_mode': 'STRICT_ALL_TABLES',
+        },
     }
 }
 
