@@ -89,30 +89,49 @@ const Profile = (props) => {
       <div className="container">
         <AuthContext.Consumer>
           {auth =>{
-          return (<div className="profile">
-            <Title text={`Hi, ${auth.user.first_name}`} />
-            <div className="flex-container">
-              <div className="flex-left">
-                <h3>Biodata</h3>
-                <Textfield title="Name" default={auth.user.first_name}/>
-                <Textfield title="Full Name" default={auth.user.last_name}/>
-                <Textfield title="University" default={auth.uni}/>
-                <Textfield title="Major" default={auth.phone_no}/>
+            let content;
+            if(auth.agree_terms == false)
+              content = (
+                <div className="agreement">
+                  <h4>Please read the terms before proceeding. By clicking proceed, you state that you have agreed to all the terms written in the document.</h4>
+                  <div className="flex-horizontal button-container">
+                    <p className="button clickable" onClick={() => {this.submit()}}>Proceed</p>
+                    <a><p>Download File</p></a>
+                  </div>
+                </div>
+              );
+            else
+              content = (
+                <div className="flex-container">
+                  <div className="flex-left">
+                    <h3>Biodata</h3>
+                    <Textfield title="Name" default={auth.user.first_name}/>
+                    <Textfield title="Full Name" default={auth.user.last_name}/>
+                    <Textfield title="University" default={auth.uni}/>
+                    <Textfield title="Major" default={auth.phone_no}/>
 
-                <h3>Contact Information</h3>
-                <Textfield title="Phone number" default={auth.phone_no}/>
-                <Textfield title="LINE ID" default={auth.line}/>
+                    <h3>Contact Information</h3>
+                    <Textfield title="Phone number" default={auth.phone_no}/>
+                    <Textfield title="LINE ID" default={auth.line}/>
 
+                  </div>
+                  <div className="flex-right">
+                    <h3>Files</h3>
+                    <FileSubmit name="TRF" authctx={auth}/>
+                    <FileSubmit name="PRO" authctx={auth}/>
+                    <FileSubmit name="KTM" authctx={auth}/>
+                    <FileSubmit name="TWB" authctx={auth}/>
+                  </div>
+                </div>
+              );
+
+              return (<div className="profile">
+                <Title text={`Hi, ${auth.user.first_name}`} />
+                {content}
+                <button onClick={auth.logout}>Logout</button>
               </div>
-              <div className="flex-right">
-                <h3>Files</h3>
-                <FileSubmit name="TRF" authctx={auth}/>
-                <FileSubmit name="PRO" authctx={auth}/>
-                <FileSubmit name="KTM" authctx={auth}/>
-                <FileSubmit name="TWB" authctx={auth}/>
-              </div>
-            </div><button onClick={auth.logout}>Logout</button>
-          </div>);}}  
+            );
+          }}  
         </AuthContext.Consumer>
       </div>
     </div>

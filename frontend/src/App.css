@@ -74,6 +74,15 @@ a:visited {
   opacity: 0.05;
 }
 
+.clickable:hover{
+  background: white;
+  color: #213665;
+
+  border-width: 3px;
+  border-style: solid;
+  border-color: #213665;
+}
+
 .blue-container {
   background: #213665;
   color: white;
@@ -223,6 +232,44 @@ a:visited {
   color: white;
   font-family: "Overpass";
   width: 30%;
+}
+
+.profile .agreement h4{
+  margin: 1em 0 0.3em;
+  font-size: 1.5em;
+}
+
+.profile .agreement .button{
+  background: #213665;
+  color: white;
+  font-family: "Overpass";
+  width: 50%;
+}
+
+.profile .agreement p{
+  border: none;
+  border-radius: 0.3em;
+  outline: none;
+  padding: 0.3em 0.3em;
+  background: #e0e0e0;
+  font-size: 1em;
+  color: #213665;
+  font-family: "Overpass";
+  width: 100%;
+  margin: 0.5em 0;
+  text-align: center;
+}
+
+.profile .agreement .button-container{
+  margin-top: 2em;
+}
+
+.profile .agreement a{
+  margin-left: 1em;
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-align: center;
 }
 
 .textbox p {

@@ -36,18 +36,6 @@ from django.db import IntegrityError
 import re
 
 class Usermanage(generics.GenericAPIView):
-    def sendVerifMail(self, user, request):
-        token = RefreshToken.for_user(user).access_token
-        current_site = get_current_site(request).domain
-        relativeLink = reverse('email-verify')
-        absurl = 'http://'+current_site+relativeLink+"?token="+str(token)
-        email_body = 'Hi '+user.username + \
-            ' Use the link below to verify your email \n' + absurl
-        datum = {'email_body': email_body, 'to_email': user.email,
-                'email_subject': 'Verify your email'}
-
-        Util.send_email(datum)
-
     # Add new user
     def addUser(self, request):
         user = User()
@@ -70,7 +58,6 @@ class Usermanage(generics.GenericAPIView):
             participant.save()
 
             # Send verification Email
-            #self.sendVerifMail(user, request)
             token = RefreshToken.for_user(user).access_token
             current_site = get_current_site(request).domain
             relativeLink = reverse('email-verify')
