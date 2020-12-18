@@ -204,13 +204,25 @@ a:visited {
   width: 75%;
 }
 
-.profile .textbox h4 {
+.profile h3 {
   margin: 1.3em 0 0.3em;
+  font-size: 2em;
+}
+
+.profile .textbox h4 {
+  margin: 1em 0 0.3em;
   font-size: 1.5em;
 }
 
 .profile .textbox input {
   margin: -2em 0;
+}
+
+.profile .button{
+  background: #213665;
+  color: white;
+  font-family: "Overpass";
+  width: 30%;
 }
 
 .textbox p {
@@ -396,6 +408,11 @@ a:visited {
 
 .vertical-center{
   margin-top : 5em;
+}
+
+.flex-horizontal{
+  display:flex;
+  flex-direction: row;
 }
 
 @media only screen and (min-width: 768px) {
@@ -660,6 +677,11 @@ a:visited {
   .profile .textbox {
     margin-bottom: 1em;
     width: 80%;
+  }
+
+  .profile h3 {
+    margin: 1.3em 0 0.3em;
+    font-size: 2em;
   }
 
   .profile .textbox h4 {

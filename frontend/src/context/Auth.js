@@ -37,11 +37,20 @@ export default class AuthContextProvider extends Component{
     this.state={
       access:"",
       refresh:"",
+      token_time:"", // Time when the token is obtained
+      refresh_time:"", // Time when the refresh token is obtained
       error:1, // 0 for authenticated, 1 normally logged out, rest: HTTP error.
+
+      // User information
+      user: {},
+      files: {},
+
+
       // Exposed functions
       signup: async (credentials) => {return await this.signup(credentials)},
       login: async (user, pass) => {return await this.authenticate(user, pass)},
-      authenticator: request => {return this.appendToken(request)},
+      authenticator: async (request) => {return await this.appendToken(request)},
+      updateInfo: async () => {return await this.getInfo()},
       logout: () => this.logOut()
     }
   }
@@ -51,6 +60,7 @@ export default class AuthContextProvider extends Component{
     this.fetchToken(()=>{
       if(this.state.error == 0){
         console.log("Authenticated");
+        this.getInfo();
       } /*else{
         this.authenticate("juminten", "pecintatedjo").then(data => {
           console.log(data);
@@ -60,24 +70,26 @@ export default class AuthContextProvider extends Component{
 
   }
 
+  // Saves token to state and storage
   saveToken(data, callback=() => {}){
-    // Saves token to state and storage
     localStorage.setItem("tokens", JSON.stringify(data));
     this.setState(data, callback);
   }
 
+  // Gets token from local, saves it to state
   fetchToken(callback=() => {}){
-    // Gets token from local, saves it to state
     let data = JSON.parse(localStorage.getItem("tokens"));
     this.setState(data, callback);
 
     return data;
   }
 
+  // Deletes saved token; effectively logging out the user
   logOut(){
     this.saveToken({access:"", refresh:"", error:1});
   }
 
+  // Sign up as a new user
   async signup(credentials){
     // Takes signup information: email, password, first_name, last_name
     let url = "/app/user/";
@@ -102,8 +114,8 @@ export default class AuthContextProvider extends Component{
     return data;
   }
 
+  // Gets user token and refresh
   async authenticate(user, pass){
-    // Gets user token and refresh
     let url = "/app/token/";
     let init = {
       method: 'POST',
@@ -126,24 +138,26 @@ export default class AuthContextProvider extends Component{
     } else {
       data = await response.json();
       data.error = 0;
+      data.token_time = new Date().getTime();
+      data.refresh_time = new Date().getTime();
     }
 
     this.saveToken(data, ()=>{
       this.getInfo();
     });
-    
+
     return data;
   }
 
+  // Gets all user information data
   async getInfo(){
-    // Gets all user information data
     let url = "/app/user/";
     let init = {
       method: 'GET',
       mode: 'cors',
       headers: {'Content-Type': 'application/json'},
     };
-    this.appendToken(init)
+    await this.appendToken(init)
 
     let response = await fetch(url, init);
     let data = "";
@@ -164,10 +178,48 @@ export default class AuthContextProvider extends Component{
     return data;
   }
 
+  // Get new token using refresh token
+  async refreshToken(){
+    let url = "/app/token/refresh/";
+    let init = {
+      method: 'POST',
+      mode: 'cors',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        'refresh': this.state.refresh
+      })
+    };
+
+    let response = await fetch(url, init);
+    let data = "";
+
+    if (response.status > 400){
+      data = { 
+        access: "",
+        refresh: "",
+        error: response.status
+        }; // Sets error.
+    } else {
+      data = await response.json();
+      data.error = 0;
+      data.token_time = new Date().getTime();
+
+      this.saveToken(data)
+      return "Bearer " + data.access;
+    }
+  }
+
   // Fungsi nambahin token untuk request header buat page yang butuh authentication
-  appendToken(request){
+  async appendToken(request){
     let token = "Bearer " + this.state.access;
-    request.headers.Authorization = "Bearer " + this.state.access;
+
+    // Refresh token buat state kalo ternyata kadaluarsa
+    let now = new Date().getTime()
+    if (now - this.state.token_time > (270 * 1000)){
+      token = await this.refreshToken();
+    }
+    
+    request.headers.Authorization = token;
   }
 
   render(){

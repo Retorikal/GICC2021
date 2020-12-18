@@ -13,6 +13,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.parsers import JSONParser
 
 import jwt
 from drf_yasg import openapi
@@ -35,7 +36,6 @@ from django.db import IntegrityError
 import re
 
 class Usermanage(generics.GenericAPIView):
-    # Send validation email
     def sendVerifMail(self, user, request):
         token = RefreshToken.for_user(user).access_token
         current_site = get_current_site(request).domain
@@ -49,7 +49,7 @@ class Usermanage(generics.GenericAPIView):
         Util.send_email(datum)
 
     # Add new user
-    def post(self, request):
+    def addUser(self, request):
         user = User()
         deserializer = SignupSerializer(user, data = request.data)
 
@@ -64,6 +64,10 @@ class Usermanage(generics.GenericAPIView):
             deserializer.save()
             user.set_password(deserializer.validated_data["password"])
             user.save()
+
+            # Save participant
+            participant = Participant(user=user)
+            participant.save()
 
             # Send verification Email
             #self.sendVerifMail(user, request)
@@ -94,7 +98,17 @@ class Usermanage(generics.GenericAPIView):
             # Get quotation enclosed parts of the error to send back
             return Response({'error': re.findall(r"'(([\w\. ]){10,100})'", str(e))}, status=status.HTTP_403_FORBIDDEN)
 
-    # GET response: general information about the user        
+    # POST response: update data
+    def post(self, request, format=None):
+        deserializer = ParticipantSerializer(request.user.participant, request.data)
+
+        if deserializer.is_valid:
+            deserializer.save()
+            return Response(serializer.data)
+        else:
+            return Response({'error':'error'},status=status.HTTP_400_BAD_REQUEST)
+
+    # GET response: general information about the user
     def get(self, request, format=None):
         serializer = ParticipantSerializer(request.user.participant)
         return Response(serializer.data)
@@ -103,10 +117,10 @@ class Files(views.APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request, format=None):
-        file_val = ParticipantFiles(owner=request.user.participant, file=request.FILES["file"])
+        file_val = ParticipantFile(owner=request.user.participant, file=request.FILES["file"], purpose=request.POST.get('purpose'))
         file_val.save()
 
-        content = {'message': request.user.username}
+        content = {'success': request.POST.get('purpose')}
         return Response(content, status=status.HTTP_201_CREATED)
 
 class VerifyEmail(views.APIView):

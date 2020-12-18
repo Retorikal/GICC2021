@@ -12,8 +12,21 @@ class UserSerializer(serializers.ModelSerializer):
             'email',
         ]
 
+        read_only_fields = ['username']
+
+class FileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ParticipantFile
+        fields = [
+            'purpose',
+            'event',
+            'file',
+            'verified'
+        ]
+
 class ParticipantSerializer(serializers.ModelSerializer):
     user = UserSerializer()
+    files = FileSerializer(many=True)
 
     class Meta:
         model = Participant
@@ -28,9 +41,12 @@ class ParticipantSerializer(serializers.ModelSerializer):
             'phone_no',
 
             'is_verified',
+            'agree_terms',
 
-            #'files'
+            'files'
         ]
+
+        read_only_fields = ['is_verified', 'agree_terms', 'files']
 
 class SignupSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
