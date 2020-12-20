@@ -16,17 +16,14 @@ const Navbar = () => {
           <img src={ham} alt="toggle menu" className="menu" id="menu" />
         </Link>
         <ul className="show-desktop hide-mobile">
-          <li> <Link to="/">Home</Link> </li>
-          <li> <Link to="/competition">Competition</Link> </li>
-          <li> <Link to="/strategicc">StrateGICC</Link> </li>
-          <li> <Link to="/classgicc">ClassGicc</Link> </li>
-          <li> <Link to="/minicc">MiniCC</Link> </li>
+          <Link to="/"><li className="clickable">Home</li></Link> 
+          <Link to="/competition"><li className="clickable">Competition</li></Link> 
           <AuthContext.Consumer>
             {value =>{
               if (value.error == 0)
-                return (<li><Link to="/profile">Profile</Link></li>);
+                return (<Link to="/profile"><li className="clickable">Profile</li></Link>);
               else
-                return (<li><Link to="/login">Sign in</Link></li>);
+                return (<Link to="/login"><li className="clickable">Sign in</li></Link>);
             }}  
           </AuthContext.Consumer>
         </ul>

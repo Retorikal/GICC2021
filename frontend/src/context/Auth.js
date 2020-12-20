@@ -39,7 +39,7 @@ export default class AuthContextProvider extends Component{
       refresh:"",
       token_time:"", // Time when the token is obtained
       refresh_time:"", // Time when the refresh token is obtained
-      error:1, // 0 for authenticated, 1 normally logged out, rest: HTTP error.
+      error:1, // 0 for logind, 1 normally logged out, rest: HTTP error.
 
       // User information
       user: {},
@@ -48,9 +48,10 @@ export default class AuthContextProvider extends Component{
 
       // Exposed functions
       signup: async (credentials) => {return await this.signup(credentials)},
-      login: async (user, pass) => {return await this.authenticate(user, pass)},
+      login: async (user, pass) => {return await this.login(user, pass)},
       authenticator: async (request) => {return await this.appendToken(request)},
-      updateInfo: async () => {return await this.getInfo()},
+      updateInfo: async (data) => {return await this.updateInfo(data)},
+      getInfo: async () => {return await this.getInfo()},
       logout: () => this.logOut()
     }
   }
@@ -62,7 +63,7 @@ export default class AuthContextProvider extends Component{
         console.log("Authenticated");
         this.getInfo();
       } /*else{
-        this.authenticate("juminten", "pecintatedjo").then(data => {
+        this.login("juminten", "pecintatedjo").then(data => {
           console.log(data);
         });
       }*/
@@ -79,7 +80,10 @@ export default class AuthContextProvider extends Component{
   // Gets token from local, saves it to state
   fetchToken(callback=() => {}){
     let data = JSON.parse(localStorage.getItem("tokens"));
-    this.setState(data, callback);
+    
+    if (data != null){
+      this.setState(data, callback);
+    }
 
     return data;
   }
@@ -115,7 +119,7 @@ export default class AuthContextProvider extends Component{
   }
 
   // Gets user token and refresh
-  async authenticate(user, pass){
+  async login(user, pass){
     let url = "/app/token/";
     let init = {
       method: 'POST',
@@ -172,7 +176,33 @@ export default class AuthContextProvider extends Component{
       data.error = 0;
     }
 
-    console.log(data)
+    this.setState(data);
+    return data;
+  }
+
+  // Update user information stored on server
+  async updateInfo(info){
+    // Takes signup information: email, password, first_name, last_name
+    let url = "/app/user/";
+    let init = {
+      method: 'POST',
+      mode: 'cors',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(info)
+    };
+    await this.appendToken(init)
+
+    let response = await fetch(url, init);
+    let data = "";
+
+    if (response.status > 400){
+      data = { 
+        error: response.status
+      }; // Sets error.
+    } else {
+      data = await response.json();
+      data.error = 0;
+    }
 
     this.setState(data);
     return data;

@@ -62,7 +62,7 @@ class Login extends Component{
             </div>
             <AuthContext.Consumer>
               {value => {
-                return (<button className="login-btn" type="button" onClick={() => {this.onLoginClick(value.login)}}>Login</button>);
+                return (<button className="login-btn clickable" type="button" onClick={() => {this.onLoginClick(value.login)}}>Login</button>);
               }}
             </AuthContext.Consumer>
             <div className="forget-pw">

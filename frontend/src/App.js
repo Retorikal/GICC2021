@@ -16,7 +16,6 @@ import Register from "pages/Register";
 import "App.css";
 import PopupTest from "pages/PopupTest";
 import PopupContextProvider from "context/PopupContext";
-import Draft from "pages/Draft";
 
 /*async function authenticate(user, pass){
   let url = "/app/token/";
@@ -60,32 +59,23 @@ class App extends Component {
 
   render() {
     return (
-      <>
-        <PopupContextProvider>
-          <div>
-            <Router>
-              <Route path="/" component={Draft} />
-            </Router>
-          </div>
-          {/* <AuthContextProvider>
-            <Router>
-              <Navbar />
-              <Route exact path="/landing" component={Landing} />
-              <Route path="/competition" component={Competition} />
-              <Route path="/preevent" component={Preevent} />
-              <Route path="/strategicc" component={Strategicc} />
-              <Route path="/classgicc" component={Classgicc} />
-              <Route path="/minicc" component={Minicc} />
-              <Route path="/login" component={Login} />
-              <Route
-                path="/profile"
-                render={() => <Profile token={this.state.access} />}
-              />
-              <Route path="/register" component={Register} />
-            </Router>
-          </AuthContextProvider> */}
-        </PopupContextProvider>
-      </>
+      <PopupContextProvider>
+        <AuthContextProvider>
+          <Router>
+            <Navbar />
+            
+            <Route exact path="/" component={Landing} />
+            <Route path="/competition" component={Competition} />
+            <Route path="/login" component={Login} />
+            <Route
+              path="/profile"
+              render={() => <Profile token={this.state.access} />}
+            />
+            <Route path="/register" component={Register} />
+          </Router>
+          
+        </AuthContextProvider>
+      </PopupContextProvider>
     );
   }
 }

@@ -4,13 +4,19 @@ from pre_events.models import Preevent
 
 # General participant information
 class Participant(models.Model):
+
+    SECTOR_CHOICES=[
+        ('OP', 'Operations'),
+        ('MA', 'Marketing'),
+        ('EH', 'Enviromental Health Safety'),
+    ]
+
     # Identity
     user = models.OneToOneField(User, related_name='participant', on_delete=models.CASCADE)
     # username
     # first_name: Nama depan
     # last_name: nama lengkap
     
-    nim = models.CharField(max_length=8, null=True)
     uni = models.CharField(max_length=255, null=True)
     major = models.CharField(max_length=255, null=True)
 
@@ -25,8 +31,8 @@ class Participant(models.Model):
     #agreement
     agree_terms = models.BooleanField(default=False)
 
-    # Preevent-related fields
-    signedup_preevent = models.ManyToManyField(Preevent, related_name='reg_users')
+    # Competition-related fields
+    sector = models.CharField(max_length=31, choices=SECTOR_CHOICES)
 
     def save(self, *args, **kwargs):
         verify = True;

@@ -26,38 +26,45 @@ class Register extends Component{
   render(){
     return (
       <div className="content">
-        <div className="login">
-          <Title text={"Register"} />
-          <div className="textbox">
-            <input type="text" name="username" placeholder="Username" id="username" className="login-input" onChange={e => {this.onFieldChange(e)}} />
+        <div className="flex-container">
+
+          <div className="flex-left flex-container vertical-center">
+            <Title text={"Register"} center={true}/>
           </div>
-          <div className="textbox">
-            <input type="text" placeholder="Email address" id="email" className="login-input" onChange={e => {this.onFieldChange(e)}}/>
+
+          <div className="login flex-right">            
+            <div className="textbox">
+              <input type="text" name="username" placeholder="Username" id="username" className="login-input" onChange={e => {this.onFieldChange(e)}} />
+            </div>
+            <div className="textbox">
+              <input type="text" placeholder="Email address" id="email" className="login-input" onChange={e => {this.onFieldChange(e)}}/>
+            </div>
+            <div className="textbox">
+              <input type="text" placeholder="First name" id="first_name" className="login-input" onChange={e => {this.onFieldChange(e)}} />
+            </div>
+            <div className="textbox">
+              <input type="text" placeholder="Full name" id="last_name" className="login-input" onChange={e => {this.onFieldChange(e)}} />
+            </div>
+            <div className="textbox">
+              <input type="password" name="password" placeholder="Password" id="password" className="login-input" onChange={e => {this.onFieldChange(e)}} />
+            </div>
+            <div className="textbox">
+              <input type="password" placeholder="Confrim password" id="passconf" className="login-input" onChange={e => {this.onFieldChange(e)}} />
+            </div>
+            <AuthContext.Consumer>
+                {value => {
+                  return (<button className="login-btn clickable" type="button" onClick={() => {this.onLoginClick(value.signup)}}>Sign up</button>);
+                }}
+            </AuthContext.Consumer>
+            <div className="forget-pw">
+              <ul>
+                <li>
+                  <Link to="/login">Already made an account? Sign in here</Link>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className="textbox">
-            <input type="text" placeholder="First name" id="first_name" className="login-input" onChange={e => {this.onFieldChange(e)}} />
-          </div>
-          <div className="textbox">
-            <input type="text" placeholder="Full name" id="last_name" className="login-input" onChange={e => {this.onFieldChange(e)}} />
-          </div>
-          <div className="textbox">
-            <input type="password" name="password" placeholder="Password" id="password" className="login-input" onChange={e => {this.onFieldChange(e)}} />
-          </div>
-          <div className="textbox">
-            <input type="password" placeholder="Confrim password" id="passconf" className="login-input" onChange={e => {this.onFieldChange(e)}} />
-          </div>
-          <div className="forget-pw">
-            <ul>
-              <li>
-                <Link to="/login">Already made an account? Sign in here</Link>
-              </li>
-            </ul>
-          </div>
-          <AuthContext.Consumer>
-              {value => {
-                return (<button className="login-btn" type="button" onClick={() => {this.onLoginClick(value.signup)}}>Sign up</button>);
-              }}
-          </AuthContext.Consumer>
+
         </div>
       </div>
     );

@@ -87,11 +87,11 @@ class Usermanage(generics.GenericAPIView):
 
     # POST response: update data
     def post(self, request, format=None):
-        deserializer = ParticipantSerializer(request.user.participant, request.data)
+        deserializer = ParticipantSerializer(request.user.participant, request.data, partial=True)
 
-        if deserializer.is_valid:
+        if deserializer.is_valid():
             deserializer.save()
-            return Response(serializer.data)
+            return Response(deserializer.data)
         else:
             return Response({'error':'error'},status=status.HTTP_400_BAD_REQUEST)
 
