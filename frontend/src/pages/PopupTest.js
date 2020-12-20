@@ -1,6 +1,6 @@
 import Popup from "components/Popup/Popup";
 import { UsePopup } from "context/PopupContext";
-import React, { useState } from "react";
+import React from "react";
 
 const PopupTest = () => {
   const { showPopup, togglePopup } = UsePopup();
@@ -10,14 +10,16 @@ const PopupTest = () => {
       <h1>Hello world</h1>
       {showPopup ? (
         <Popup
-          errorMsg={
+          msg={
             "Test popup Test popup Test popup Test popup Test popup Test popup"
           }
           togglePopup={togglePopup}
-          type="succes"
+          type="success"
         />
       ) : null}
-      <button onClick={togglePopup}>Show Popup</button>
+      <button className="btn btn-primary" onClick={togglePopup}>
+        Show Popup
+      </button>
     </div>
   );
 };

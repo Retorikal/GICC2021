@@ -16,6 +16,7 @@ import Register from "pages/Register";
 import "App.css";
 import PopupTest from "pages/PopupTest";
 import PopupContextProvider from "context/PopupContext";
+import Draft from "pages/Draft";
 
 /*async function authenticate(user, pass){
   let url = "/app/token/";
@@ -61,12 +62,12 @@ class App extends Component {
     return (
       <>
         <PopupContextProvider>
-          {/* <div>
+          <div>
             <Router>
-              <Route path="/" component={PopupTest} />
+              <Route path="/" component={Draft} />
             </Router>
-          </div> */}
-          <AuthContextProvider>
+          </div>
+          {/* <AuthContextProvider>
             <Router>
               <Navbar />
               <Route exact path="/landing" component={Landing} />
@@ -82,7 +83,7 @@ class App extends Component {
               />
               <Route path="/register" component={Register} />
             </Router>
-          </AuthContextProvider>
+          </AuthContextProvider> */}
         </PopupContextProvider>
       </>
     );

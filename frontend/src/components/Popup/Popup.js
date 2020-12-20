@@ -1,11 +1,11 @@
 import React from "react";
 
-const Popup = ({ togglePopup, errorMsg, type }) => {
+const Popup = ({ togglePopup, msg, type }) => {
   const getPopupTitle = (type) => {
     if (type === "error") {
       return "Error";
-    } else if (type === "succes") {
-      return "Succes";
+    } else if (type === "success") {
+      return "Success";
     } else if (type === "info") {
       return "Info";
     } else if (type === "warning") {
@@ -18,7 +18,7 @@ const Popup = ({ togglePopup, errorMsg, type }) => {
   const getPopupColor = (type) => {
     if (type === "error") {
       return "#FF5353";
-    } else if (type === "succes") {
+    } else if (type === "success") {
       return "#4CB050";
     } else if (type === "info") {
       return "#3DBFF1";
@@ -33,7 +33,7 @@ const Popup = ({ togglePopup, errorMsg, type }) => {
       <div className="popup-error">
         <div className="popup-error-inner">
           <h1 className="popup-title">{getPopupTitle(type)}</h1>
-          <p className="popup-message">{errorMsg}</p>
+          <p className="popup-message">{msg}</p>
           <div className="popup-btn-container">
             <button className="popup-btn-close" onClick={togglePopup}>
               Close
