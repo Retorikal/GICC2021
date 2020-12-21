@@ -32,7 +32,7 @@ class Participant(models.Model):
     agree_terms = models.BooleanField(default=False)
 
     # Competition-related fields
-    sector = models.CharField(max_length=31, choices=SECTOR_CHOICES)
+    sector = models.CharField(max_length=31, choices=SECTOR_CHOICES, null=True)
 
     def save(self, *args, **kwargs):
         verify = True;

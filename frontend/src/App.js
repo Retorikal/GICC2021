@@ -14,8 +14,8 @@ import Minicc from "pages/Minicc";
 import Register from "pages/Register";
 
 import "App.css";
-import PopupTest from "pages/PopupTest";
-import PopupContextProvider from "context/PopupContext";
+import Popup from "components/Popup/Popup";
+import PopupContextProvider, { PopupContext, UsePopup } from "context/Popup";
 
 /*async function authenticate(user, pass){
   let url = "/app/token/";
@@ -43,41 +43,27 @@ import PopupContextProvider from "context/PopupContext";
   return data;
 }*/
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      access: "",
-      refresh: "",
-    };
-  }
+const App = ()=> {
+  //const popup = UsePopup();
 
-  componentDidMount() {
-    // Do initial authentication here
-    //authenticate("juminten", "pecintatedjo").then(data => {this.setState(() => {return data;})});
-  }
+  return (
+    <PopupContextProvider>
+      <AuthContextProvider>
+        <Router>
+          <Navbar />
+          <PopupContext.Consumer>
+           {popup => {return(<Popup enabled={popup.show} msg={popup.msg} togglePopup={popup.toggle} type={popup.type}/>)}}
+          </PopupContext.Consumer>
+          <Route exact path="/" component={Landing} />
+          <Route path="/competition" component={Competition} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+        </Router>
 
-  render() {
-    return (
-      <PopupContextProvider>
-        <AuthContextProvider>
-          <Router>
-            <Navbar />
-            
-            <Route exact path="/" component={Landing} />
-            <Route path="/competition" component={Competition} />
-            <Route path="/login" component={Login} />
-            <Route
-              path="/profile"
-              render={() => <Profile token={this.state.access} />}
-            />
-            <Route path="/register" component={Register} />
-          </Router>
-          
-        </AuthContextProvider>
-      </PopupContextProvider>
-    );
-  }
+      </AuthContextProvider>
+    </PopupContextProvider>
+  );
 }
 
 export default App;

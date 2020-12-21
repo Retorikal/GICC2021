@@ -4,9 +4,7 @@ import { Redirect } from "react-router-dom";
 
 export const AuthContext = createContext();
 
-export function useAuth() {
-  return useContext(AuthContext);
-}
+export const UseAuth = () => useContext(AuthContext);
 
 /*const AuthContextProvider = (props) => {
   const existingTokens = JSON.parse(localStorage.getItem("tokens"));
@@ -106,7 +104,7 @@ export default class AuthContextProvider extends Component{
     let response = await fetch(url, init);
     let data = "";
 
-    if (response.status > 400){
+    if (response.status >= 400){
       data = { 
         error: response.status
       }; // Sets error.
@@ -134,21 +132,20 @@ export default class AuthContextProvider extends Component{
     let response = await fetch(url, init);
     let data = "";
 
-    if (response.status > 400){
-      data = { 
-        access: "",
-        error: response.status
-      }; // Sets error.
+    if (response.status >= 400){
+      data = await response.json();
+      data.access = "";
+      data.error = response.status;
     } else {
       data = await response.json();
       data.error = 0;
       data.token_time = new Date().getTime();
       data.refresh_time = new Date().getTime();
-    }
-
-    this.saveToken(data, ()=>{
+    
+      this.saveToken(data, ()=>{
       this.getInfo();
     });
+    }
 
     return data;
   }
@@ -166,7 +163,7 @@ export default class AuthContextProvider extends Component{
     let response = await fetch(url, init);
     let data = "";
 
-    if (response.status > 400){
+    if (response.status >= 400){
       data = { 
         access: "",
         error: response.status
@@ -195,7 +192,7 @@ export default class AuthContextProvider extends Component{
     let response = await fetch(url, init);
     let data = "";
 
-    if (response.status > 400){
+    if (response.status >= 400){
       data = { 
         error: response.status
       }; // Sets error.
@@ -223,7 +220,7 @@ export default class AuthContextProvider extends Component{
     let response = await fetch(url, init);
     let data = "";
 
-    if (response.status > 400){
+    if (response.status >= 400){
       data = { 
         access: "",
         refresh: "",

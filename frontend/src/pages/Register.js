@@ -4,26 +4,48 @@ import { AuthContext } from "context/Auth.js";
 import Title from "components/Title";
 
 class Register extends Component{
+  constructor(props){
+    super(props);
+    this.state={
+      regis:{}
+    }
+  }
+
   onFieldChange(e){
-    let prop = {};
-    prop[e.target.id] = e.target.value;
-    this.setState(prop);
+    let regis = this.state.regis;
+    regis[e.target.id] = e.target.value;
+
+    let state = this.state;
+    state.regis = regis;
+
+    this.setState(state);
   }
 
   onLoginClick(signup){
     console.log("Signing up");
     // Blah blah blah validation
-    let data = Object.assign({}, this.state);
+    let data = Object.assign({}, this.state.regis);
+    let valid = true;
+
+    if(data.password == data.passconf){
+      console.log("Pasword does not match.");
+      return;
+    }
+
     delete data.passconf;
 
     signup(data).then(result =>{
       if (result.error == 0) {
-        this.setState({redirect: true});
+        this.setState({redirect: "/login"});
       }
     });
+
   }
 
   render(){
+    if (this.state.redirect != undefined) {
+      return <Redirect to={this.state.redirect}/>
+    }
     return (
       <div className="content">
         <div className="flex-container">
@@ -37,13 +59,13 @@ class Register extends Component{
               <input type="text" name="username" placeholder="Username" id="username" className="login-input" onChange={e => {this.onFieldChange(e)}} />
             </div>
             <div className="textbox">
-              <input type="text" placeholder="Email address" id="email" className="login-input" onChange={e => {this.onFieldChange(e)}}/>
+              <input type="text" name="email" placeholder="Email address" id="email" className="login-input" onChange={e => {this.onFieldChange(e)}}/>
             </div>
             <div className="textbox">
-              <input type="text" placeholder="First name" id="first_name" className="login-input" onChange={e => {this.onFieldChange(e)}} />
+              <input type="text" name="first_name" placeholder="First name" id="first_name" className="login-input" onChange={e => {this.onFieldChange(e)}} />
             </div>
             <div className="textbox">
-              <input type="text" placeholder="Full name" id="last_name" className="login-input" onChange={e => {this.onFieldChange(e)}} />
+              <input type="text" name="last_name" placeholder="Full name" id="last_name" className="login-input" onChange={e => {this.onFieldChange(e)}} />
             </div>
             <div className="textbox">
               <input type="password" name="password" placeholder="Password" id="password" className="login-input" onChange={e => {this.onFieldChange(e)}} />

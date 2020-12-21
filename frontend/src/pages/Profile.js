@@ -1,6 +1,8 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, Component } from "react";
+import { Link, Redirect } from "react-router-dom";
+import { AuthContext, UseAuth } from "context/Auth";
+import { PopupContext, UsePopup } from "context/Popup";
 import Title from "components/Title";
-import { AuthContext } from "context/Auth";
 
 class FileSubmit extends Component{
   constructor(props){
@@ -89,76 +91,93 @@ class Textfield extends Component{
 }
 
 
-class Profile extends Component{
-  constructor(props){
-    super(props);
-    this.state={
-      data: {}
-    };
+const Profile = ()=>{
+  const [data, setData] = useState({user:{}});
+  const [redirect, setRedirect] = useState(null);
+
+  const popup = UsePopup();
+  const auth = UseAuth();
+
+  const onTextChange = (name, value)=>{
+    let tmp_data = data;
+    tmp_data[name] = value;
+
+    setData(tmp_data);
   }
 
-  onTextChange(name, value){
-    let data = this.state.data;
-    data[name] = value;
+  const onUserChange = (name, value)=>{
+    let tmp_user = data.user;
+    tmp_user[name] = value;
 
-    this.setState(data);
+    let tmp_data = data;
+    tmp_data.user = tmp_user;
+
+    setData(tmp_data);
   }
 
-  render() {
-    return (
-      <div className="content">
-        <div className="container">
-          <AuthContext.Consumer>
-            {auth =>{
-              let content;
-              if(auth.agree_terms == false)
-                content = (
-                  <div className="agreement">
-                    <h4>Please read the terms before proceeding. By clicking proceed, you state that you have agreed to all the terms written in the document.</h4>
-                    <div className="flex-horizontal button-container">
-                      <p className="button clickable" onClick={() => {auth.updateInfo({agree_terms: true})}}>Proceed</p>
-                      <a><p>Download File</p></a>
-                    </div>
-                  </div>
-                );
-              else
-                content = (
-                  <div className="flex-container">
-                    <div className="flex-left">
-                      <h3>Biodata</h3>
-                      <Textfield name="first_name" title="Name" default={auth.user.first_name} updateText={(a, b) => this.onTextChange(a,b)}/>
-                      <Textfield name="last_name" title="Full Name" default={auth.user.last_name} updateText={(a, b) => this.onTextChange(a,b)}/>
-                      <Textfield name="uni" title="University" default={auth.uni} updateText={(a, b) => this.onTextChange(a,b)}/>
-                      <Textfield name="major" title="Major" default={auth.major} updateText={(a, b) => this.onTextChange(a,b)}/>
-                      <Textfield name="category" title="Category" default={auth.category} updateText={(a, b) => this.onTextChange(a,b)}/>
-                      
-                      <h3>Contact Information</h3>
-                      <Textfield name="phone_no" title="Phone number" default={auth.phone_no} updateText={(a, b) => this.onTextChange(a,b)}/>
-                      <Textfield name="line" title="LINE ID" default={auth.line} updateText={(a, b) => this.onTextChange(a,b)}/>
+  const logout = () => {
+    auth.logout()
+    setRedirect("/login");
+  }
 
-                      <button className="clickable" onClick={() => {auth.updateInfo(this.state.data)}}>Update information</button>
-                    </div>
-                    <div className="flex-right">
-                      <h3>Files</h3>
-                      <FileSubmit name="TRF" authctx={auth}/>
-                      <FileSubmit name="KTM" authctx={auth}/>
-                      <FileSubmit name="TWB" authctx={auth}/>
-                    </div>
-                  </div>
-                );
+  const sec_cho={
+    OP: 'Operations',
+    MA: 'Marketing',
+    EH: 'Enviromental Health Safety',
+  }
 
-                return (<div className="profile">
-                  <Title text={`Hi, ${auth.user.first_name}`} />
-                  {content}
-                  <button className="clickable secondary-button" onClick={auth.logout}>Logout</button>
-                </div>
-              );
-            }}  
-          </AuthContext.Consumer>
+  let content;
+  if(auth.agree_terms == false)
+    content = (
+      <div className="agreement">
+        <h4>Please read the terms before proceeding. By clicking proceed, you state that you have agreed to all the terms written in the document.</h4>
+        <div className="flex-horizontal button-container">
+          <p className="button clickable" onClick={() => {auth.updateInfo({agree_terms: true})}}>Proceed</p>
+          <a><p className = "secondary-button">Download File</p></a>
+        </div>
+      </div>
+      );
+
+  else
+    content = (
+      <div className="flex-container">
+        <div className="flex-left">
+          <h3>Biodata</h3>
+          <Textfield name="first_name" title="First Name" default={auth.user.first_name} updateText={(a, b) => onUserChange(a,b)}/>
+          <Textfield name="last_name" title="Full Name" default={auth.user.last_name} updateText={(a, b) => onUserChange(a,b)}/>
+          <Textfield name="uni" title="University" default={auth.uni} updateText={(a, b) => onTextChange(a,b)}/>
+          <Textfield name="major" title="Major" default={auth.major} updateText={(a, b) => onTextChange(a,b)}/>
+          <Textfield name="sector" title="Sector" default={sec_cho[auth.sector]} updateText={(a, b) => onTextChange(a,b)}/>
+          
+          <h3>Contact Information</h3>
+          <Textfield name="phone_no" title="Phone number" default={auth.phone_no} updateText={(a, b) => onTextChange(a,b)}/>
+          <Textfield name="line" title="LINE ID" default={auth.line} updateText={(a, b) => onTextChange(a,b)}/>
+
+          <button className="clickable" onClick={() => {auth.updateInfo(data)}}>Update information</button>
+        </div>
+        <div className="flex-right">
+          <h3>Files</h3>
+          <FileSubmit name="TRF" authctx={auth}/>
+          <FileSubmit name="KTM" authctx={auth}/>
+          <FileSubmit name="TWB" authctx={auth}/>
         </div>
       </div>
     );
-  }; 
+
+  if (redirect != null) {
+    return <Redirect to={redirect}/>
+  }
+  return (
+    <div className="content">
+      <div className="container">
+        <div className="profile">
+            <Title text={`Hi, ${auth.user.first_name}`} />
+            {content}
+          <button className="clickable secondary-button" onClick={logout}>Logout</button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Profile;

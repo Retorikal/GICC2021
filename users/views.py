@@ -89,7 +89,7 @@ class Usermanage(generics.GenericAPIView):
     def post(self, request, format=None):
         deserializer = ParticipantSerializer(request.user.participant, request.data, partial=True)
 
-        if deserializer.is_valid():
+        if deserializer.is_valid(raise_exception=True):
             deserializer.save()
             return Response(deserializer.data)
         else:

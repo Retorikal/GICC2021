@@ -29,15 +29,24 @@ class ParticipantSerializer(serializers.ModelSerializer):
     user = UserSerializer(required = False)
     files = FileSerializer(many=True, required = False)
 
+    def update(self, instance, validated_data):
+        userdata = validated_data.pop("user", None)
+
+        userdese = UserSerializer(instance.user, userdata, partial=True)
+        if userdese.is_valid():
+            userdese.save()
+        
+        super(ParticipantSerializer, self).update(instance, validated_data)
+        return instance
+        
+
     class Meta:
         model = Participant
         fields = [
             'user',
 
-            'nim',
             'uni',
             'major',
-
 
             'line',
             'phone_no',
