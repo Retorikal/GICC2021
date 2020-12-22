@@ -43,11 +43,12 @@ class FileSubmit extends Component{
 
   async submit(){
     console.log("submitting");
+    console.log(this.state.file);
 
     if(this.state.file != ""){
       let url = "/app/user/files/";
       let formData = new FormData();
-      formData.append("file", this.state.file, this.props.name);
+      formData.append("file", this.state.file, this.props.name+this.state.file.name);
       formData.append("purpose", this.props.name);
       let init = {
         method: 'POST',
@@ -55,8 +56,16 @@ class FileSubmit extends Component{
         headers: {}
       };
       await this.props.authctx.authenticator(init);
+      
+      let response = await fetch(url, init);
+      let data = await response.json();
 
-      await fetch(url, init);
+      if (response.status >= 400){
+        this.props.popupctx.showPopup("Upload failed: " + data.error, "error");
+      } else {
+        this.props.popupctx.showPopup("Upload successful", "success");
+      }
+
       await this.props.authctx.getInfo();
     }
   }
@@ -90,6 +99,21 @@ class Textfield extends Component{
   }
 }
 
+const sec_cho={
+  OP: 'Operations',
+  MA: 'Marketing',
+  EH: 'Enviromental Health Safety',
+}
+
+const fields_name={
+  first_name: "First Name",
+  last_name: "Full Name",
+  uni: "University",
+  major: "Major",
+  sector: "Sector",
+  phone_no: "Phone number",
+  line: "LINE ID",
+}
 
 const Profile = ()=>{
   const [data, setData] = useState({user:{}});
@@ -115,15 +139,15 @@ const Profile = ()=>{
     setData(tmp_data);
   }
 
-  const logout = () => {
-    auth.logout()
-    setRedirect("/login");
-  }
-
-  const sec_cho={
-    OP: 'Operations',
-    MA: 'Marketing',
-    EH: 'Enviromental Health Safety',
+  const updateInfo = () => {
+    auth.updateInfo(data).then(result=>{
+      if (result.error == 0) {
+        popup.showPopup("Information updated.", "success");
+      } else {
+        let err = Object.entries(result)
+        popup.showPopup(fields_name[err[0][0]] + ": " + err[0][1], "error");
+      }
+    })
   }
 
   let content;
@@ -153,19 +177,20 @@ const Profile = ()=>{
           <Textfield name="phone_no" title="Phone number" default={auth.phone_no} updateText={(a, b) => onTextChange(a,b)}/>
           <Textfield name="line" title="LINE ID" default={auth.line} updateText={(a, b) => onTextChange(a,b)}/>
 
-          <button className="clickable" onClick={() => {auth.updateInfo(data)}}>Update information</button>
+          <button className="clickable" onClick={updateInfo}>Update information</button>
         </div>
         <div className="flex-right">
           <h3>Files</h3>
-          <FileSubmit name="TRF" authctx={auth}/>
-          <FileSubmit name="KTM" authctx={auth}/>
-          <FileSubmit name="TWB" authctx={auth}/>
+          <FileSubmit name="TRF" authctx={auth} popupctx={popup}/>
+          <FileSubmit name="KTM" authctx={auth} popupctx={popup}/>
+          <FileSubmit name="TWB" authctx={auth} popupctx={popup}/>
         </div>
       </div>
     );
 
-  if (redirect != null) {
-    return <Redirect to={redirect}/>
+  if (auth.error != 0 && auth.ready) {
+    // Wait for auth to complete initial componentDidMount before determining if redirecting is necessary
+    return <Redirect to={"/login"}/>
   }
   return (
     <div className="content">
@@ -173,7 +198,7 @@ const Profile = ()=>{
         <div className="profile">
             <Title text={`Hi, ${auth.user.first_name}`} />
             {content}
-          <button className="clickable secondary-button" onClick={logout}>Logout</button>
+          <button className="clickable secondary-button" onClick={auth.logout}>Logout</button>
         </div>
       </div>
     </div>
