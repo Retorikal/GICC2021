@@ -1,23 +1,23 @@
 import React, { useState, useEffect, Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { AuthContext, UseAuth } from "context/Auth";
-import { PopupContext, UsePopup } from "context/Popup";
+// import { PopupContext, UsePopup } from "context/Popup";
 import Title from "components/Title";
 
-class FileSubmit extends Component{
-  constructor(props){
+class FileSubmit extends Component {
+  constructor(props) {
     super(props);
-    this.state={
-      file: ""
-    }
+    this.state = {
+      file: "",
+    };
   }
 
-  onFileChange(e){
-    this.setState({file: e.target.files[0]});
+  onFileChange(e) {
+    this.setState({ file: e.target.files[0] });
   }
 
-  titleString(){
-    switch(this.props.name){
+  titleString() {
+    switch (this.props.name) {
       case "TRF":
         return "Payment";
       case "PRO":
@@ -29,30 +29,34 @@ class FileSubmit extends Component{
     }
   }
 
-  getFile(){
+  getFile() {
     let files = this.props.authctx.files;
-    
-    for(let i = 0; i < files.length; i++){
-      if(files[i].purpose == this.props.name){
-        return(<a style={{width: "100%"}} href={files[i].file}><p>Download file</p></a>);
+
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].purpose == this.props.name) {
+        return (
+          <a style={{ width: "100%" }} href={files[i].file}>
+            <p>Download file</p>
+          </a>
+        );
       }
     }
 
-    return(<p>No file has been uploaded.</p>);
+    return <p>No file has been uploaded.</p>;
   }
 
-  async submit(){
+  async submit() {
     console.log("submitting");
 
-    if(this.state.file != ""){
+    if (this.state.file != "") {
       let url = "/app/user/files/";
       let formData = new FormData();
       formData.append("file", this.state.file, this.props.name);
       formData.append("purpose", this.props.name);
       let init = {
-        method: 'POST',
+        method: "POST",
         body: formData,
-        headers: {}
+        headers: {},
       };
       await this.props.authctx.authenticator(init);
 
@@ -61,51 +65,70 @@ class FileSubmit extends Component{
     }
   }
 
-  render(){
-      return(
-        <div className="textbox">
-          <h4>{this.titleString()}</h4>
-          <input type="file" className="checkbox" name={this.props.name} onChange={e => {this.onFileChange(e)}}/>
-          <div className="checkbox flex-horizontal" >
-            <p className="button clickable" onClick={() => {this.submit()}}>Upload</p>
-            {this.getFile()}
-          </div>
-        </div>
-    );
-  }
-}
-
-class Textfield extends Component{
-  onTextChange(e){
-    this.props.updateText(this.props.name, e.target.value);
-  }  
-
   render() {
-    return(
+    return (
       <div className="textbox">
-        <h4>{this.props.title}</h4>
-        <input type="text" defaultValue={this.props.default} onChange={e => {this.onTextChange(e)}}/>
+        <h4>{this.titleString()}</h4>
+        <input
+          type="file"
+          className="checkbox"
+          name={this.props.name}
+          onChange={(e) => {
+            this.onFileChange(e);
+          }}
+        />
+        <div className="checkbox flex-horizontal">
+          <p
+            className="button clickable"
+            onClick={() => {
+              this.submit();
+            }}
+          >
+            Upload
+          </p>
+          {this.getFile()}
+        </div>
       </div>
     );
   }
 }
 
+class Textfield extends Component {
+  onTextChange(e) {
+    this.props.updateText(this.props.name, e.target.value);
+  }
 
-const Profile = ()=>{
-  const [data, setData] = useState({user:{}});
+  render() {
+    return (
+      <div className="textbox">
+        <h4>{this.props.title}</h4>
+        <input
+          type="text"
+          defaultValue={this.props.default}
+          onChange={(e) => {
+            this.onTextChange(e);
+          }}
+        />
+      </div>
+    );
+  }
+}
+
+const Profile = () => {
+  const [data, setData] = useState({ user: {} });
   const [redirect, setRedirect] = useState(null);
 
-  const popup = UsePopup();
+  // const popup = UsePopup();
   const auth = UseAuth();
 
-  const onTextChange = (name, value)=>{
+  const onTextChange = (name, value) => {
     let tmp_data = data;
     tmp_data[name] = value;
 
     setData(tmp_data);
-  }
+  };
 
-  const onUserChange = (name, value)=>{
+  const onUserChange = (name, value) => {
     let tmp_user = data.user;
     tmp_user[name] = value;
 
@@ -113,71 +136,126 @@ const Profile = ()=>{
     tmp_data.user = tmp_user;
 
     setData(tmp_data);
-  }
+  };
 
   const logout = () => {
-    auth.logout()
+    auth.logout();
     setRedirect("/login");
-  }
+  };
 
-  const sec_cho={
-    OP: 'Operations',
-    MA: 'Marketing',
-    EH: 'Enviromental Health Safety',
-  }
+  const sec_cho = {
+    OP: "Operations",
+    MA: "Marketing",
+    EH: "Enviromental Health Safety",
+  };
 
   let content;
-  if(auth.agree_terms == false)
+  if (auth.agree_terms == false)
     content = (
       <div className="agreement">
-        <h4>Please read the terms before proceeding. By clicking proceed, you state that you have agreed to all the terms written in the document.</h4>
+        <h4>
+          Please read the terms before proceeding. By clicking proceed, you
+          state that you have agreed to all the terms written in the document.
+        </h4>
         <div className="flex-horizontal button-container">
-          <p className="button clickable" onClick={() => {auth.updateInfo({agree_terms: true})}}>Proceed</p>
-          <a><p className = "secondary-button">Download File</p></a>
+          <p
+            className="button clickable"
+            onClick={() => {
+              auth.updateInfo({ agree_terms: true });
+            }}
+          >
+            Proceed
+          </p>
+          <a>
+            <p className="secondary-button">Download File</p>
+          </a>
         </div>
       </div>
-      );
-
+    );
   else
     content = (
       <div className="flex-container">
         <div className="flex-left">
           <h3>Biodata</h3>
-          <Textfield name="first_name" title="First Name" default={auth.user.first_name} updateText={(a, b) => onUserChange(a,b)}/>
-          <Textfield name="last_name" title="Full Name" default={auth.user.last_name} updateText={(a, b) => onUserChange(a,b)}/>
-          <Textfield name="uni" title="University" default={auth.uni} updateText={(a, b) => onTextChange(a,b)}/>
-          <Textfield name="major" title="Major" default={auth.major} updateText={(a, b) => onTextChange(a,b)}/>
-          <Textfield name="sector" title="Sector" default={sec_cho[auth.sector]} updateText={(a, b) => onTextChange(a,b)}/>
-          
-          <h3>Contact Information</h3>
-          <Textfield name="phone_no" title="Phone number" default={auth.phone_no} updateText={(a, b) => onTextChange(a,b)}/>
-          <Textfield name="line" title="LINE ID" default={auth.line} updateText={(a, b) => onTextChange(a,b)}/>
+          <Textfield
+            name="first_name"
+            title="First Name"
+            default={auth.user.first_name}
+            updateText={(a, b) => onUserChange(a, b)}
+          />
+          <Textfield
+            name="last_name"
+            title="Full Name"
+            default={auth.user.last_name}
+            updateText={(a, b) => onUserChange(a, b)}
+          />
+          <Textfield
+            name="uni"
+            title="University"
+            default={auth.uni}
+            updateText={(a, b) => onTextChange(a, b)}
+          />
+          <Textfield
+            name="major"
+            title="Major"
+            default={auth.major}
+            updateText={(a, b) => onTextChange(a, b)}
+          />
+          <Textfield
+            name="sector"
+            title="Sector"
+            default={sec_cho[auth.sector]}
+            updateText={(a, b) => onTextChange(a, b)}
+          />
 
-          <button className="clickable" onClick={() => {auth.updateInfo(data)}}>Update information</button>
+          <h3>Contact Information</h3>
+          <Textfield
+            name="phone_no"
+            title="Phone number"
+            default={auth.phone_no}
+            updateText={(a, b) => onTextChange(a, b)}
+          />
+          <Textfield
+            name="line"
+            title="LINE ID"
+            default={auth.line}
+            updateText={(a, b) => onTextChange(a, b)}
+          />
+
+          <button
+            className="clickable"
+            onClick={() => {
+              auth.updateInfo(data);
+            }}
+          >
+            Update information
+          </button>
         </div>
         <div className="flex-right">
           <h3>Files</h3>
-          <FileSubmit name="TRF" authctx={auth}/>
-          <FileSubmit name="KTM" authctx={auth}/>
-          <FileSubmit name="TWB" authctx={auth}/>
+          <FileSubmit name="TRF" authctx={auth} />
+          <FileSubmit name="KTM" authctx={auth} />
+          <FileSubmit name="TWB" authctx={auth} />
         </div>
       </div>
     );
 
   if (redirect != null) {
-    return <Redirect to={redirect}/>
+    return <Redirect to={redirect} />;
   }
   return (
     <div className="content">
       <div className="container">
         <div className="profile">
-            <Title text={`Hi, ${auth.user.first_name}`} />
-            {content}
-          <button className="clickable secondary-button" onClick={logout}>Logout</button>
+          <Title text={`Hi, ${auth.user.first_name}`} />
+          {content}
+          <button className="clickable secondary-button" onClick={logout}>
+            Logout
+          </button>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Profile;
