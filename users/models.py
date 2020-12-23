@@ -2,6 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 from pre_events.models import Preevent
 
+#untuk email verf
+from .serializers import SignupSerializer
+from .utils import Util
+from django.contrib.sites.shortcuts import get_current_site
+from django.urls import reverse
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
+
 # General participant information
 class Participant(models.Model):
     # Identity
@@ -43,6 +52,43 @@ class Participant(models.Model):
         self.is_verified = verify and (verifCounter == 3)
 
         super(Participant, self).save(*args, **kwargs)
+
+    def addUser(self, request):
+        user = User()
+        deserializer = SignupSerializer(user, data = request.data)
+
+        try:
+            # Validation
+            deserializer.is_valid(raise_exception=True)
+            if User.objects.filter(email=deserializer.validated_data["email"]).exists():
+                raise Exception("'That email address is already taken.'")
+            validate_password(deserializer.validated_data["password"])
+
+            # Save user
+            deserializer.save()
+            user.set_password(deserializer.validated_data["password"])
+            user.save()
+
+            # Save participant
+            participant = Participant(user=user)
+            participant.save()
+
+            # Send verification Email
+            token = RefreshToken.for_user(user).access_token
+            current_site = get_current_site(request).domain
+            relativeLink = reverse('email-verify')
+            absurl = 'http://'+current_site+relativeLink+"?token="+str(token)
+            email_body = 'Hi '+user.username + \
+            ' Use the link below to verify your email \n' + absurl
+            datum = {'email_body': email_body, 'to_email': user.email,
+                'email_subject': 'Verify your email'}
+
+            Util.send_email(datum)
+
+            return Response(deserializer.data, status=status.HTTP_201_CREATED)
+            
+        except Exception as e:
+            raise
 
 
     def __str__(self):
