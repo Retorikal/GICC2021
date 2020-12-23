@@ -79,7 +79,7 @@ class Usermanage(generics.GenericAPIView):
 
         if deserializer.is_valid(raise_exception=True):
             deserializer.save()
-            Participant.addUser(self, request)
+            Participant.postMail(self, request)
             return Response(deserializer.data)
         else:
             return Response({'error':'error'},status=status.HTTP_400_BAD_REQUEST)
