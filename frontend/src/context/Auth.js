@@ -38,6 +38,7 @@ export default class AuthContextProvider extends Component{
       token_time:"", // Time when the token is obtained
       refresh_time:"", // Time when the refresh token is obtained
       error:1, // 0 for logind, 1 normally logged out, rest: HTTP error.
+      ready:false, // True if mounting finishes
 
       // User information
       user: {},
@@ -59,12 +60,11 @@ export default class AuthContextProvider extends Component{
     this.fetchToken(()=>{
       if(this.state.error == 0){
         console.log("Authenticated");
-        this.getInfo();
-      } /*else{
-        this.login("juminten", "pecintatedjo").then(data => {
-          console.log(data);
+        
+        this.getInfo().then(()=>{
+          this.setState({ready:true});
         });
-      }*/
+      } 
     });
 
   }
@@ -104,12 +104,12 @@ export default class AuthContextProvider extends Component{
     let response = await fetch(url, init);
     let data = "";
 
+    data = await response.json();
+
     if (response.status >= 400){
-      data = { 
-        error: response.status
-      }; // Sets error.
+      data.errormsg = data.error;
+      data.error = response.status;
     } else {
-      data = await response.json();
       data.error = 0;
     }
 
@@ -132,19 +132,19 @@ export default class AuthContextProvider extends Component{
     let response = await fetch(url, init);
     let data = "";
 
+    data = await response.json();
+
     if (response.status >= 400){
-      data = await response.json();
       data.access = "";
       data.error = response.status;
     } else {
-      data = await response.json();
       data.error = 0;
       data.token_time = new Date().getTime();
       data.refresh_time = new Date().getTime();
     
       this.saveToken(data, ()=>{
-      this.getInfo();
-    });
+        this.getInfo();
+      });
     }
 
     return data;
@@ -190,18 +190,16 @@ export default class AuthContextProvider extends Component{
     await this.appendToken(init)
 
     let response = await fetch(url, init);
-    let data = "";
+    let data = await response.json();
 
     if (response.status >= 400){
-      data = { 
-        error: response.status
-      }; // Sets error.
+      data.errormsg = data.error;
+      data.error = response.status;
     } else {
-      data = await response.json();
       data.error = 0;
+      this.setState(data);
     }
 
-    this.setState(data);
     return data;
   }
 

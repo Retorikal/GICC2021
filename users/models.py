@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from pre_events.models import Preevent
+import random
+import string
 
 # General participant information
 class Participant(models.Model):
@@ -64,7 +66,7 @@ class ParticipantFile(models.Model):
     ]
 
     def savedFileName(self, filename):
-        return 'userfiles/{0}/{1}'.format(self.owner.user.username, filename)
+        return 'userfiles/{0}/{1}'.format(self.owner.user.username, ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(20)) + filename)
 
     def __str__(self):
         return self.owner.user.username + "'s " + self.purpose
