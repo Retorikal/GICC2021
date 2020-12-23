@@ -1,5 +1,5 @@
 import Popup from "components/Popup/Popup";
-import { UsePopup } from "context/PopupContext";
+import { UsePopup } from "context/Popup";
 import React from "react";
 
 const PopupTest = () => {

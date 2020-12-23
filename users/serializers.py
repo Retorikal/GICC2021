@@ -23,17 +23,28 @@ class FileSerializer(serializers.ModelSerializer):
             'file',
             'verified'
         ]
+        read_only_fields = ['verified', 'file']
 
 class ParticipantSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-    files = FileSerializer(many=True)
+    user = UserSerializer(required = False)
+    files = FileSerializer(many=True, required = False)
+
+    def update(self, instance, validated_data):
+        userdata = validated_data.pop("user", None)
+
+        userdese = UserSerializer(instance.user, userdata, partial=True)
+        if userdese.is_valid():
+            userdese.save()
+        
+        super(ParticipantSerializer, self).update(instance, validated_data)
+        return instance
+        
 
     class Meta:
         model = Participant
         fields = [
             'user',
 
-            'nim',
             'uni',
             'major',
 
@@ -43,10 +54,12 @@ class ParticipantSerializer(serializers.ModelSerializer):
             'is_verified',
             'agree_terms',
 
+            'sector',
+            
             'files'
         ]
 
-        read_only_fields = ['is_verified', 'agree_terms', 'files']
+        read_only_fields = ['is_verified', 'files']
 
 class SignupSerializer(serializers.ModelSerializer):
     password = serializers.CharField(

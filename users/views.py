@@ -57,6 +57,18 @@ class Usermanage(generics.GenericAPIView):
             participant = Participant(user=user)
             participant.save()
 
+            # Send verification Email
+            # token = RefreshToken.for_user(user).access_token
+            # current_site = get_current_site(request).domain
+            # relativeLink = reverse('email-verify')
+            # absurl = 'http://'+current_site+relativeLink+"?token="+str(token)
+            # email_body = 'Hi '+user.username + \
+            # ' Use the link below to verify your email \n' + absurl
+            # datum = {'email_body': email_body, 'to_email': user.email,
+            #     'email_subject': 'Verify your email'}
+
+            # Util.send_email(datum)
+
             return Response(deserializer.data, status=status.HTTP_201_CREATED)
             
         except Exception as e:
@@ -75,9 +87,9 @@ class Usermanage(generics.GenericAPIView):
 
     # POST response: update data
     def post(self, request, format=None):
-        deserializer = ParticipantSerializer(request.user.participant, request.data)
+        deserializer = ParticipantSerializer(request.user.participant, request.data, partial=True)
 
-        if deserializer.is_valid:
+        if deserializer.is_valid(raise_exception=True):
             deserializer.save()
             Participant.addUser(self, request)
             return Response(deserializer.data)
@@ -93,8 +105,9 @@ class Files(views.APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request, format=None):
-        file_val = ParticipantFile(owner=request.user.participant, file=request.FILES["file"], purpose=request.POST.get('purpose'))
-        file_val.save()
+
+        defaults = {'file': request.FILES["file"]}        
+        obj, created = ParticipantFile.objects.update_or_create(owner=request.user.participant, purpose=request.POST.get('purpose'), defaults=defaults)
 
         content = {'success': request.POST.get('purpose')}
         return Response(content, status=status.HTTP_201_CREATED)

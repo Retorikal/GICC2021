@@ -3,6 +3,7 @@ import BlueContainer from "components/BlueContainer";
 import Landing_Preevent from "components/Landing_Preevent";
 import Landing_Competition from "components/Landing_Competition";
 import Landing_Title from "components/Landing_Title";
+import Footer from "components/Footer";
 
 const Landing = () => {
   return (
@@ -12,6 +13,7 @@ const Landing = () => {
       <Landing_Preevent />
       <BlueContainer title={"Competition"} />
       <Landing_Competition />
+      <Footer />
     </div>
   );
 };

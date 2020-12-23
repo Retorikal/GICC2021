@@ -1,6 +1,6 @@
 import React from "react";
 
-const Popup = ({ togglePopup, msg, type }) => {
+const Popup = ({ togglePopup, msg, type, enabled}) => {
   const getPopupTitle = (type) => {
     if (type === "error") {
       return "Error";
@@ -30,7 +30,7 @@ const Popup = ({ togglePopup, msg, type }) => {
   };
   return (
     <>
-      <div className="popup-error">
+      <div className="popup-error" style={{opacity : (enabled ? 1:0), visibility : (enabled? "visible":"hidden")}}>
         <div className="popup-error-inner">
           <h1 className="popup-title">{getPopupTitle(type)}</h1>
           <p className="popup-message">{msg}</p>
@@ -43,6 +43,10 @@ const Popup = ({ togglePopup, msg, type }) => {
       </div>
       <style jsx>
         {`
+          *{
+            transition-duration: 100ms;
+          }
+
           .popup-error {
             position: fixed;
             width: 100%;

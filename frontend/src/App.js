@@ -14,9 +14,8 @@ import Minicc from "pages/Minicc";
 import Register from "pages/Register";
 
 import "App.css";
-import PopupTest from "pages/PopupTest";
-import PopupContextProvider from "context/PopupContext";
-import Draft from "pages/Draft";
+import Popup from "components/Popup/Popup";
+import PopupContextProvider, { PopupContext, UsePopup } from "context/Popup";
 
 /*async function authenticate(user, pass){
   let url = "/app/token/";
@@ -44,50 +43,40 @@ import Draft from "pages/Draft";
   return data;
 }*/
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      access: "",
-      refresh: "",
-    };
-  }
+const App = () => {
+  //const popup = UsePopup();
 
-  componentDidMount() {
-    // Do initial authentication here
-    //authenticate("juminten", "pecintatedjo").then(data => {this.setState(() => {return data;})});
-  }
-
-  render() {
-    return (
-      <>
-        <PopupContextProvider>
-          <div>
-            <Router>
-              <Route path="/" component={Draft} />
-            </Router>
-          </div>
-          {/* <AuthContextProvider>
-            <Router>
-              <Navbar />
-              <Route exact path="/landing" component={Landing} />
-              <Route path="/competition" component={Competition} />
-              <Route path="/preevent" component={Preevent} />
-              <Route path="/strategicc" component={Strategicc} />
-              <Route path="/classgicc" component={Classgicc} />
-              <Route path="/minicc" component={Minicc} />
-              <Route path="/login" component={Login} />
-              <Route
-                path="/profile"
-                render={() => <Profile token={this.state.access} />}
-              />
-              <Route path="/register" component={Register} />
-            </Router>
-          </AuthContextProvider> */}
-        </PopupContextProvider>
-      </>
-    );
-  }
-}
+  return (
+    // <div>
+    //   <Router>
+    //     <Landing />
+    //   </Router>
+    // </div>
+    <PopupContextProvider>
+      <AuthContextProvider>
+        <Router>
+          <Navbar />
+          <PopupContext.Consumer>
+            {(popup) => {
+              return (
+                <Popup
+                  enabled={popup.show}
+                  msg={popup.msg}
+                  togglePopup={popup.toggle}
+                  type={popup.type}
+                />
+              );
+            }}
+          </PopupContext.Consumer>
+          <Route exact path="/" component={Landing} />
+          <Route path="/competition" component={Competition} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+        </Router>
+      </AuthContextProvider>
+    </PopupContextProvider>
+  );
+};
 
 export default App;

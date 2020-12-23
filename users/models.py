@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from pre_events.models import Preevent
+import random
+import string
 
 #untuk email verf
 from .serializers import SignupSerializer
@@ -13,13 +15,19 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 # General participant information
 class Participant(models.Model):
+
+    SECTOR_CHOICES=[
+        ('OP', 'Operations'),
+        ('MA', 'Marketing'),
+        ('EH', 'Enviromental Health Safety'),
+    ]
+
     # Identity
     user = models.OneToOneField(User, related_name='participant', on_delete=models.CASCADE)
     # username
     # first_name: Nama depan
     # last_name: nama lengkap
     
-    nim = models.CharField(max_length=8, null=True)
     uni = models.CharField(max_length=255, null=True)
     major = models.CharField(max_length=255, null=True)
 
@@ -34,8 +42,8 @@ class Participant(models.Model):
     #agreement
     agree_terms = models.BooleanField(default=False)
 
-    # Preevent-related fields
-    signedup_preevent = models.ManyToManyField(Preevent, related_name='reg_users')
+    # Competition-related fields
+    sector = models.CharField(max_length=31, choices=SECTOR_CHOICES, null=True)
 
     def save(self, *args, **kwargs):
         verify = True;
@@ -104,7 +112,7 @@ class ParticipantFile(models.Model):
     ]
 
     def savedFileName(self, filename):
-        return 'userfiles/{0}/{1}'.format(self.owner.user.username, filename)
+        return 'userfiles/{0}/{1}'.format(self.owner.user.username, ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(20)) + filename)
 
     def __str__(self):
         return self.owner.user.username + "'s " + self.purpose

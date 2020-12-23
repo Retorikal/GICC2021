@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import Participant
+from users.models import ParticipantFile
 
 # Create your models here.
 class Team(models.Model):
@@ -9,7 +10,7 @@ class Competitor(models.Model):
     SECTOR_CHOICES=[
         ('OP', 'Operations'),
         ('MA', 'Marketing'),
-        ('DN', 'Dunno'),
+        ('EH', 'Dunno'),
     ]
 
     Participant = models.OneToOneField(Participant, related_name='comp', on_delete=models.CASCADE)
