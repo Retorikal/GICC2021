@@ -15,7 +15,7 @@ import Register from "pages/Register";
 
 import "App.css";
 import Popup from "components/Popup/Popup";
-// import PopupContextProvider, { PopupContext, UsePopup } from "context/Popup";
+import PopupContextProvider, { PopupContext, UsePopup } from "context/Popup";
 
 /*async function authenticate(user, pass){
   let url = "/app/token/";
@@ -47,27 +47,35 @@ const App = () => {
   //const popup = UsePopup();
 
   return (
-    <div>
-      <Router>
-        <Landing />
-      </Router>
-    </div>
-    // <PopupContextProvider>
-    //   <AuthContextProvider>
-    //     <Router>
-    //       <Navbar />
-    //       <PopupContext.Consumer>
-    //        {popup => {return(<Popup enabled={popup.show} msg={popup.msg} togglePopup={popup.toggle} type={popup.type}/>)}}
-    //       </PopupContext.Consumer>
-    //       <Route exact path="/" component={Landing} />
-    //       <Route path="/competition" component={Competition} />
-    //       <Route path="/profile" component={Profile} />
-    //       <Route path="/login" component={Login} />
-    //       <Route path="/register" component={Register} />
-    //     </Router>
-
-    //   </AuthContextProvider>
-    // </PopupContextProvider>
+    // <div>
+    //   <Router>
+    //     <Landing />
+    //   </Router>
+    // </div>
+    <PopupContextProvider>
+      <AuthContextProvider>
+        <Router>
+          <Navbar />
+          <PopupContext.Consumer>
+            {(popup) => {
+              return (
+                <Popup
+                  enabled={popup.show}
+                  msg={popup.msg}
+                  togglePopup={popup.toggle}
+                  type={popup.type}
+                />
+              );
+            }}
+          </PopupContext.Consumer>
+          <Route exact path="/" component={Landing} />
+          <Route path="/competition" component={Competition} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+        </Router>
+      </AuthContextProvider>
+    </PopupContextProvider>
   );
 };
 

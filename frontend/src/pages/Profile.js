@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { AuthContext, UseAuth } from "context/Auth";
-// import { PopupContext, UsePopup } from "context/Popup";
+import { PopupContext, UsePopup } from "context/Popup";
 import Title from "components/Title";
 
 class FileSubmit extends Component {
@@ -52,7 +52,11 @@ class FileSubmit extends Component {
     if (this.state.file != "") {
       let url = "/app/user/files/";
       let formData = new FormData();
-      formData.append("file", this.state.file, this.props.name+this.state.file.name);
+      formData.append(
+        "file",
+        this.state.file,
+        this.props.name + this.state.file.name
+      );
       formData.append("purpose", this.props.name);
       let init = {
         method: "POST",
@@ -60,11 +64,11 @@ class FileSubmit extends Component {
         headers: {},
       };
       await this.props.authctx.authenticator(init);
-      
+
       let response = await fetch(url, init);
       let data = await response.json();
 
-      if (response.status >= 400){
+      if (response.status >= 400) {
         this.props.popupctx.showPopup("Upload failed: " + data.error, "error");
       } else {
         this.props.popupctx.showPopup("Upload successful", "success");
@@ -123,17 +127,13 @@ class Textfield extends Component {
   }
 }
 
-<<<<<<< HEAD
-const Profile = () => {
-  const [data, setData] = useState({ user: {} });
-=======
-const sec_cho={
-  OP: 'Operations',
-  MA: 'Marketing',
-  EH: 'Enviromental Health Safety',
-}
+const sec_cho = {
+  OP: "Operations",
+  MA: "Marketing",
+  EH: "Enviromental Health Safety",
+};
 
-const fields_name={
+const fields_name = {
   first_name: "First Name",
   last_name: "Full Name",
   uni: "University",
@@ -141,14 +141,13 @@ const fields_name={
   sector: "Sector",
   phone_no: "Phone number",
   line: "LINE ID",
-}
+};
 
-const Profile = ()=>{
-  const [data, setData] = useState({user:{}});
->>>>>>> 643597449f6a28194bd779bdcdb510473b5c0226
+const Profile = () => {
+  const [data, setData] = useState({ user: {} });
   const [redirect, setRedirect] = useState(null);
 
-  // const popup = UsePopup();
+  const popup = UsePopup();
   const auth = UseAuth();
 
   const onTextChange = (name, value) => {
@@ -168,29 +167,16 @@ const Profile = ()=>{
     setData(tmp_data);
   };
 
-<<<<<<< HEAD
-  const logout = () => {
-    auth.logout();
-    setRedirect("/login");
-  };
-
-  const sec_cho = {
-    OP: "Operations",
-    MA: "Marketing",
-    EH: "Enviromental Health Safety",
-  };
-=======
   const updateInfo = () => {
-    auth.updateInfo(data).then(result=>{
+    auth.updateInfo(data).then((result) => {
       if (result.error == 0) {
         popup.showPopup("Information updated.", "success");
       } else {
-        let err = Object.entries(result)
+        let err = Object.entries(result);
         popup.showPopup(fields_name[err[0][0]] + ": " + err[0][1], "error");
       }
-    })
-  }
->>>>>>> 643597449f6a28194bd779bdcdb510473b5c0226
+    });
+  };
 
   let content;
   if (auth.agree_terms == false)
@@ -265,58 +251,32 @@ const Profile = ()=>{
             updateText={(a, b) => onTextChange(a, b)}
           />
 
-<<<<<<< HEAD
-          <button
-            className="clickable"
-            onClick={() => {
-              auth.updateInfo(data);
-            }}
-          >
+          <button className="clickable" onClick={updateInfo}>
             Update information
           </button>
         </div>
         <div className="flex-right">
           <h3>Files</h3>
-          <FileSubmit name="TRF" authctx={auth} />
-          <FileSubmit name="KTM" authctx={auth} />
-          <FileSubmit name="TWB" authctx={auth} />
-=======
-          <button className="clickable" onClick={updateInfo}>Update information</button>
-        </div>
-        <div className="flex-right">
-          <h3>Files</h3>
-          <FileSubmit name="TRF" authctx={auth} popupctx={popup}/>
-          <FileSubmit name="KTM" authctx={auth} popupctx={popup}/>
-          <FileSubmit name="TWB" authctx={auth} popupctx={popup}/>
->>>>>>> 643597449f6a28194bd779bdcdb510473b5c0226
+          <FileSubmit name="TRF" authctx={auth} popupctx={popup} />
+          <FileSubmit name="KTM" authctx={auth} popupctx={popup} />
+          <FileSubmit name="TWB" authctx={auth} popupctx={popup} />
         </div>
       </div>
     );
 
-<<<<<<< HEAD
-  if (redirect != null) {
-    return <Redirect to={redirect} />;
-=======
   if (auth.error != 0 && auth.ready) {
     // Wait for auth to complete initial componentDidMount before determining if redirecting is necessary
-    return <Redirect to={"/login"}/>
->>>>>>> 643597449f6a28194bd779bdcdb510473b5c0226
+    return <Redirect to={"/login"} />;
   }
   return (
     <div className="content">
       <div className="container">
         <div className="profile">
-<<<<<<< HEAD
           <Title text={`Hi, ${auth.user.first_name}`} />
           {content}
-          <button className="clickable secondary-button" onClick={logout}>
+          <button className="clickable secondary-button" onClick={auth.logout}>
             Logout
           </button>
-=======
-            <Title text={`Hi, ${auth.user.first_name}`} />
-            {content}
-          <button className="clickable secondary-button" onClick={auth.logout}>Logout</button>
->>>>>>> 643597449f6a28194bd779bdcdb510473b5c0226
         </div>
       </div>
     </div>

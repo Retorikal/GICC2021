@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { AuthContext, UseAuth } from "context/Auth";
-// import { PopupContext, UsePopup } from "context/Popup";
+import { PopupContext, UsePopup } from "context/Popup";
 import Title from "components/Title";
 
 const Login = () => {
@@ -9,7 +9,7 @@ const Login = () => {
   const [pass, onPassChange] = useState("");
   const [redirect, setRedirect] = useState(null);
 
-  // const popup = UsePopup();
+  const popup = UsePopup();
   const auth = UseAuth();
 
   const onLoginClick = () => {
@@ -19,7 +19,7 @@ const Login = () => {
       if (result.error == 0) {
         setRedirect("/profile");
       } else {
-        // popup.showPopup(result.detail, "error");
+        popup.showPopup(result.detail, "error");
       }
     });
   };
