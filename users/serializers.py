@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Participant
+from .models import *
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,7 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class FileSerializer(serializers.ModelSerializer):
     class Meta:
-        #model = ParticipantFile
+        model = ParticipantFile
         fields = [
             'purpose',
             'event',

@@ -5,7 +5,6 @@ import random
 import string
 
 #untuk email verf
-from .serializers import SignupSerializer
 from .utils import Util
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
@@ -46,7 +45,7 @@ class Participant(models.Model):
     sector = models.CharField(max_length=31, choices=SECTOR_CHOICES, null=True)
 
     def save(self, *args, **kwargs):
-        verify = True;
+        verify = True
         verifyList = ('TRF', 'TWB', 'KTM')
         verifCounter = 0
 
@@ -61,43 +60,18 @@ class Participant(models.Model):
 
         super(Participant, self).save(*args, **kwargs)
 
-    def addUser(self, request):
+    def postMail(self, request):
         user = User()
-        deserializer = SignupSerializer(user, data = request.data)
+        # Send verification Email
+        token = RefreshToken.for_user(user).access_token
+        relativeLink = reverse('email-verify')
+        absurl = 'http://'+relativeLink+"?token="+str(token) #hardcode current site
+        email_body = 'Hi '+user.username + \
+        ' Use the link below to verify your email \n' + absurl
+        datum = {'email_body': email_body, 'to_email': user.email,
+            'email_subject': 'Verify your email'}
 
-        try:
-            # Validation
-            deserializer.is_valid(raise_exception=True)
-            if User.objects.filter(email=deserializer.validated_data["email"]).exists():
-                raise Exception("'That email address is already taken.'")
-            validate_password(deserializer.validated_data["password"])
-
-            # Save user
-            deserializer.save()
-            user.set_password(deserializer.validated_data["password"])
-            user.save()
-
-            # Save participant
-            participant = Participant(user=user)
-            participant.save()
-
-            # Send verification Email
-            token = RefreshToken.for_user(user).access_token
-            current_site = get_current_site(request).domain
-            relativeLink = reverse('email-verify')
-            absurl = 'http://'+current_site+relativeLink+"?token="+str(token)
-            email_body = 'Hi '+user.username + \
-            ' Use the link below to verify your email \n' + absurl
-            datum = {'email_body': email_body, 'to_email': user.email,
-                'email_subject': 'Verify your email'}
-
-            Util.send_email(datum)
-
-            return Response(deserializer.data, status=status.HTTP_201_CREATED)
-            
-        except Exception as e:
-            raise
-
+        Util.send_email(datum)
 
     def __str__(self):
         return self.user.username
