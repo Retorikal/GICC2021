@@ -118,7 +118,6 @@ class Textfield extends Component {
         <input
           type="text"
           defaultValue={this.props.default}
-          readOnly={this.props.readOnly}
           onChange={(e) => {
             this.onTextChange(e);
           }}

@@ -131,6 +131,6 @@ class VerifyEmail(views.APIView):
                 user.participant.save()
             return HttpResponse('<h4>Email verified. Please try logging in.</h4>')
         except jwt.ExpiredSignatureError as identifier:
-            return Response({'error': 'Activation Expired'}, status=status.HTTP_400_BAD_REQUEST)
+            return HttpResponse('<h4>Link expired. Please log in and request a re-send.</h4>', status=400)
         except jwt.exceptions.DecodeError as identifier:
-            return Response({'error': 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
+            return HttpResponse('<h4>Invalid token.</h4>')

@@ -68,7 +68,7 @@ class Participant(models.Model):
         token = RefreshToken.for_user(self.user).access_token
         relativeLink = reverse('email-verify')
         absurl = "http://ganeshaicc.my.id"+relativeLink+"?token="+str(token) #hardcode current site
-        email_body = 'Hi '+ self.user.first_name + ' Use the link below to verify your email. \n' + absurl
+        email_body = 'Hi '+ self.user.first_name + ',\nPlease use the link below to verify your email.\n' + absurl + "\nThe link expires in 10 minutes."
 
         datum = {
             'email_body': email_body, 
