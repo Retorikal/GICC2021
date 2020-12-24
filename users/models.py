@@ -66,7 +66,7 @@ class Participant(models.Model):
 
         super(Participant, self).save(*args, **kwargs)
 
-    def mailContactInfo():
+    def mailContactInfo(self):
         return ("\n\n")
 
     def postVerifMail(self, dummy=False):
@@ -74,7 +74,7 @@ class Participant(models.Model):
         token = RefreshToken.for_user(self.user).access_token
         relativeLink = reverse('email-verify')
         absurl = "http://ganeshaicc.my.id"+relativeLink+"?token="+str(token) #hardcode current site
-        email_body = 'Hi '+ self.user.first_name + ',\nPlease use the link below to verify your email.\n' + absurl + "\nThe link expires in 10 minutes." + mailContactInfo()
+        email_body = 'Hi '+ self.user.first_name + ',\nPlease use the link below to verify your email.\n' + absurl + "\nThe link expires in 10 minutes." + self.mailContactInfo()
 
         datum = {
             'email_body': email_body, 
@@ -90,7 +90,7 @@ class Participant(models.Model):
     def postFileMail(self, dummy=False):
         # Send verification Email
         email_body = ("Hi " + self.user.first_name + ", this e-mail is sent to notify you that all your pre-requisite files has been verified."
-            " Thank you for completing the registration proccess.") + mailContactInfo()
+            " Thank you for completing the registration proccess.") + self.mailContactInfo()
 
         datum = {
             'email_body': email_body, 

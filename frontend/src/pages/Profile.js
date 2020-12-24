@@ -118,6 +118,7 @@ class Textfield extends Component {
         <input
           type="text"
           defaultValue={this.props.default}
+          readOnly={this.props.readOnly}
           onChange={(e) => {
             this.onTextChange(e);
           }}
@@ -137,7 +138,7 @@ class Selectfield extends Component {
       <div className="textbox">
         <h4>{this.props.title}</h4>
         <select
-          value={this.props.default}
+          defaultValue={this.props.default}
           onChange={(e) => {
             this.onTextChange(e);
           }}
@@ -283,6 +284,7 @@ const Profile = () => {
             name="email"
             title="E-mail"
             default={auth.user.email}
+            updateText={(a, b) => {}}
             readOnly={true}
           />
           <Textfield

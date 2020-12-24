@@ -169,6 +169,18 @@ a:visited {
   width: 100%;
 }
 
+.textbox select {
+  border: none;
+  border-radius: 0.3em;
+  outline: none;
+  padding: 0.6em 0.6em;
+  background: #e0e0e0;
+  font-size: 1em;
+  color: #213665;
+  font-family: "Overpass";
+  width: 100%;
+}
+
 .forget-pw {
   text-align: center;
   margin: 0.3em 0;
