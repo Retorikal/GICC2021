@@ -33,6 +33,14 @@ a:visited {
   text-align: center;
 }
 
+.container2 {
+  padding: 0.8em 1.2em;
+}
+
+.container2 h2 {
+  text-align: center;
+}
+
 .logo {
   width: 2.1em;
 }
@@ -601,6 +609,26 @@ a:visited {
 
   .landing-competition .learn-more {
     font-size: 2em;
+  }
+
+  .landing-competition-types ul {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+  }
+
+  .landing-competition-types p {
+    font-size: 1.2em;
+  }
+
+  .landing-competition2 ul {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+  }
+
+  .landing-competition2 p {
+    font-size: 1.2em;
   }
 
   .competition-hero p {
