@@ -33,6 +33,14 @@ a:visited {
   text-align: center;
 }
 
+.container2 {
+  padding: 0.8em 1.2em;
+}
+
+.container2 h2 {
+  text-align: center;
+}
+
 .logo {
   width: 2.1em;
 }
@@ -97,13 +105,11 @@ a:visited {
 /* .preevent img {
   width: 70%;
 }
-
 .preevent h3 {
   font-size: 2em;
   font-weight: 700;
   margin: 0.4em 0;
 }
-
 .preevent p {
   margin-top: -1em;
 } */
@@ -565,7 +571,6 @@ a:visited {
     justify-content: space-between;
     text-align: center;
   }
-
   .preevent li {
     text-align: justify;
     width: 22%;
@@ -574,11 +579,9 @@ a:visited {
   /* .preevent p {
     font-size: 1.2em;
   }
-
   .preevent img {
     width: 100%;
   }
-
   .preevent .learn-more {
     font-size: 1.2em;
     font-weight: 700;
@@ -602,6 +605,26 @@ a:visited {
 
   .landing-competition .learn-more {
     font-size: 2em;
+  }
+
+  .landing-competition-types ul {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+  }
+
+  .landing-competition-types p {
+    font-size: 1.2em;
+  }
+
+  .landing-competition2 ul {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+  }
+
+  .landing-competition2 p {
+    font-size: 1.2em;
   }
 
   .competition-hero p {
