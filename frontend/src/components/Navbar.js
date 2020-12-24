@@ -23,7 +23,7 @@ const Navbar = () => {
               if (value.error == 0)
                 return (<Link to="/profile"><li className="clickable">Profile</li></Link>);
               else
-                return (<Link to="/login"><li className="clickable">Sign in</li></Link>);
+                return (<Link to="/login"><li className="clickable">Register/Sign in</li></Link>);
             }}  
           </AuthContext.Consumer>
         </ul>

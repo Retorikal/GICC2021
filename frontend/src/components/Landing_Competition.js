@@ -12,12 +12,14 @@ const Landing_Competition = () => {
         </p>
         <div className="landing-competition-types">
           <ul>
+
             <li>
               <h3>Operations</h3>
               <p>
                 In this sector, Paterion.id, an online class and try out platform, will give you a case of blablabla
               </p>
             </li>
+
             <li>
               <h3>Marketing</h3>
               <p>
@@ -25,6 +27,7 @@ const Landing_Competition = () => {
                 blablala
               </p>
             </li>
+            
             <li>
               <h3>EHS</h3>
               <p>
@@ -33,7 +36,7 @@ const Landing_Competition = () => {
             </li>
           </ul>
         </div>
-        <Link to="/competition" className="learn-more">{"Learn More >"}</Link>
+        <Link to="/competition" className="learn-more clickable">{"Learn More >"}</Link>
       </div>
     </div>
   );
