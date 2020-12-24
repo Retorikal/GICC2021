@@ -67,7 +67,10 @@ class Participant(models.Model):
         super(Participant, self).save(*args, **kwargs)
 
     def mailContactInfo(self):
-        return ("\n\n")
+        return ("\n\n"
+            "Instagram: @ganesha.icc\n"
+            "E-mail: ganeshai@ganeshaicc.my.id"
+            )
 
     def postVerifMail(self, dummy=False):
         # Send verification Email
