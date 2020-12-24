@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import *
 
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -12,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
             'email',
         ]
 
-        read_only_fields = ['username']
+        read_only_fields = ['username', 'email']
 
 class FileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -52,6 +53,8 @@ class ParticipantSerializer(serializers.ModelSerializer):
             'phone_no',
 
             'is_verified',
+            'mail_verified',
+
             'agree_terms',
 
             'sector',
@@ -59,7 +62,7 @@ class ParticipantSerializer(serializers.ModelSerializer):
             'files'
         ]
 
-        read_only_fields = ['is_verified', 'files']
+        read_only_fields = ['is_verified', 'mail_verified', 'files']
 
 class SignupSerializer(serializers.ModelSerializer):
     password = serializers.CharField(

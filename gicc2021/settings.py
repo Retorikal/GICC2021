@@ -26,7 +26,7 @@ SECRET_KEY = "2ec-1o4#z2%tuy&x*&h4sd7t$%zgt=21$98dj3-$8(9snea3wn"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =  False
 
-ALLOWED_HOSTS = ["ganeshaicc.my.id"]
+ALLOWED_HOSTS = ["ganeshaicc.my.id", "www.ganeshaicc.my.id", "localhost"]
 
 
 # Application definition
@@ -101,7 +101,7 @@ DATABASES = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,
@@ -180,8 +180,8 @@ LOGIN_REDIRECT_URL = "landing-home"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND  
 EMAIL_HOST = 'mail.ganeshaicc.my.id'  
-EMAIL_HOST_PASSWORD = '57k3DM638RHSHp9'  
-EMAIL_HOST_USER = 'hilmifaww@ganeshaicc.my.id'  
+EMAIL_HOST_PASSWORD = '0r7Ci?{U,,Qn'  
+EMAIL_HOST_USER = 'noreply@ganeshaicc.my.id'  
 EMAIL_PORT = 465  
 EMAIL_USE_SSL = True  
 

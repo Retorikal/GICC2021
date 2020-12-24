@@ -1,19 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Landing_Competition2 from "components/Landing_Competition2";
 
 const Landing_Competition = () => {
   return (
     <div className="container">
       <div className="landing-competition">
-        <p className="ld-comp-quote-top">
-          "The competition itself is Lorem ipsum, dolor sit amet consectetur
-          adipisicing elit. Eveniet, similique? Iure, nobis repudiandae.
-          Quibusdam tenetur temporibus debitis fugiat.{" "}
-          <span>Biggest event of the millenium.</span>"
-        </p>
-        <div className="landing-competition-quote">
-          <p>You will work to solve the problem of company X in the finals</p>
+        <div className="landing-competition1">
+          <p className="ld-comp-quote-top">
+            Join us to experience a competition like never before. Innovate your way to the chance of
+            connecting with fellow game-changers and to be mentored by the experts. Win the grand prize a
+            total of 8 million rupiah and internship opportunity in our case contributor’s company.
+          </p>
         </div>
+        <Landing_Competition2 />
         <Link to="/competition" className="learn-more">{"Learn More >"}</Link>
       </div>
     </div>

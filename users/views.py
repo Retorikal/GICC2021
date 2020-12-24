@@ -28,12 +28,15 @@ from users.serializers import *
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import *
 
-#utils
-from .utils import Util
+#models
+from .models import Participant
 
 # Errors
 from django.db import IntegrityError
 import re
+
+# HttpResponse
+from django.http import HttpResponse
 
 class Usermanage(generics.GenericAPIView):
     # Add new user
@@ -57,17 +60,7 @@ class Usermanage(generics.GenericAPIView):
             participant = Participant(user=user)
             participant.save()
 
-            # Send verification Email
-            # token = RefreshToken.for_user(user).access_token
-            # current_site = get_current_site(request).domain
-            # relativeLink = reverse('email-verify')
-            # absurl = 'http://'+current_site+relativeLink+"?token="+str(token)
-            # email_body = 'Hi '+user.username + \
-            # ' Use the link below to verify your email \n' + absurl
-            # datum = {'email_body': email_body, 'to_email': user.email,
-            #     'email_subject': 'Verify your email'}
-
-            # Util.send_email(datum)
+            participant.postVerifMail()
 
             return Response(deserializer.data, status=status.HTTP_201_CREATED)
             
@@ -90,10 +83,13 @@ class Usermanage(generics.GenericAPIView):
         deserializer = ParticipantSerializer(request.user.participant, request.data, partial=True)
 
         if deserializer.is_valid(raise_exception=True):
-            deserializer.save()
-            return Response(deserializer.data)
+            if(request.user.participant.mail_verified == False):
+                return Response({'mail': ["Please verify your email before updating any data."]}, status=status.HTTP_403_FORBIDDEN)
+            else:
+                deserializer.save()
+                return Response(deserializer.data)
         else:
-            return Response({'error':'error'},status=status.HTTP_400_BAD_REQUEST)
+            return Response({'?':'Invalid data'},status=status.HTTP_400_BAD_REQUEST)
 
     # GET response: general information about the user
     def get(self, request, format=None):
@@ -117,17 +113,24 @@ class VerifyEmail(views.APIView):
     token_param_config = openapi.Parameter(
         'token', in_=openapi.IN_QUERY, description='Description', type=openapi.TYPE_STRING)
 
+    def post(self, request):
+        if not request.user.participant.mail_verified:
+            request.user.participant.postVerifMail()
+            return Response({"success": "Verification re-sent."}, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "Mail already verified."}, status=status.HTTP_403_FORBIDDEN)
+
     @swagger_auto_schema(manual_parameters=[token_param_config])
     def get(self, request):
         token = request.GET.get('token')
         try:
             payload = jwt.decode(token, settings.SECRET_KEY)
             user = User.objects.get(id=payload['user_id'])
-            if not user.is_verified:
-                user.is_verified = True
-                user.save()
-            return Response({'email': 'Successfully activated'}, status=status.HTTP_200_OK)
+            if not user.participant.mail_verified:
+                user.participant.mail_verified = True
+                user.participant.save()
+            return HttpResponse('<h4>Email verified. Please try logging in.</h4>')
         except jwt.ExpiredSignatureError as identifier:
-            return Response({'error': 'Activation Expired'}, status=status.HTTP_400_BAD_REQUEST)
+            return HttpResponse('<h4>Link expired. Please log in and request a re-send.</h4>', status=400)
         except jwt.exceptions.DecodeError as identifier:
-            return Response({'error': 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
+            return HttpResponse('<h4>Invalid token.</h4>')

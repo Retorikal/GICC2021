@@ -4,6 +4,14 @@ from pre_events.models import Preevent
 import random
 import string
 
+#untuk email verf
+from .utils import Util
+from django.contrib.sites.shortcuts import get_current_site
+from django.urls import reverse
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
+
 # General participant information
 class Participant(models.Model):
 
@@ -26,8 +34,11 @@ class Participant(models.Model):
     phone_no = models.CharField(max_length=31, null=True)
     line = models.CharField(max_length=127, null=True)
 
-    #verifier
+    # File Verifier
     is_verified = models.BooleanField(default = False)
+
+    # Email Verifier
+    mail_verified = models.BooleanField(default = False)
     verify_code = models.CharField(max_length=255, null=True)
 
     #agreement
@@ -37,7 +48,7 @@ class Participant(models.Model):
     sector = models.CharField(max_length=31, choices=SECTOR_CHOICES, null=True)
 
     def save(self, *args, **kwargs):
-        verify = True;
+        verify = True
         verifyList = ('TRF', 'TWB', 'KTM')
         verifCounter = 0
 
@@ -47,11 +58,53 @@ class Participant(models.Model):
                 verify = verify and f.verified
                 verifCounter += 1
 
-        # Check if total of 3 verified document exists, if yes, mark as verified.             
-        self.is_verified = verify and (verifCounter == 3)
+        # Check if total of 3 verified document exists, if yes, mark as verified, and send a notification mail.           
+        tmp_is_verified = verify and (verifCounter == 3)
+        if (not self.is_verified and tmp_is_verified):
+            self.is_verified = True
+            self.postFileMail()
 
         super(Participant, self).save(*args, **kwargs)
 
+    def mailContactInfo(self):
+        return ("\n\n"
+            "Instagram: @ganesha.icc\n"
+            "E-mail: ganeshai@ganeshaicc.my.id"
+            )
+
+    def postVerifMail(self, dummy=False):
+        # Send verification Email
+        token = RefreshToken.for_user(self.user).access_token
+        relativeLink = reverse('email-verify')
+        absurl = "http://ganeshaicc.my.id"+relativeLink+"?token="+str(token) #hardcode current site
+        email_body = 'Hi '+ self.user.first_name + ',\nPlease use the link below to verify your email.\n' + absurl + "\nThe link expires in 10 minutes." + self.mailContactInfo()
+
+        datum = {
+            'email_body': email_body, 
+            'to_email': self.user.email,
+            'email_subject': 'Verify your email'
+        }
+
+        if(dummy):
+            print(email_body)
+        else:
+            Util.send_email(datum)
+
+    def postFileMail(self, dummy=False):
+        # Send verification Email
+        email_body = ("Hi " + self.user.first_name + ", this e-mail is sent to notify you that all your pre-requisite files has been verified."
+            " Thank you for completing the registration proccess.") + self.mailContactInfo()
+
+        datum = {
+            'email_body': email_body, 
+            'to_email': self.user.email,
+            'email_subject': 'Your submitted files has been verified.'
+        }
+
+        if(dummy):
+            print(email_body)
+        else:
+            Util.send_email(datum)
 
     def __str__(self):
         return self.user.username

@@ -1,4 +1,4 @@
-import React, {Component, useState} from "react";
+import React, { Component, useState } from "react";
 import { createContext, useContext } from "react";
 import { Redirect } from "react-router-dom";
 
@@ -29,57 +29,84 @@ export const UseAuth = () => useContext(AuthContext);
     );
 };*/
 
-export default class AuthContextProvider extends Component{
-  constructor(props){
+export default class AuthContextProvider extends Component {
+  constructor(props) {
     super(props);
-    this.state={
-      access:"",
-      refresh:"",
-      token_time:"", // Time when the token is obtained
-      refresh_time:"", // Time when the refresh token is obtained
-      error:1, // 0 for logind, 1 normally logged out, rest: HTTP error.
-      ready:false, // True if mounting finishes
+    this.state = {
+      access: "",
+      refresh: "",
+      token_time: "", // Time when the token is obtained
+      refresh_time: "", // Time when the refresh token is obtained
+      error: 1, // 0 for logind, 1 normally logged out, rest: HTTP error.
+      ready: false, // True if mounting finishes
 
       // User information
       user: {},
       files: {},
 
-
       // Exposed functions
-      signup: async (credentials) => {return await this.signup(credentials)},
-      login: async (user, pass) => {return await this.login(user, pass)},
-      authenticator: async (request) => {return await this.appendToken(request)},
-      updateInfo: async (data) => {return await this.updateInfo(data)},
-      getInfo: async () => {return await this.getInfo()},
-      logout: () => this.logOut()
+      signup: async (credentials) => {
+        return await this.signup(credentials);
+      },
+      login: async (user, pass) => {
+        return await this.login(user, pass);
+      },
+      authenticator: async (request) => {
+        return await this.appendToken(request);
+      },
+      updateInfo: async (data) => {
+        return await this.updateInfo(data);
+      },
+      getInfo: async () => {
+        return await this.getInfo();
+      },
+      sendVerifMail: async () => {
+        return await this.sendVerifMail();
+      },
+      logout: () => this.logOut(),
+    };
+  }
+
+  componentDidMount() {
+    // Automatically fetch old tokens when component is loaded
+    let data = this.fetchToken(() => {
+      // Executed if fetchToken found something
+      console.log("Saved data found");
+      if (this.state.error == 0) {
+        this.getInfo().then(data => {
+          this.setState({ ready: true });
+
+          // If saved token is not valid, just logout.
+          if(data.error >= 400)
+            this.logOut();
+        });
+      }
+
+      // If first login, or no data found
+      else{
+        console.log("Not logged in");
+        this.setState({ ready: true });
+      }
+    });
+
+    if(data == null){
+      console.log("First visit");
+      this.setState({ ready: true });
     }
   }
 
-  componentDidMount(){
-    // Automatically fetch old tokens when component is loaded
-    this.fetchToken(()=>{
-      if(this.state.error == 0){
-        console.log("Authenticated");
-        
-        this.getInfo().then(()=>{
-          this.setState({ready:true});
-        });
-      } 
-    });
-
-  }
-
   // Saves token to state and storage
-  saveToken(data, callback=() => {}){
+  saveToken(data, callback = () => {}) {
     localStorage.setItem("tokens", JSON.stringify(data));
     this.setState(data, callback);
   }
 
   // Gets token from local, saves it to state
-  fetchToken(callback=() => {}){
+  fetchToken(callback = () => {}) {
     let data = JSON.parse(localStorage.getItem("tokens"));
-    
-    if (data != null){
+
+    if (data != null) {
+      console.log(data);
       this.setState(data, callback);
     }
 
@@ -87,26 +114,27 @@ export default class AuthContextProvider extends Component{
   }
 
   // Deletes saved token; effectively logging out the user
-  logOut(){
-    this.saveToken({access:"", refresh:"", error:1});
+  logOut() {
+    this.setState({ access: "", refresh: "", error: 1 });
+    localStorage.clear();
   }
 
   // Sign up as a new user
-  async signup(credentials){
+  async signup(credentials) {
     // Takes signup information: email, password, first_name, last_name
     let url = "/app/user/";
     let init = {
-      method: 'PUT',
-      mode: 'cors',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(credentials)
+      method: "PUT",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(credentials),
     };
     let response = await fetch(url, init);
     let data = "";
 
     data = await response.json();
 
-    if (response.status >= 400){
+    if (response.status >= 400) {
       data.errormsg = data.error;
       data.error = response.status;
     } else {
@@ -117,16 +145,16 @@ export default class AuthContextProvider extends Component{
   }
 
   // Gets user token and refresh
-  async login(user, pass){
+  async login(user, pass) {
     let url = "/app/token/";
     let init = {
-      method: 'POST',
-      mode: 'cors',
-      headers: {'Content-Type': 'application/json'},
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        'username': user,
-        'password': pass
-      })
+        username: user,
+        password: pass,
+      }),
     };
 
     let response = await fetch(url, init);
@@ -134,15 +162,15 @@ export default class AuthContextProvider extends Component{
 
     data = await response.json();
 
-    if (response.status >= 400){
+    if (response.status >= 400) {
       data.access = "";
       data.error = response.status;
     } else {
       data.error = 0;
       data.token_time = new Date().getTime();
       data.refresh_time = new Date().getTime();
-    
-      this.saveToken(data, ()=>{
+
+      this.saveToken(data, () => {
         this.getInfo();
       });
     }
@@ -151,22 +179,22 @@ export default class AuthContextProvider extends Component{
   }
 
   // Gets all user information data
-  async getInfo(){
+  async getInfo() {
     let url = "/app/user/";
     let init = {
-      method: 'GET',
-      mode: 'cors',
-      headers: {'Content-Type': 'application/json'},
+      method: "GET",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
     };
-    await this.appendToken(init)
+    await this.appendToken(init);
 
     let response = await fetch(url, init);
     let data = "";
 
-    if (response.status >= 400){
-      data = { 
+    if (response.status >= 400) {
+      data = {
         access: "",
-        error: response.status
+        error: response.status,
       }; // Sets error.
     } else {
       data = await response.json();
@@ -178,21 +206,21 @@ export default class AuthContextProvider extends Component{
   }
 
   // Update user information stored on server
-  async updateInfo(info){
+  async updateInfo(info) {
     // Takes signup information: email, password, first_name, last_name
     let url = "/app/user/";
     let init = {
-      method: 'POST',
-      mode: 'cors',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(info)
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(info),
     };
-    await this.appendToken(init)
+    await this.appendToken(init);
 
     let response = await fetch(url, init);
     let data = await response.json();
 
-    if (response.status >= 400){
+    if (response.status >= 400) {
       data.errormsg = data.error;
       data.error = response.status;
     } else {
@@ -204,50 +232,73 @@ export default class AuthContextProvider extends Component{
   }
 
   // Get new token using refresh token
-  async refreshToken(){
+  async refreshToken() {
     let url = "/app/token/refresh/";
     let init = {
-      method: 'POST',
-      mode: 'cors',
-      headers: {'Content-Type': 'application/json'},
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        'refresh': this.state.refresh
-      })
+        refresh: this.state.refresh,
+      }),
     };
 
     let response = await fetch(url, init);
     let data = "";
 
-    if (response.status >= 400){
-      data = { 
+    if (response.status >= 400) {
+      data = {
         access: "",
         refresh: "",
-        error: response.status
-        }; // Sets error.
+        error: response.status,
+      }; // Sets error.
     } else {
       data = await response.json();
       data.error = 0;
       data.token_time = new Date().getTime();
 
-      this.saveToken(data)
+      this.saveToken(data);
       return "Bearer " + data.access;
     }
   }
 
+  // Get new token using refresh token
+  async sendVerifMail() {
+    let url = "app/user/email-verify/";
+    let init = {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+    };
+    await this.appendToken(init);
+
+    let response = await fetch(url, init);
+    let data = await response.json();
+
+    if (response.status >= 400) {
+      data.errormsg = data.error;
+      data.error = response.status;
+    } else {
+      data.error = 0;
+    }
+
+    return data;
+  }
+
   // Fungsi nambahin token untuk request header buat page yang butuh authentication
-  async appendToken(request){
+  async appendToken(request) {
     let token = "Bearer " + this.state.access;
 
     // Refresh token buat state kalo ternyata kadaluarsa
-    let now = new Date().getTime()
-    if (now - this.state.token_time > (270 * 1000)){
+    let now = new Date().getTime();
+    if (now - this.state.token_time > 540 * 1000) {
       token = await this.refreshToken();
     }
-    
+
     request.headers.Authorization = token;
   }
 
-  render(){
+  render() {
     return (
       <AuthContext.Provider value={this.state}>
         {this.props.children}

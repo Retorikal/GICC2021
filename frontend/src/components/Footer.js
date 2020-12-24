@@ -16,16 +16,13 @@ const Footer = () => {
             <div>
               <h3 className="footer-title">Navigation</h3>
               <div className="footer-link">
-                <Link>Home</Link>
+                <Link to="/">Home</Link>
               </div>
               <div className="footer-link">
-                <Link>Pre-Events</Link>
+                <Link to="/competition">Competition</Link>
               </div>
               <div className="footer-link">
-                <Link>Competition</Link>
-              </div>
-              <div className="footer-link">
-                <Link>My Profile</Link>
+                <Link to="/login">Register</Link>
               </div>
             </div>
           </div>
@@ -33,13 +30,10 @@ const Footer = () => {
             <div>
               <h3 className="footer-title">Socials</h3>
               <div>
-                <p>ganesha.icc@gmail.com</p>
+                <p>ganesha@ganeshaicc.my.id</p>
               </div>
               <div>
-                <p>+62 8123456789 (Lorem Ipsum)</p>
-              </div>
-              <div>
-                <p>@ganesha.icc</p>
+                <p><a href="https://www.instagram.com/ganesha.icc/">@ganesha.icc</a></p>
               </div>
             </div>
           </div>
