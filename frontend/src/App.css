@@ -619,24 +619,30 @@ a:visited {
     font-size: 2em;
   }
 
-  .landing-competition-types ul {
+  .landing-competition2 {
     display: flex;
-    justify-content: space-between;
-    text-align: center;
-  }
-
-  .landing-competition-types p {
-    font-size: 1.2em;
-  }
-
-  .landing-competition2 ul {
-    display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content: space-around;
     text-align: center;
   }
 
   .landing-competition2 p {
     font-size: 1.2em;
+  }
+
+  .land-comp2-op {
+    flex-grow: 1;
+    width: 7em;
+  }
+
+  .land-comp2-ma {
+    flex-grow: 1;
+    width: 7em;
+  }
+
+  .land-comp2-eh {
+    flex-grow: 1;
+    width: 7em;
   }
 
   .competition-hero p {

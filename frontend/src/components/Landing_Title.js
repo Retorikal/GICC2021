@@ -15,15 +15,15 @@ const Landing_Title = () => {
           <ul>
             <li>
               <p>
-              "GICC will open your eyes on how real-world industrial problems are solved
-              and how innovations are generated, including the ethics and conflicts behind it."
+              GICC will open your eyes on how real-world industrial problems are solved
+              and how innovations are generated, including the ethics and conflicts behind them.
               </p>
             </li>
-            <li>
+            <li className="paragraf2">
               <p>
-              "GICC is set to make you cooperate with people you have never met and collaborate with
+              GICC is set to make you cooperate with people you have never met and collaborate with
               colleagues from different backgrounds. Mimicking a professional environment to prepare you, to
-              change the game in the future."
+              change the game in the future.
               </p>
             </li>
           </ul>
@@ -60,8 +60,14 @@ const Landing_Title = () => {
 
           .title-quote ul {
               margin: 3.5rem 0;
-              width: 30rem;
               line-height: 2;
+              display: flex;
+              justify-content: space-between;
+              text-align: left;
+          }
+
+          .paragraf2 {
+            margin: 0 0 0 2rem;
           }
 
           .title-quote p {
