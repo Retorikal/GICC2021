@@ -30,4 +30,4 @@ const Landing_Competition2 = () => {
   );
 };
 
-export default Landing_Competition;
+export default Landing_Competition2;
