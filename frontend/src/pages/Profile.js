@@ -118,6 +118,7 @@ class Textfield extends Component {
         <input
           type="text"
           defaultValue={this.props.default}
+          readOnly={this.props.readOnly}
           onChange={(e) => {
             this.onTextChange(e);
           }}
@@ -271,9 +272,9 @@ const Profile = () => {
           <h3>Contact Information</h3>
           <Textfield
             name="email"
-            title="E-mail Address (needs verification)"
+            title="Phone number"
             default={auth.user.email}
-            updateText={(a, b) => onUserChange(a, b)}
+            readOnly={true}
           />
           <Textfield
             name="phone_no"
@@ -309,7 +310,7 @@ const Profile = () => {
     <div className="content">
       <div className="container">
         <div className="profile">
-          <Title text={`Hi, ${auth.user.first_name}`} />
+          <Title text={`Hi, ${auth.user.username}`} />
           {content}
           <button className="clickable secondary-button" onClick={auth.logout}>
             Logout
