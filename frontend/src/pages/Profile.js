@@ -118,10 +118,35 @@ class Textfield extends Component {
         <input
           type="text"
           defaultValue={this.props.default}
+          readOnly={this.props.readOnly}
           onChange={(e) => {
             this.onTextChange(e);
           }}
         />
+      </div>
+    );
+  }
+}
+
+class Selectfield extends Component {
+  onTextChange(e) {
+    this.props.updateText(this.props.name, e.target.value);
+  }
+
+  render() {
+    return (
+      <div className="textbox">
+        <h4>{this.props.title}</h4>
+        <select
+          value={this.props.default}
+          onChange={(e) => {
+            this.onTextChange(e);
+          }}
+        >
+          <option value="EH">Enviromental Health Safety</option>
+          <option value="OP">Operational</option>
+          <option value="MA">Marketing</option>
+        </select>
       </div>
     );
   }
@@ -185,6 +210,16 @@ const Profile = () => {
     });
   };
 
+  const sendVerifMail = ()=>{
+    auth.sendVerifMail().then(result => {
+      if (result.error == 0) {
+        popup.showPopup("Verification re-sent.", "success");
+      } else {
+        popup.showPopup(result.errormsg, "error");
+      }
+    });
+  };
+
   let content;
   if (auth.agree_terms == false)
     content = (
@@ -237,7 +272,7 @@ const Profile = () => {
             default={auth.major}
             updateText={(a, b) => onTextChange(a, b)}
           />
-          <Textfield
+          <Selectfield
             name="sector"
             title="Sector"
             default={sec_cho[auth.sector]}
@@ -247,9 +282,9 @@ const Profile = () => {
           <h3>Contact Information</h3>
           <Textfield
             name="email"
-            title="E-mail Address (needs verification)"
+            title="E-mail"
             default={auth.user.email}
-            updateText={(a, b) => onUserChange(a, b)}
+            readOnly={true}
           />
           <Textfield
             name="phone_no"
@@ -285,8 +320,10 @@ const Profile = () => {
     <div className="content">
       <div className="container">
         <div className="profile">
-          <Title text={`Hi, ${auth.user.first_name}`} />
+          <Title text={`Hi, ${auth.user.username}`} />
           {content}
+          {(auth.mail_verified ? null : <button className="clickable" onClick={sendVerifMail}> Resend verification mail</button>)}
+          <br/>
           <button className="clickable secondary-button" onClick={auth.logout}>
             Logout
           </button>

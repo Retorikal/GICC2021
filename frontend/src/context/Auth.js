@@ -60,6 +60,9 @@ export default class AuthContextProvider extends Component {
       getInfo: async () => {
         return await this.getInfo();
       },
+      sendVerifMail: async () => {
+        return await this.sendVerifMail();
+      },
       logout: () => this.logOut(),
     };
   }
@@ -259,13 +262,36 @@ export default class AuthContextProvider extends Component {
     }
   }
 
+  // Get new token using refresh token
+  async sendVerifMail() {
+    let url = "app/user/email-verify/";
+    let init = {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+    };
+    await this.appendToken(init);
+
+    let response = await fetch(url, init);
+    let data = await response.json();
+
+    if (response.status >= 400) {
+      data.errormsg = data.error;
+      data.error = response.status;
+    } else {
+      data.error = 0;
+    }
+
+    return data;
+  }
+
   // Fungsi nambahin token untuk request header buat page yang butuh authentication
   async appendToken(request) {
     let token = "Bearer " + this.state.access;
 
     // Refresh token buat state kalo ternyata kadaluarsa
     let now = new Date().getTime();
-    if (now - this.state.token_time > 270 * 1000) {
+    if (now - this.state.token_time > 540 * 1000) {
       token = await this.refreshToken();
     }
 
