@@ -210,6 +210,16 @@ const Profile = () => {
     });
   };
 
+  const sendVerifMail = ()=>{
+    auth.sendVerifMail().then(result => {
+      if (result.error == 0) {
+        popup.showPopup("Verification re-sent.", "success");
+      } else {
+        popup.showPopup(result.errormsg, "error");
+      }
+    });
+  };
+
   let content;
   if (auth.agree_terms == false)
     content = (
@@ -272,7 +282,7 @@ const Profile = () => {
           <h3>Contact Information</h3>
           <Textfield
             name="email"
-            title="Phone number"
+            title="E-mail"
             default={auth.user.email}
             readOnly={true}
           />
@@ -312,6 +322,8 @@ const Profile = () => {
         <div className="profile">
           <Title text={`Hi, ${auth.user.username}`} />
           {content}
+          {(auth.mail_verified ? null : <button className="clickable" onClick={sendVerifMail}> Resend verification mail</button>)}
+          <br/>
           <button className="clickable secondary-button" onClick={auth.logout}>
             Logout
           </button>

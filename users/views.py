@@ -35,6 +35,9 @@ from .models import Participant
 from django.db import IntegrityError
 import re
 
+# HttpResponse
+from django.http import HttpResponse
+
 class Usermanage(generics.GenericAPIView):
     # Add new user
     def addUser(self, request):
@@ -110,6 +113,13 @@ class VerifyEmail(views.APIView):
     token_param_config = openapi.Parameter(
         'token', in_=openapi.IN_QUERY, description='Description', type=openapi.TYPE_STRING)
 
+    def post(self, request):
+        if not request.user.participant.mail_verified:
+            request.user.participant.postVerifMail()
+            return Response({"success": "Verification re-sent."}, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "Mail already verified."}, status=status.HTTP_403_FORBIDDEN)
+
     @swagger_auto_schema(manual_parameters=[token_param_config])
     def get(self, request):
         token = request.GET.get('token')
@@ -119,7 +129,7 @@ class VerifyEmail(views.APIView):
             if not user.participant.mail_verified:
                 user.participant.mail_verified = True
                 user.participant.save()
-            return Response({'email': 'Successfully activated'}, status=status.HTTP_200_OK)
+            return HttpResponse('<h4>Email verified. Please try logging in.</h4>')
         except jwt.ExpiredSignatureError as identifier:
             return Response({'error': 'Activation Expired'}, status=status.HTTP_400_BAD_REQUEST)
         except jwt.exceptions.DecodeError as identifier:
