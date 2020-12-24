@@ -26,7 +26,7 @@ SECRET_KEY = "2ec-1o4#z2%tuy&x*&h4sd7t$%zgt=21$98dj3-$8(9snea3wn"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["ganeshaicc.my.id", "www.ganeshaicc.my.id", "localhost"]
 
 
 # Application definition

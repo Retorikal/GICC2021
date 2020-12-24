@@ -167,13 +167,20 @@ const Profile = () => {
     setData(tmp_data);
   };
 
-  const updateInfo = () => {
-    auth.updateInfo(data).then((result) => {
+  const updateInfo = (arg) => {
+    let tmpData = (arg == "agreement"? { agree_terms: true }:data);
+    auth.updateInfo(tmpData).then((result) => {
       if (result.error == 0) {
         popup.showPopup("Information updated.", "success");
       } else {
-        let err = Object.entries(result);
-        popup.showPopup(fields_name[err[0][0]] + ": " + err[0][1], "error");
+        if(arg == "agreement"){
+          popup.showPopup("Please verify your email first.", "error");
+        }
+        else{
+          let err = Object.entries(result);
+          console.log(err);
+          popup.showPopup(err[0][0] + ": " + JSON.stringify(err[0][1]), "error");
+        }
       }
     });
   };
@@ -190,7 +197,7 @@ const Profile = () => {
           <p
             className="button clickable"
             onClick={() => {
-              auth.updateInfo({ agree_terms: true });
+              updateInfo("agreement")
             }}
           >
             Proceed
@@ -238,6 +245,12 @@ const Profile = () => {
           />
 
           <h3>Contact Information</h3>
+          <Textfield
+            name="email"
+            title="E-mail Address (needs verification)"
+            default={auth.user.email}
+            updateText={(a, b) => onUserChange(a, b)}
+          />
           <Textfield
             name="phone_no"
             title="Phone number"

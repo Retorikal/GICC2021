@@ -17,41 +17,10 @@ import "App.css";
 import Popup from "components/Popup/Popup";
 import PopupContextProvider, { PopupContext, UsePopup } from "context/Popup";
 
-/*async function authenticate(user, pass){
-  let url = "/app/token/";
-  let init = {
-    method: 'POST',
-    mode: 'cors',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      'username': user,
-      'password': pass
-    })
-  };
-  let response = await fetch(url, init);
-  let data = "";
-  
-  if (response.status > 400)
-    data = { 
-      access: null,
-      placeholder: "Something went wrong",
-      auth_error: response.status
-    }; // Sets error.
-  else
-    data = response.json();
-
-  return data;
-}*/
-
 const App = () => {
   //const popup = UsePopup();
 
   return (
-    // <div>
-    //   <Router>
-    //     <Landing />
-    //   </Router>
-    // </div>
     <PopupContextProvider>
       <AuthContextProvider>
         <Router>
@@ -60,10 +29,10 @@ const App = () => {
             {(popup) => {
               return (
                 <Popup
-                  enabled={popup.show}
-                  msg={popup.msg}
                   togglePopup={popup.toggle}
+                  msg={popup.msg}
                   type={popup.type}
+                  enabled={popup.show}
                 />
               );
             }}
