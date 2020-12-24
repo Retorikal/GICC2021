@@ -8,7 +8,7 @@ import strategicc_1 from "images/IG Post.png";
 import strategicc_2 from "images/S2_IG Post.png";
 import dialogicc_1 from "images/IG_DialoGICC2-.png";
 import dialogicc_2 from "images/feeds with logo-03.jpg";
-import gicclass_1 from "images/Feeds GICClass 1.png";
+import gicclass_1 from "images/Feeds GICClass1.png";
 import gicclass_2 from "images/GICC Workshop 2 Feeds.png";
 import minicc_1 from "images/minicc_poster-01.jpg";
 import minicc_2 from "images/minicc2-01.jpg";
