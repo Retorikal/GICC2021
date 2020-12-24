@@ -9,14 +9,24 @@ const Landing_Title = () => {
       <div className="landing-title-container">
         <div className="title-top">
           <h1>GANESHA INTEGRATION CASE COMPETITION</h1>
-
           <div className="green-bar">1</div>
         </div>
         <div className="title-quote">
-          <p>
-            "I think I'm about to go <span>insane</span>. Nah really, I'm having
-            a mental breakdown <span>right now</span>."
-          </p>
+          <ul>
+            <li>
+              <p>
+              "GICC will open your eyes on how real-world industrial problems are solved
+              and how innovations are generated, including the ethics and conflicts behind it."
+              </p>
+            </li>
+            <li>
+              <p>
+              "GICC is set to make you cooperate with people you have never met and collaborate with
+              colleagues from different backgrounds. Mimicking a professional environment to prepare you, to
+              change the game in the future."
+              </p>
+            </li>
+          </ul>
         </div>
         <div className="title-logo">
           <img className="logo-km" src={Logo_KM} />
@@ -48,11 +58,14 @@ const Landing_Title = () => {
               z-index: -1;
           }
 
-          .title-quote {
+          .title-quote ul {
               margin: 3.5rem 0;
               width: 30rem;
-              font-size: 1.5rem;
               line-height: 2;
+          }
+
+          .title-quote p {
+              font-size: 1.5rem;
           }
 
           .title-quote span {
