@@ -34,8 +34,11 @@ class Participant(models.Model):
     phone_no = models.CharField(max_length=31, null=True)
     line = models.CharField(max_length=127, null=True)
 
-    #verifier
+    # File Verifier
     is_verified = models.BooleanField(default = False)
+
+    # Email Verifier
+    mail_verified = models.BooleanField(default = False)
     verify_code = models.CharField(max_length=255, null=True)
 
     #agreement
@@ -60,18 +63,23 @@ class Participant(models.Model):
 
         super(Participant, self).save(*args, **kwargs)
 
-    def postMail(self, request):
-        user = User()
+    def postVerifMail(self, dummy=False):
         # Send verification Email
-        token = RefreshToken.for_user(user).access_token
+        token = RefreshToken.for_user(self.user).access_token
         relativeLink = reverse('email-verify')
-        absurl = 'http://'+relativeLink+"?token="+str(token) #hardcode current site
-        email_body = 'Hi '+user.username + \
-        ' Use the link below to verify your email \n' + absurl
-        datum = {'email_body': email_body, 'to_email': user.email,
-            'email_subject': 'Verify your email'}
+        absurl = "http://ganeshaicc.my.id/"+relativeLink+"?token="+str(token) #hardcode current site
+        email_body = 'Hi '+ self.user.first_name + ' Use the link below to verify your email. \n' + absurl
 
-        Util.send_email(datum)
+        datum = {
+            'email_body': email_body, 
+            'to_email': self.user.email,
+            'email_subject': 'Verify your email'
+        }
+
+        if(dummy):
+            print(email_body)
+        else:
+            Util.send_email(datum)
 
     def __str__(self):
         return self.user.username

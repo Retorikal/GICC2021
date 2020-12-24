@@ -57,6 +57,8 @@ class Usermanage(generics.GenericAPIView):
             participant = Participant(user=user)
             participant.save()
 
+            participant.postVerifMail()
+
             return Response(deserializer.data, status=status.HTTP_201_CREATED)
             
         except Exception as e:
@@ -78,11 +80,13 @@ class Usermanage(generics.GenericAPIView):
         deserializer = ParticipantSerializer(request.user.participant, request.data, partial=True)
 
         if deserializer.is_valid(raise_exception=True):
-            deserializer.save()
-            Participant.postMail(self, request)
-            return Response(deserializer.data)
+            if(request.user.participant.mail_verified == False):
+                return Response({'mail': ["Please verify your email before updating any data."]}, status=status.HTTP_403_FORBIDDEN)
+            else:
+                deserializer.save()
+                return Response(deserializer.data)
         else:
-            return Response({'error':'error'},status=status.HTTP_400_BAD_REQUEST)
+            return Response({'?':'Invalid data'},status=status.HTTP_400_BAD_REQUEST)
 
     # GET response: general information about the user
     def get(self, request, format=None):
@@ -112,9 +116,9 @@ class VerifyEmail(views.APIView):
         try:
             payload = jwt.decode(token, settings.SECRET_KEY)
             user = User.objects.get(id=payload['user_id'])
-            if not user.is_verified:
-                user.is_verified = True
-                user.save()
+            if not user.participant.mail_verified:
+                user.participant.mail_verified = True
+                user.participant.save()
             return Response({'email': 'Successfully activated'}, status=status.HTTP_200_OK)
         except jwt.ExpiredSignatureError as identifier:
             return Response({'error': 'Activation Expired'}, status=status.HTTP_400_BAD_REQUEST)

@@ -66,15 +66,30 @@ export default class AuthContextProvider extends Component {
 
   componentDidMount() {
     // Automatically fetch old tokens when component is loaded
-    this.fetchToken(() => {
+    let data = this.fetchToken(() => {
+      // Executed if fetchToken found something
+      console.log("Saved data found");
       if (this.state.error == 0) {
-        console.log("Authenticated");
-
-        this.getInfo().then(() => {
+        this.getInfo().then(data => {
           this.setState({ ready: true });
+
+          // If saved token is not valid, just logout.
+          if(data.error >= 400)
+            this.logOut();
         });
       }
+
+      // If first login, or no data found
+      else{
+        console.log("Not logged in");
+        this.setState({ ready: true });
+      }
     });
+
+    if(data == null){
+      console.log("First visit");
+      this.setState({ ready: true });
+    }
   }
 
   // Saves token to state and storage
@@ -97,7 +112,8 @@ export default class AuthContextProvider extends Component {
 
   // Deletes saved token; effectively logging out the user
   logOut() {
-    this.saveToken({ access: "", refresh: "", error: 1 });
+    this.setState({ access: "", refresh: "", error: 1 });
+    localStorage.clear();
   }
 
   // Sign up as a new user
