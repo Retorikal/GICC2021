@@ -89,23 +89,24 @@ a:visited {
   margin: 0 auto;
 }
 
-.preevent li {
+/* .preevent li {
   text-align: center;
   margin-bottom: 3em;
-}
+} */
 
-.preevent img {
+/* .preevent img {
   width: 70%;
 }
 
 .preevent h3 {
-  font-size: 2.5em;
+  font-size: 2em;
+  font-weight: 700;
   margin: 0.4em 0;
 }
 
 .preevent p {
   margin-top: -1em;
-}
+} */
 
 .landing-competition {
   text-align: center;
@@ -219,14 +220,14 @@ a:visited {
   margin: -2em 0;
 }
 
-.profile .button{
+.profile .button {
   background: #213665;
   color: white;
   font-family: "Overpass";
   width: 30%;
 }
 
-.profile .agreement h4{
+.profile .agreement h4 {
   margin: 1em 0 0.3em;
   font-size: 1.5em;
 }
@@ -244,17 +245,17 @@ a:visited {
   font-family: "Overpass";
 }
 
-.profile .secondary-button{
+.profile .secondary-button {
   outline-color: #213665;
   background-color: #f0f0f8;
   color: #213665;
 }
 
-.profile .agreement .button{
+.profile .agreement .button {
   width: 50%;
 }
 
-.profile .agreement p{
+.profile .agreement p {
   border: none;
   border-radius: 0.3em;
   outline: none;
@@ -266,11 +267,11 @@ a:visited {
   text-align: center;
 }
 
-.profile .agreement .button-container{
+.profile .agreement .button-container {
   margin-top: 2em;
 }
 
-.profile .agreement a{
+.profile .agreement a {
   margin-left: 1em;
   display: block;
   height: 100%;
@@ -459,27 +460,27 @@ a:visited {
   text-align: center;
 }
 
-.vertical-center{
-  margin-top : 0.5em;
+.vertical-center {
+  margin-top: 0.5em;
 }
 
-.flex-horizontal{
-  display:flex;
+.flex-horizontal {
+  display: flex;
   flex-direction: row;
 }
 
-.clickable{
+.clickable {
   transition-duration: 100ms;
 }
 
-.clickable:hover{
+.clickable:hover {
   color: #213665;
 
   transition-duration: 100ms;
   background-color: #e0e0e0;
 }
 
-.clickable:active{
+.clickable:active {
   color: #b8bece;
 
   transition-duration: 20ms;
@@ -559,7 +560,7 @@ a:visited {
     padding-bottom: 5em;
   }
 
-  .preevent ul {
+  /* .preevent ul {
     display: flex;
     justify-content: space-between;
     text-align: center;
@@ -568,9 +569,9 @@ a:visited {
   .preevent li {
     text-align: justify;
     width: 22%;
-  }
+  } */
 
-  .preevent p {
+  /* .preevent p {
     font-size: 1.2em;
   }
 
@@ -581,7 +582,7 @@ a:visited {
   .preevent .learn-more {
     font-size: 1.2em;
     font-weight: 700;
-  }
+  } */
 
   .landing-competition {
     display: flex;
@@ -769,7 +770,7 @@ a:visited {
     padding: 0.7em 0.3em;
   }
 
-  .vertical-center{
-    margin-top : 8em;
+  .vertical-center {
+    margin-top: 8em;
   }
 }

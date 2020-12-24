@@ -127,6 +127,30 @@ class Textfield extends Component {
   }
 }
 
+class Selectfield extends Component {
+  onTextChange(e) {
+    this.props.updateText(this.props.name, e.target.value);
+  }
+
+  render() {
+    return (
+      <div className="textbox">
+        <h4>{this.props.title}</h4>
+        <select
+          value={this.props.default}
+          onChange={(e) => {
+            this.onTextChange(e);
+          }}
+        >
+          <option value="EH">Enviromental Health Safety</option>
+          <option value="OP">Operational</option>
+          <option value="MA">Marketing</option>
+        </select>
+      </div>
+    );
+  }
+}
+
 const sec_cho = {
   OP: "Operations",
   MA: "Marketing",
@@ -230,7 +254,7 @@ const Profile = () => {
             default={auth.major}
             updateText={(a, b) => onTextChange(a, b)}
           />
-          <Textfield
+          <Selectfield
             name="sector"
             title="Sector"
             default={sec_cho[auth.sector]}

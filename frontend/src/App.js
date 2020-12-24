@@ -50,6 +50,7 @@ const App = () => {
     // <div>
     //   <Router>
     //     <Landing />
+    //     {localStorage.clear()}
     //   </Router>
     // </div>
     <PopupContextProvider>
