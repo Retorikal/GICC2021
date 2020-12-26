@@ -2,8 +2,10 @@ import BlueContainer from "components/BlueContainer";
 import Landing_Competition2 from "components/Landing_Competition2";
 import Footer from "components/Footer";
 import Title from "components/Title";
+import potrait_1 from "images/potrait-1.jpg";
 import React from "react";
 import Timeline from "components/Competition_Timeline"
+import Guidebook from "files/GICC_2021_Guidebook.pdf"
 import { Awards, Benefits } from "components/Competition_Awards"
 import { Link } from "react-router-dom";
 
@@ -28,9 +30,9 @@ const Competition = () => {
               stakeholders to win the final prize.
             </p>
           </div>
-          <div className="guidebook-button">
-            <button>View the guidebook here</button>
-          </div>
+          <a href={Guidebook}><div className="guidebook-button">
+            <button class="clickable">View the guidebook here</button>
+          </div></a>
         </div>
       </div>
 
