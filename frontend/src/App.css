@@ -489,7 +489,9 @@ a:visited {
 
 .competition-awards {
   text-align: center;
-  margin: 1em 0;
+  margin: 1em 0em;
+  display: flex;
+  flex-direction: column;
 }
 
 .competition-awards h2 {
@@ -500,26 +502,27 @@ a:visited {
 
 .competition-awards h1 {
   font-size: 2.5em;
-  margin: 0;
+  margin-top: 0.2em;
   font-weight: 900;
 }
 
 .competition-awards img {
   width: 35%;
   border-radius: 50%;
+  margin: 0.8em;
 }
 
 .competition-awards h3 {
   padding: 0;
   margin: 0;
+  color: #213665;
+  font-weight: bold
 }
 .competition-awards h4 {
   padding: 0;
   margin: 0;
-}
-
-.competition-awards li {
-  margin: 3em 0;
+  color: #213665;
+  font-style: italic;
 }
 
 .competition-hero .guidebook-button {
@@ -590,7 +593,7 @@ a:visited {
 
 .landing-competition2 {
   display: flex;
-  flex-direction: column;
+  display: column;
   justify-content: space-around;
   text-align: center;
   width: fit-content;
@@ -678,43 +681,46 @@ a:visited {
   font-size: 1.2em;
 }
 
-.competition-awards {
+.awards-list {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
-.awards2 {
+.awards-list .awards-lists {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  margin-bottom: 1.5em;
+  justify-content: center;
+  margin-bottom: 0.5em;
+  flex-wrap: wrap;
 }
 
-.awards1 {
+.benefits-list {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  margin-bottom: 1.5em;
+  justify-content: center;
+  margin: 0 0.5em;
+  flex-wrap: wrap;
 }
 
-.benefits {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin: 0 0.6em;
-}
-
-.aw-be {
-  width: 30%;
-  background-color: pink;
+.the-winners {
+  width: 15em;
+  height: 20em;
+  background-color:#eeeeee;
   padding: 0.6em;
+  margin: 0.5em 0.5em;
+  border-radius: 2em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
 
-.aw-be2 {
-  width: 30%;
-  background-color: pink;
+.the-benefits {
+  width: 15em;
+  height: 20em;
+  background-color: #eeeeee;
   padding: 0.6em;
-  margin: 0 0.6em;
+  margin: 0.5em 0.5em;
+  border-radius: 2em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
 
 @media only screen and (min-width: 768px) {
@@ -951,40 +957,19 @@ a:visited {
   .competition-awards h2 {
     font-size: 4em;
     margin-top: 1em;
+    font-weight: bold;
   }
 
   .competition-awards h1 {
     font-size: 4em;
   }
 
-  .awards2 {
-    display: flex;
-    justify-content: space-around;
+  .benefits-list {
+    flex-wrap: nowrap;
   }
 
-  .awards1 {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 1.5em;
-  }
-
-  .benefits {
-    display: flex;
-    justify-content: space-between;
-    /*margin: 0 6em;*/
-  }
-
-  .aw-be {
-    width: 30%;
-    background-color: pink;
-    padding: 0.6em;
-  }
-
-  .aw-be2 {
-    width: 30%;
-    background-color: pink;
-    padding: 0.6em;
-    margin: 0.6em;
+  .awards-list {
+    flex-wrap: nowrap;
   }
 
   .competition-awards img {
@@ -992,11 +977,11 @@ a:visited {
   }
 
   .competition-awards h3 {
-    font-size: 2.5em;
+    font-size: 2em;
   }
 
   .competition-awards h4 {
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: 100;
   }
 
