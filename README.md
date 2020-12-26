@@ -24,6 +24,26 @@ Bikin view yang requires authentication:
 https://simpleisbetterthancomplex.com/tutorial/2018/12/19/how-to-use-jwt-authentication-with-django-rest-framework.html
 
 # Struktur
+
+## Revisian
+Home
+  Ganti judul
+  Brief singkat tentang gicc
+
+Home-compe
+  Overview lomba
+  Keterangan sektor
+
+Compe
+  Company
+    Keterangan ada 3 sektor
+    Card: 3 sektor
+  Winner awards
+    Benefit in general
+    Pemenang lomba
+  Timeline
+  guidebook
+
 ## Menu Bar
 Home - Pre Events - Competition - Sign in button (not logged in) / User (logged in)
 

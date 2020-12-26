@@ -15,6 +15,7 @@ const Landing_Title = () => {
           <ul>
             <li>
               <p>
+<<<<<<< HEAD
               "GICC will open your eyes on how real-world industrial problems are solved
               and how innovations are generated, including the ethics and conflicts behind it."
               </p>
@@ -24,6 +25,17 @@ const Landing_Title = () => {
               "GICC is set to make you cooperate with people you have never met and collaborate with
               colleagues from different backgrounds. Mimicking a professional environment to prepare you, to
               change the game in the future."
+=======
+              GICC will open your eyes on how real-world industrial problems are solved
+              and how innovations are generated, including the ethics and conflicts behind them.
+              </p>
+            </li>
+            <li className="paragraf2">
+              <p>
+              GICC is set to make you cooperate with people you have never met and collaborate with
+              colleagues from different backgrounds. Mimicking a professional environment to prepare you, to
+              change the game in the future.
+>>>>>>> e9e80c3bd613e01c20441aa4a1724e88a1c943b4
               </p>
             </li>
           </ul>
@@ -60,8 +72,22 @@ const Landing_Title = () => {
 
           .title-quote ul {
               margin: 3.5rem 0;
+<<<<<<< HEAD
               width: 30rem;
+=======
+>>>>>>> e9e80c3bd613e01c20441aa4a1724e88a1c943b4
               line-height: 2;
+              display: flex;
+              justify-content: space-between;
+              text-align: left;
+          }
+
+          .paragraf2 {
+            margin: 0 0 0 2rem;
+          }
+
+          .title-quote p {
+              font-size: 1.5rem;
           }
 
           .title-quote p {
