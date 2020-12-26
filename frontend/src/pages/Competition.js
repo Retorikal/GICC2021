@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import BlueContainer from "components/BlueContainer";
 import Landing_Competition2 from "components/Landing_Competition2";
+import Footer from "components/Footer";
 import Title from "components/Title";
 import potrait_1 from "images/potrait-1.jpg";
 
@@ -49,61 +50,62 @@ const Competition = () => {
       <div className="container">
         <div className="competition-awards">
           <h1>Awards</h1>
-          <ul>
-            <li>
+          <div className="awards1">
+            <div className="aw-be">
               <img src={potrait_1} />
               <h3>Team Champion</h3>
               <h4>IDR</h4>
-            </li>
-            <li>
+            </div>
+            <div className="aw-be">
               <img src={potrait_1} />
               <h3>Best Team Prize</h3>
               <h4>IDR</h4>
-            </li>
-            <li>
+            </div>
+            <div className="aw-be">
               <img src={potrait_1} />
               <h3>Best Speaker</h3>
               <h4>IDR</h4>
-            </li>
-          </ul>
-          <ul>
-            <li>
+            </div>
+          </div>
+          <div className="awards2">
+            <div className="aw-be">
               <img src={potrait_1} />
               <h3>1st Individual Winner of Operation</h3>
-              <h4>IDR</h4>
-            </li>
-            <li>
+              <h4>IDRinisengaja panjang banget hehehe</h4>
+            </div>
+            <div className="aw-be">
               <img src={potrait_1} />
               <h3>1st Individual Winner of Marketing</h3>
               <h4>IDR</h4>
-            </li>
-            <li>
+            </div>
+            <div className="aw-be">
               <img src={potrait_1} />
               <h3>1st Individual Winner of EHS</h3>
               <h4>IDR</h4>
-            </li>
-          </ul>
+            </div>
+          </div>
           <h2>Benefits</h2>
-          <ul>
-            <li>
+          <div className="benefits">
+            <div className="aw-be2">
               <img src={potrait_1} />
               <h4>Connect with game-changers from all over Indonesia</h4>
-            </li>
-            <li>
+            </div>
+            <div className="aw-be2">
               <img src={potrait_1} />
               <h4>Mentored by the experts in their respective field</h4>
-            </li>
-            <li>
+            </div>
+            <div className="aw-be2">
               <img src={potrait_1} />
               <h4>Internship opportunity on case contributor’s company</h4>
-            </li>
-            <li>
+            </div>
+            <div className="aw-be2">
               <img src={potrait_1} />
               <h4>e-Certificate</h4>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

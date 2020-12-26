@@ -505,6 +505,156 @@ a:visited {
   background-color: #56698e;
 }
 
+.landing-competition {
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-competition1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ld-comp-quote-top {
+  font-size: 1.7em;
+  width: 70%;
+  /*align-items: center;*/
+}
+
+.landing-competition .learn-more {
+  font-size: 2em;
+}
+
+.landing-competition2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+  width: fit-content;
+  background: url("images/building-landing.jpg");
+  background-size: 100%;
+  color: #213665
+}
+
+.landing-competition2 p {
+  font-size: 1.2em;
+}
+
+.land-comp2-op {
+  /*flex-grow: 1;*/
+  width: 20em;
+  padding: 0.1em 0;
+  margin-bottom: 0.8em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+}
+
+.land-comp2-op .icon-op {
+  width: 12em;
+  padding: 0.5em;
+  background: rgba(255, 255, 255, 0.8);
+  margin: 0.9em;
+}
+
+.land-comp2-op p {
+  padding: 0.5em;
+  margin: 0.6em;
+  background: rgba(255, 255, 255, 0.8);
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.land-comp2-ma {
+  width: 20em;
+  padding: 0.1em 0;
+  margin-bottom: 0.8em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.land-comp2-ma .icon-ma {
+  width: 12em;
+  padding: 0.5em;
+  background: rgba(255, 255, 255, 0.8);
+  margin: 0.9em;
+}
+
+.land-comp2-ma p {
+  padding: 0.5em;
+  margin: 0.6em;
+  background: rgba(255, 255, 255, 0.8);
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.land-comp2-eh {
+  /*flex-grow: 1;*/
+  width: 20em;
+  padding: 0.1em 0;
+  margin-bottom: 0.8em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.land-comp2-eh .icon-eh {
+  width: 12em;
+  padding: 0.5em;
+  background: rgba(255, 255, 255, 0.8);
+  margin: 0.9em;
+}
+
+.land-comp2-eh p {
+  padding: 0.5em;
+  margin: 0.6em;
+  background: rgba(255, 255, 255, 0.8);
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.competition-awards {
+  display: flex;
+  flex-direction: column;
+}
+
+.awards2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 1.5em;
+}
+
+.awards1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 1.5em;
+}
+
+.benefits {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 0 0.6em;
+}
+
+.aw-be {
+  width: 30%;
+  background-color: pink;
+  padding: 0.6em;
+}
+
+.aw-be2 {
+  width: 30%;
+  background-color: pink;
+  padding: 0.6em;
+  margin: 0 0.6em;
+}
+
 @media only screen and (min-width: 768px) {
   .container {
     padding: 1.6em 0em;
@@ -600,8 +750,12 @@ a:visited {
   } */
 
   .landing-competition {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .landing-competition1 {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
@@ -609,41 +763,22 @@ a:visited {
   .ld-comp-quote-top {
     font-size: 1.7em;
     width: 70%;
-  }
-
-  .landing-competition-quote p {
-    font-size: 0.7em;
+    /*align-items: center;*/
   }
 
   .landing-competition .learn-more {
     font-size: 2em;
   }
 
-<<<<<<< HEAD
-  .landing-competition-types ul {
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-  }
-
-  .landing-competition-types p {
-    font-size: 1.2em;
-  }
-
-  .landing-competition2 ul {
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-  }
-
-  .landing-competition2 p {
-    font-size: 1.2em;
-=======
   .landing-competition2 {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     text-align: center;
+    width: 63em;
+    background: url("images/building-landing.jpg");
+    background-size: 100%;
+    color: #213665
   }
 
   .landing-competition2 p {
@@ -651,19 +786,78 @@ a:visited {
   }
 
   .land-comp2-op {
-    flex-grow: 1;
-    width: 7em;
+    /*flex-grow: 1;*/
+    width: 20em;
+    padding: 0.1em 0;
+    margin-bottom: 0.8em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+  }
+
+  .land-comp2-op .icon-op {
+    width: 12em;
+    padding: 0.5em;
+    background: rgba(255, 255, 255, 0.8);
+    margin: 0.9em;
+  }
+
+  .land-comp2-op p {
+    padding: 0.5em;
+    margin: 0.6em;
+    background: rgba(255, 255, 255, 0.8);
+    font-weight: bold;
+    font-size: 1.2em;
   }
 
   .land-comp2-ma {
-    flex-grow: 1;
-    width: 7em;
+    width: 20em;
+    padding: 0.1em 0;
+    margin-bottom: 0.8em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .land-comp2-ma .icon-ma {
+    width: 12em;
+    padding: 0.5em;
+    background: rgba(255, 255, 255, 0.8);
+    margin: 0.9em;
+  }
+
+  .land-comp2-ma p {
+    padding: 0.5em;
+    margin: 0.6em;
+    background: rgba(255, 255, 255, 0.8);
+    font-weight: bold;
+    font-size: 1.2em;
   }
 
   .land-comp2-eh {
-    flex-grow: 1;
-    width: 7em;
->>>>>>> e9e80c3bd613e01c20441aa4a1724e88a1c943b4
+    /*flex-grow: 1;*/
+    width: 20em;
+    padding: 0.1em 0;
+    margin-bottom: 0.8em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .land-comp2-eh .icon-eh {
+    width: 12em;
+    padding: 0.5em;
+    background: rgba(255, 255, 255, 0.8);
+    margin: 0.9em;
+  }
+
+  .land-comp2-eh p {
+    padding: 0.5em;
+    margin: 0.6em;
+    background: rgba(255, 255, 255, 0.8);
+    font-weight: bold;
+    font-size: 1.2em;
   }
 
   .competition-hero p {
@@ -694,19 +888,41 @@ a:visited {
 
   .competition-awards h2 {
     font-size: 4em;
+    margin-top: 1em;
   }
 
   .competition-awards h1 {
     font-size: 4em;
   }
 
-  .competition-awards ul {
+  .awards2 {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
   }
 
-  .competition-awards ul li {
+  .awards1 {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1.5em;
+  }
+
+  .benefits {
+    display: flex;
+    justify-content: space-between;
+    /*margin: 0 6em;*/
+  }
+
+  .aw-be {
     width: 30%;
+    background-color: pink;
+    padding: 0.6em;
+  }
+
+  .aw-be2 {
+    width: 30%;
+    background-color: pink;
+    padding: 0.6em;
+    margin: 0.6em;
   }
 
   .competition-awards img {
@@ -836,3 +1052,4 @@ a:visited {
     margin-top: 8em;
   }
 }
+
