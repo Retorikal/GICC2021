@@ -5,8 +5,8 @@ import iconMa from "../images/Asset 4@4x-8.png";
 
 const Landing_Competition2 = () => {
   return (
-    <div className="container2">
-      <div className="landing-competition2">
+    <div className="container">
+      <div className="landing-competition">
         <div className="land-comp2-op">
           <img className="icon-op" src={iconOp} />
           <p>

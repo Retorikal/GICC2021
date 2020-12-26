@@ -1,10 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import BlueContainer from "components/BlueContainer";
 import Landing_Competition2 from "components/Landing_Competition2";
+<<<<<<< HEAD
 import Footer from "components/Footer";
 import Title from "components/Title";
+=======
+>>>>>>> 58a9611e3430c5182e083cec457a4b1a29ce99a6
 import potrait_1 from "images/potrait-1.jpg";
+import React from "react";
+import Timeline from "components/Competition_Timeline"
+import Title from "components/Title";
+import { Link } from "react-router-dom";
 
 const Competition = () => {
   return (
@@ -16,11 +21,13 @@ const Competition = () => {
             <p>
               <span>Ganesha Integration Case Competition 2021</span> is a program that prepares ITB students to face
               real-world industrial problems and innovate an advancement that improves the key sectors of
-              companies..
+              companies. <br/><br/>
 
               In the preliminary phase, participants must develop a strategy-based solution for the distributed
               case to help companies achieve their goals. Five most eligible participants of each sector will be
-              chosen to be finalists and combined into a team of three. Each team must develop a solution for
+              chosen to be finalists and combined into a team of three.<br/><br/>
+
+              Finalist teams are then to develop a solution for
               the issues given by the case contributor together and present it to the judges and company
               stakeholders to win the final prize.
             </p>
@@ -37,13 +44,7 @@ const Competition = () => {
 
       <BlueContainer title={"Timeline"} />
 
-      <div className="container">
-        <div className="strategicc-timeline">
-          <h2>Mock</h2>
-          <h1>Timeline</h1>
-          <button>Sign up for this event</button>
-        </div>
-      </div>
+      <Timeline/>
 
       <BlueContainer title={"Benefits and Awards"} />
 
