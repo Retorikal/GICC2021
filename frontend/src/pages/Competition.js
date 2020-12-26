@@ -1,10 +1,6 @@
 import BlueContainer from "components/BlueContainer";
-import Landing_Competition2 from "components/Landing_Competition2";
-<<<<<<< HEAD
 import Footer from "components/Footer";
-import Title from "components/Title";
-=======
->>>>>>> 58a9611e3430c5182e083cec457a4b1a29ce99a6
+import Landing_Competition2 from "components/Landing_Competition2";
 import potrait_1 from "images/potrait-1.jpg";
 import React from "react";
 import Timeline from "components/Competition_Timeline"

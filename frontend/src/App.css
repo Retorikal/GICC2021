@@ -832,7 +832,6 @@ a:visited {
     font-size: 2em;
   }
 
-<<<<<<< HEAD
   .landing-competition2 {
     display: flex;
     flex-direction: row;
@@ -845,9 +844,6 @@ a:visited {
   }
 
   .landing-competition2 p {
-=======
-  .landing-competition p {
->>>>>>> 58a9611e3430c5182e083cec457a4b1a29ce99a6
     font-size: 1.2em;
   }
 

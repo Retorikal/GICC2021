@@ -1,7 +1,7 @@
 import React from "react";
-import iconEh from "../images/Asset 2@4x-8.png";
-import iconOp from "../images/Asset 3@4x-8.png";
-import iconMa from "../images/Asset 4@4x-8.png";
+import iconEh from "images/Asset 2@4x-8.png";
+import iconOp from "images/Asset 3@4x-8.png";
+import iconMa from "images/Asset 4@4x-8.png";
 
 const Landing_Competition2 = () => {
   return (
