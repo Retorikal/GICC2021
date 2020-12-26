@@ -36,7 +36,7 @@ class FileSubmit extends Component {
       if (files[i].purpose == this.props.name) {
         return (
           <a style={{ width: "100%" }} href={files[i].file}>
-            <p>Download file</p>
+            <p>{files[i].verified? "File has been verified.":"Download file"}</p>
           </a>
         );
       }
@@ -143,6 +143,7 @@ class Selectfield extends Component {
             this.onTextChange(e);
           }}
         >
+          <option value="NO">---</option>
           <option value="EH">Enviromental Health Safety</option>
           <option value="OP">Operational</option>
           <option value="MA">Marketing</option>
@@ -156,6 +157,7 @@ const sec_cho = {
   OP: "Operations",
   MA: "Marketing",
   EH: "Enviromental Health Safety",
+  NO: "",
 };
 
 const fields_name = {

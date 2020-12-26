@@ -18,8 +18,6 @@ import Popup from "components/Popup/Popup";
 import PopupContextProvider, { PopupContext, UsePopup } from "context/Popup";
 
 const App = () => {
-  //const popup = UsePopup();
-
   return (
     <PopupContextProvider>
       <AuthContextProvider>

@@ -16,6 +16,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 class Participant(models.Model):
 
     SECTOR_CHOICES=[
+        ('NO', 'Has not chosen yet'),
         ('OP', 'Operations'),
         ('MA', 'Marketing'),
         ('EH', 'Enviromental Health Safety'),
@@ -45,7 +46,7 @@ class Participant(models.Model):
     agree_terms = models.BooleanField(default=False)
 
     # Competition-related fields
-    sector = models.CharField(max_length=31, choices=SECTOR_CHOICES, null=True)
+    sector = models.CharField(max_length=2, choices=SECTOR_CHOICES, default='NO')
 
     def save(self, *args, **kwargs):
         verify = True
@@ -129,7 +130,6 @@ class ParticipantFile(models.Model):
         self.owner.save()
 
     owner = models.ForeignKey(Participant, related_name='files', on_delete=models.CASCADE)
-    event = models.CharField(max_length=255) # Nama pre-event atau "Competition"
     purpose = models.CharField(max_length=31, choices=TYPE_CHOICES)
     file = models.FileField(upload_to=savedFileName, default=None) # Link bukti transfer di file uploader, berupa gambar
     verified = models.BooleanField(default=False) # Pembayaran sudah dikroscek panit
