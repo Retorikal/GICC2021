@@ -29,11 +29,11 @@ const Login = () => {
   }
   return (
     <div className="content">
-      <div className="flex-container vertical-center">
+      <div className="flex-fullscreen vertical-center">
         <div className="flex-left flex-container">
           <Title text={"Sign in"} center={true} />
         </div>
-        <div className="login flex-right">
+        <div className="login flex-right"ull>
           <div className="textbox">
             <input
               type="text"

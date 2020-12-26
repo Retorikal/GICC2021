@@ -104,8 +104,24 @@ class Files(views.APIView):
         defaults = {'file': request.FILES["file"]}        
         obj, created = ParticipantFile.objects.update_or_create(owner=request.user.participant, purpose=request.POST.get('purpose'), defaults=defaults)
 
-        content = {'success': request.POST.get('purpose')}
-        return Response(content, status=status.HTTP_201_CREATED)
+        file = ParticipantFile.objects.filter(owner=request.user.participant, purpose=request.POST.get('purpose')).first()
+
+        # If the file is already submitted
+        if file == None:
+            obj, created = ParticipantFile.objects.create(owner=request.user.participant, purpose=request.POST.get('purpose'), file=request.FILES["file"])
+            
+            content = {'success': request.POST.get('purpose')}
+            return Response(content, status=status.HTTP_201_CREATED)
+
+        else:
+            if file.verified:
+                content = {'error': "This file is already verified. You don't need to update it."}
+                return Response(content, status=status.HTTP_403_FORBIDDEN)
+            else:
+                file.file = request.FILES["file"]
+                file.save()
+                content = {'success': request.POST.get('purpose')}
+                return Response(content, status=status.HTTP_201_CREATED)
 
 class VerifyEmail(views.APIView):
     serializer_class = EmailVerificationSerializer

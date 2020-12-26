@@ -50,7 +50,7 @@ const Register = () => {
   }
   return (
     <div className="content">
-      <div className="flex-container">
+      <div className="flex-fullscreen">
         <div className="flex-left flex-container vertical-center">
           <Title text={"Register"} center={true} />
         </div>

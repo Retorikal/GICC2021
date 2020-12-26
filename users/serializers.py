@@ -20,7 +20,6 @@ class FileSerializer(serializers.ModelSerializer):
         model = ParticipantFile
         fields = [
             'purpose',
-            'event',
             'file',
             'verified'
         ]
