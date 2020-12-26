@@ -30,7 +30,7 @@ const Footer = () => {
             <div>
               <h3 className="footer-title">Socials</h3>
               <div>
-                <p>ganesha@ganeshaicc.my.id</p>
+                <p>ganesha@ganeshaicc.id</p>
               </div>
               <div>
                 <p><a href="https://www.instagram.com/ganesha.icc/">@ganesha.icc</a></p>
