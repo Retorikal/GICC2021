@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { AuthContext, UseAuth } from "context/Auth";
 import { PopupContext, UsePopup } from "context/Popup";
 import Title from "components/Title";
+import Guidebook from "files/GICC_2021_Guidebook.pdf"
 
 class FileSubmit extends Component {
   constructor(props) {
@@ -239,7 +240,7 @@ const Profile = () => {
           >
             Proceed
           </p>
-          <a>
+          <a href={Guidebook}>
             <p className="secondary-button">Download File</p>
           </a>
         </div>
