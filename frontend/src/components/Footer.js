@@ -35,6 +35,9 @@ const Footer = () => {
               <div>
                 <p><a href="https://www.instagram.com/ganesha.icc/">@ganesha.icc</a></p>
               </div>
+              <div>
+                <p><a href="https://www.linkedin.com/company/ganeshaicc/">Linkedin</a></p>
+              </div>
             </div>
           </div>
         </div>

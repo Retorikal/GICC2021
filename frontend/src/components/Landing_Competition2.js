@@ -2,8 +2,8 @@ import React from "react";
 
 const Landing_Competition2 = () => {
   return (
-    <div className="container2">
-      <div className="landing-competition2">
+    <div className="container">
+      <div className="landing-competition">
         <div className="land-comp2-op">
           <h3>Operations</h3>
           <p>
