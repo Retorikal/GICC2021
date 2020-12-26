@@ -126,7 +126,7 @@ const Landing_Preevent = () => {
           }
         
           .preevent img {
-            width: 70%;
+            width: 50%;
           }
 
           .preevent-img {

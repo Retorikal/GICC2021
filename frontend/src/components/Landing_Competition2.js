@@ -3,31 +3,42 @@ import iconEh from "images/Asset 2@4x-8.png";
 import iconOp from "images/Asset 3@4x-8.png";
 import iconMa from "images/Asset 4@4x-8.png";
 
+import eola from "images/eolalogo.png"
+import pateron from "images/pateronlogo.png"
+import ecoplast from "images/ecoplastlogo.jpg"
+
 const Landing_Competition2 = () => {
   return (
     <div className="container">
       <div className="landing-competition2">
 
         <div className="land-comp2-content">
-          <img className="icon" src={iconOp} />
+          <div>
+            <img className="icon" src={iconOp} />
+            <img className="company" src={pateron} />
+          </div>
           <p>
-            In this sector, Paterion.id, an online class and try out platform, will give you a case of blablabla sengaja dibuat panjang banget buat ngetes hehehehhehehe
-            Paterion.id
+            Pateron is an edutech startup that focuses on helping students pass the SBMPTN test. Established in 2018, Pateron provides quality, creative and technology-based learning guidance and training in improving the quality of education in Indonesia.
           </p>
         </div>
 
         <div className="land-comp2-content">
-          <img className="icon" src={iconMa} />
+          <div>
+            <img className="icon" src={iconMa} />
+            <img className="company" src={eola} />
+          </div>
           <p>
-            You will need to open your mind to create the most creative idea to solve EolaPlus case in
-            blablala
+            Coming soon! 
           </p>
         </div>
 
         <div className="land-comp2-content">
-          <img className="icon" src={iconEh} />
+          <div>
+            <img className="icon" src={iconEh} />
+            <img className="company" src={ecoplast} />
+          </div>
           <p>
-            EcoPlast, an environmental startup that is eager to blablabla
+            Ecoplast Indonesia is a startup that develops bioplastics from agro-industrial waste, from food packaging, straws, plastic bags, and plastic spoons.
           </p>
         </div>
 
