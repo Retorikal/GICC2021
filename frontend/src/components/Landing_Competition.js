@@ -12,7 +12,9 @@ const Landing_Competition = () => {
             total of 8 million rupiah and internship opportunity in our case contributor’s company.
           </p>
         <Landing_Competition2 />
-        <Link to="/competition" className="learn-more">{"Learn More >"}</Link>
+        <Link to="/competition" className="learn-more">
+          <p className="clickable"> Learn more ></p>
+        </Link>
       </div>
     </div>
   );

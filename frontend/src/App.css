@@ -464,7 +464,7 @@ a:visited {
 }
 
 .competition-hero {
-  margin-bottom: 9em;
+  margin-bottom: 4em;
 }
 
 .competition-hero p {
@@ -522,12 +522,12 @@ a:visited {
   margin: 3em 0;
 }
 
-.competition-hero .guidebook-button {
+.guidebook-button {
   display: flex;
   justify-content: center;
 }
 
-.competition-hero .guidebook-button button {
+.guidebook-button button {
   margin-top: 1.5em;
   outline: none;
   border: none;
@@ -581,7 +581,7 @@ a:visited {
 .ld-comp-quote-top {
   font-size: 1.7em;
   width: 70%;
-  /*align-items: center;*/
+  margin: auto;
 }
 
 .landing-competition .learn-more {
@@ -593,7 +593,6 @@ a:visited {
   flex-direction: column;
   justify-content: space-around;
   text-align: center;
-  width: fit-content;
   background: url("images/building-landing.jpg");
   background-size: 100%;
   color: #213665
@@ -603,80 +602,7 @@ a:visited {
   font-size: 1.2em;
 }
 
-.land-comp2-op {
-  /*flex-grow: 1;*/
-  width: 20em;
-  padding: 0.1em 0;
-  margin-bottom: 0.8em;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  
-}
-
-.land-comp2-op .icon-op {
-  width: 12em;
-  padding: 0.5em;
-  background: rgba(255, 255, 255, 0.8);
-  margin: 0.9em;
-}
-
-.land-comp2-op p {
-  padding: 0.5em;
-  margin: 0.6em;
-  background: rgba(255, 255, 255, 0.8);
-  font-weight: bold;
-  font-size: 1.2em;
-}
-
-.land-comp2-ma {
-  width: 20em;
-  padding: 0.1em 0;
-  margin-bottom: 0.8em;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.land-comp2-ma .icon-ma {
-  width: 12em;
-  padding: 0.5em;
-  background: rgba(255, 255, 255, 0.8);
-  margin: 0.9em;
-}
-
-.land-comp2-ma p {
-  padding: 0.5em;
-  margin: 0.6em;
-  background: rgba(255, 255, 255, 0.8);
-  font-weight: bold;
-  font-size: 1.2em;
-}
-
-.land-comp2-eh {
-  /*flex-grow: 1;*/
-  width: 20em;
-  padding: 0.1em 0;
-  margin-bottom: 0.8em;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.land-comp2-eh .icon-eh {
-  width: 12em;
-  padding: 0.5em;
-  background: rgba(255, 255, 255, 0.8);
-  margin: 0.9em;
-}
-
-.land-comp2-eh p {
-  padding: 0.5em;
-  margin: 0.6em;
-  background: rgba(255, 255, 255, 0.8);
-  font-weight: bold;
-  font-size: 1.2em;
-}
+.land-comp
 
 .competition-awards {
   display: flex;
@@ -822,103 +748,38 @@ a:visited {
     align-items: center;
   }
 
-  .ld-comp-quote-top {
-    font-size: 1.7em;
-    width: 70%;
-    /*align-items: center;*/
-  }
-
   .landing-competition .learn-more {
     font-size: 2em;
   }
 
   .landing-competition2 {
-    display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    text-align: center;
-    width: 63em;
-    background: url("images/building-landing.jpg");
-    background-size: 100%;
-    color: #213665
   }
 
   .landing-competition2 p {
     font-size: 1.2em;
   }
 
-  .land-comp2-op {
-    /*flex-grow: 1;*/
+  .land-comp2-content {
     width: 20em;
-    padding: 0.1em 0;
-    margin-bottom: 0.8em;
+    margin: 1em;
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 1em;
   }
 
-  .land-comp2-op .icon-op {
+  .land-comp2-content .icon {
     width: 12em;
     padding: 0.5em;
-    background: rgba(255, 255, 255, 0.8);
-    margin: 0.9em;
+    margin: 1em 1em 0em 1em;
   }
 
-  .land-comp2-op p {
+  .land-comp2-content p {
     padding: 0.5em;
-    margin: 0.6em;
-    background: rgba(255, 255, 255, 0.8);
-    font-weight: bold;
-    font-size: 1.2em;
-  }
-
-  .land-comp2-ma {
-    width: 20em;
-    padding: 0.1em 0;
-    margin-bottom: 0.8em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .land-comp2-ma .icon-ma {
-    width: 12em;
-    padding: 0.5em;
-    background: rgba(255, 255, 255, 0.8);
-    margin: 0.9em;
-  }
-
-  .land-comp2-ma p {
-    padding: 0.5em;
-    margin: 0.6em;
-    background: rgba(255, 255, 255, 0.8);
-    font-weight: bold;
-    font-size: 1.2em;
-  }
-
-  .land-comp2-eh {
-    /*flex-grow: 1;*/
-    width: 20em;
-    padding: 0.1em 0;
-    margin-bottom: 0.8em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .land-comp2-eh .icon-eh {
-    width: 12em;
-    padding: 0.5em;
-    background: rgba(255, 255, 255, 0.8);
-    margin: 0.9em;
-  }
-
-  .land-comp2-eh p {
-    padding: 0.5em;
-    margin: 0.6em;
-    background: rgba(255, 255, 255, 0.8);
-    font-weight: bold;
+    margin: 0em 1em 1em 1em;
+    font-style: italic;
     font-size: 1.2em;
   }
 
@@ -926,7 +787,7 @@ a:visited {
     font-size: 1.5em;
   }
 
-  .competition-hero .guidebook-button button {
+  .guidebook-button button {
     margin-top: 1.5em;
     padding: 0.6em 2em;
     border-radius: 0.2em;

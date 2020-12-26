@@ -6,26 +6,30 @@ import iconMa from "images/Asset 4@4x-8.png";
 const Landing_Competition2 = () => {
   return (
     <div className="container">
-      <div className="landing-competition">
-        <div className="land-comp2-op">
-          <img className="icon-op" src={iconOp} />
+      <div className="landing-competition2">
+
+        <div className="land-comp2-content">
+          <img className="icon" src={iconOp} />
           <p>
-            In this sector, Paterion.id, an online class and try out platform, will give you a case of blablabla sengaja dibuat panjang banget buat ngetes hehehehhehehe
+            Paterion.id
           </p>
         </div>
-        <div className="land-comp2-ma">
-          <img className="icon-ma" src={iconMa} />
+
+        <div className="land-comp2-content">
+          <img className="icon" src={iconMa} />
           <p>
             You will need to open your mind to create the most creative idea to solve EolaPlus case in
             blablala
           </p>
         </div>
-        <div className="land-comp2-eh">
-          <img className="icon-eh" src={iconEh} />
+
+        <div className="land-comp2-content">
+          <img className="icon" src={iconEh} />
           <p>
             EcoPlast, an environmental startup that is eager to blablabla
           </p>
         </div>
+
       </div>
     </div>
   );

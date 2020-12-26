@@ -70,14 +70,14 @@ class Participant(models.Model):
     def mailContactInfo(self):
         return ("\n\n"
             "Instagram: @ganesha.icc\n"
-            "E-mail: ganeshai@ganeshaicc.id"
+            "E-mail: ganeshai@ganeshaicc.my.id"
             )
 
     def postVerifMail(self, dummy=False):
         # Send verification Email
         token = RefreshToken.for_user(self.user).access_token
         relativeLink = reverse('email-verify')
-        absurl = "http://ganeshaicc.id/app"+relativeLink+"?token="+str(token) #hardcode current site
+        absurl = "http://ganeshaicc.my.id"+relativeLink+"?token="+str(token) #hardcode current site
         email_body = 'Hi '+ self.user.first_name + ',\nPlease use the link below to verify your email.\n' + absurl + "\nThe link expires in 10 minutes." + self.mailContactInfo()
 
         datum = {

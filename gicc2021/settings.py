@@ -26,7 +26,7 @@ SECRET_KEY = "2ec-1o4#z2%tuy&x*&h4sd7t$%zgt=21$98dj3-$8(9snea3wn"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["ganeshaicc.id", "www.ganeshaicc.id", "localhost"]
+ALLOWED_HOSTS = ["ganeshaicc.id", "www.ganeshaicc.id","ganeshaicc.my.id", "www.ganeshaicc.my.id", "localhost"]
 
 
 # Application definition
@@ -169,7 +169,7 @@ LOGIN_REDIRECT_URL = "landing-home"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND  
-EMAIL_HOST = 'mail.ganeshaicc.id'  
+EMAIL_HOST = 'mail.ganeshaicc.my.id'  
 EMAIL_HOST_PASSWORD = '0r7Ci?{U,,Qn'  
 EMAIL_HOST_USER = 'noreply@ganeshaicc.id'  
 EMAIL_PORT = 465  

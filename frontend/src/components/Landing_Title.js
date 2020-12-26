@@ -31,7 +31,6 @@ const Landing_Title = () => {
         <div className="title-logo">
           <img className="logo-km" src={Logo_KM} />
           <img className="logo-kabinet" src={Logo_Kabinet} />
-          <img className="logo-growthlabs" src={Logo_Growthlabs} />
         </div>
       </div>
       <style>
