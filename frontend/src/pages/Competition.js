@@ -6,6 +6,7 @@ import potrait_1 from "images/potrait-1.jpg";
 import React from "react";
 import Timeline from "components/Competition_Timeline"
 import Guidebook from "files/GICC_2021_Guidebook.pdf"
+import { Awards, Benefits } from "components/Competition_Awards"
 import { Link } from "react-router-dom";
 
 const Competition = () => {
@@ -45,65 +46,10 @@ const Competition = () => {
 
       <BlueContainer title={"Benefits and Awards"} />
 
-      <div className="container">
-        <div className="competition-awards">
-          <h1>Awards</h1>
-          <div className="awards1">
-            <div className="aw-be">
-              <img src={potrait_1} />
-              <h3>Team Champion</h3>
-              <h4>IDR</h4>
-            </div>
-            <div className="aw-be">
-              <img src={potrait_1} />
-              <h3>Best Team Prize</h3>
-              <h4>IDR</h4>
-            </div>
-            <div className="aw-be">
-              <img src={potrait_1} />
-              <h3>Best Speaker</h3>
-              <h4>IDR</h4>
-            </div>
-          </div>
-          <div className="awards2">
-            <div className="aw-be">
-              <img src={potrait_1} />
-              <h3>1st Individual Winner of Operation</h3>
-              <h4>IDRinisengaja panjang banget hehehe</h4>
-            </div>
-            <div className="aw-be">
-              <img src={potrait_1} />
-              <h3>1st Individual Winner of Marketing</h3>
-              <h4>IDR</h4>
-            </div>
-            <div className="aw-be">
-              <img src={potrait_1} />
-              <h3>1st Individual Winner of EHS</h3>
-              <h4>IDR</h4>
-            </div>
-          </div>
-          <h2>Benefits</h2>
-          <div className="benefits">
-            <div className="aw-be2">
-              <img src={potrait_1} />
-              <h4>Connect with game-changers from all over Indonesia</h4>
-            </div>
-            <div className="aw-be2">
-              <img src={potrait_1} />
-              <h4>Mentored by the experts in their respective field</h4>
-            </div>
-            <div className="aw-be2">
-              <img src={potrait_1} />
-              <h4>Internship opportunity on case contributor’s company</h4>
-            </div>
-            <div className="aw-be2">
-              <img src={potrait_1} />
-              <h4>e-Certificate</h4>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Awards/>
 
+      <Benefits/>
+      
       <Link to="/register"><div className="guidebook-button">
         <button class="clickable">Register now!</button>
       </div></Link>

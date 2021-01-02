@@ -35,7 +35,7 @@ const Register = () => {
     auth.signup(data).then((result) => {
       if (result.error == 0) {
         popup.showPopup(
-          "Account created! Please check your email for confirmation.",
+          "Please check your email for confirmation (The email might be detected as spam).",
           "success"
         );
         setRedirect("/login");

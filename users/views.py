@@ -84,7 +84,7 @@ class Usermanage(generics.GenericAPIView):
 
         if deserializer.is_valid(raise_exception=True):
             if(request.user.participant.mail_verified == False):
-                return Response({'mail': ["Please verify your email before updating any data."]}, status=status.HTTP_403_FORBIDDEN)
+                return Response({'mail': ["Please verify your email before updating any data (The email might be detected as spam)."]}, status=status.HTTP_403_FORBIDDEN)
             elif (request.user.participant.is_verified):
                 return Response({'verivied': ["Data cannot be changed after verification is done."]}, status=status.HTTP_403_FORBIDDEN)
             else:

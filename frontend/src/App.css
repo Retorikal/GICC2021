@@ -147,6 +147,7 @@ a:visited {
 
 .blue-container {
   background: #213665;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   color: white;
   margin: 0em 0em;
 }
@@ -489,7 +490,9 @@ a:visited {
 
 .competition-awards {
   text-align: center;
-  margin: 1em 0;
+  margin: 1em 0em;
+  display: flex;
+  flex-direction: column;
 }
 
 .competition-awards h2 {
@@ -500,26 +503,28 @@ a:visited {
 
 .competition-awards h1 {
   font-size: 2.5em;
-  margin: 0;
+  margin-top: 0.2em;
   font-weight: 900;
 }
 
 .competition-awards img {
   width: 35%;
   border-radius: 50%;
+  margin: 0.8em;
 }
 
 .competition-awards h3 {
   padding: 0;
   margin: 0;
+  color: #213665;
+  font-weight: bold
 }
+
 .competition-awards h4 {
   padding: 0;
   margin: 0;
-}
-
-.competition-awards li {
-  margin: 3em 0;
+  color: #213665;
+  font-style: italic;
 }
 
 .guidebook-button {
@@ -591,10 +596,10 @@ a:visited {
 .landing-competition2 {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   text-align: center;
   background: url("images/building-landing.jpg");
-  background-size: 100%;
+  background-color: #eee;
+  background-size: cover;
   color: #213665
 }
 
@@ -604,46 +609,95 @@ a:visited {
 
 .land-comp
 
-.competition-awards {
+.awards-list {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
-.awards2 {
+.awards-list .awards-lists {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  margin-bottom: 1.5em;
+  justify-content: center;
+  margin-bottom: 0.5em;
+  flex-wrap: wrap;
 }
 
-.awards1 {
+.benefits-list {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  margin-bottom: 1.5em;
+  justify-content: center;
+  margin: 0 0.5em;
+  flex-wrap: wrap;
 }
 
-.benefits {
+.the-winners {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin: 0 0.6em;
+
+  width: 15em;
+  min-height: 15em;
+  background-color:#eeeeee;
+  padding: 2em;
+  margin: 0.5em 0.5em;
+  border-radius: 1em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
 
-.aw-be {
-  width: 30%;
-  background-color: pink;
-  padding: 0.6em;
+.land-comp2-content .icon {
+  height: 7em;
+  width: auto;
+  padding: 0.5em;
+  margin: 0.5em;
 }
 
-.aw-be2 {
-  width: 30%;
-  background-color: pink;
-  padding: 0.6em;
-  margin: 0 0.6em;
+.land-comp2-content .company {
+  height: auto;
+  width: 5em;
+  padding: 0.5em;
+  margin: 0.5em;
+}
+
+.land-comp2-content {
+  margin: 1em;
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 1em;
+}
+
+.land-comp2-content p {
+  padding: 0.5em;
+  font-style: italic;
+  font-size: 1em;
+  margin: auto 0.5em;
+  display: inline-block;
+}
+
+.copyright{
+  background-color: #213665;
+}
+
+.footer-top{
+  background-color: #eee;
+  padding: 1em;
+}
+
+.copyright p{
+  margin: 1em;
+  color: white;
+  font-style: italic;
 }
 
 @media only screen and (min-width: 768px) {
+  .copyright {
+    box-shadow: inset 100px 0px 100px -50px #D4D4CC, 
+              inset -100px 0px 100px -50px #D4D4CC;
+  }
+
+  .footer-top {
+    box-shadow: inset 100px 0px 100px -50px #D4D4CC, 
+              inset -100px 0px 100px -50px #D4D4CC;
+  }
+
   .container {
     padding: 1.6em 0em;
   }
@@ -657,7 +711,8 @@ a:visited {
   }
 
   .content {
-    padding: 5em 10em 0em;
+    margin-top: 2em;
+    padding: 2em 10em 0em;
   }
 
   .blue-container {
@@ -668,6 +723,7 @@ a:visited {
 
   header {
     padding: 0.8em 10em;
+    top: 0px;
   }
 
   header .logo {
@@ -762,16 +818,27 @@ a:visited {
 
   .land-comp2-content {
     width: 20em;
-    margin: 1em;
-    display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .land-comp2-content {
+    margin: 1em;
+    display: flex;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 1em;
   }
 
   .land-comp2-content .icon {
     width: 12em;
+    height: auto;
+    padding: 0.5em;
+    margin: 1em 1em 0em 1em;
+  }
+
+  .land-comp2-content .company {
+    width: auto;
+    height: 4em;
     padding: 0.5em;
     margin: 1em 1em 0em 1em;
   }
@@ -779,7 +846,6 @@ a:visited {
   .land-comp2-content p {
     padding: 0.5em;
     margin: 0em 1em 1em 1em;
-    font-style: italic;
     font-size: 1.2em;
   }
 
@@ -812,40 +878,19 @@ a:visited {
   .competition-awards h2 {
     font-size: 4em;
     margin-top: 1em;
+    font-weight: bold;
   }
 
   .competition-awards h1 {
     font-size: 4em;
   }
 
-  .awards2 {
-    display: flex;
-    justify-content: space-around;
+  .benefits-list {
+    flex-wrap: nowrap;
   }
 
-  .awards1 {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 1.5em;
-  }
-
-  .benefits {
-    display: flex;
-    justify-content: space-between;
-    /*margin: 0 6em;*/
-  }
-
-  .aw-be {
-    width: 30%;
-    background-color: pink;
-    padding: 0.6em;
-  }
-
-  .aw-be2 {
-    width: 30%;
-    background-color: pink;
-    padding: 0.6em;
-    margin: 0.6em;
+  .awards-list {
+    flex-wrap: nowrap;
   }
 
   .competition-awards img {
@@ -853,11 +898,11 @@ a:visited {
   }
 
   .competition-awards h3 {
-    font-size: 2.5em;
+    font-size: 2em;
   }
 
   .competition-awards h4 {
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: 100;
   }
 

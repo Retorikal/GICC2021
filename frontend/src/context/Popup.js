@@ -18,6 +18,8 @@ const PopupContextProvider = ({ children }) => {
     setPopupMsg(new_msg);
     setPopupType(new_state);
     setShowPopup(true);
+
+    setTimeout(() => {setShowPopup(false)}, 5000);
   }
 
   return (
