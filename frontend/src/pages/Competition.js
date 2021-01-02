@@ -50,6 +50,10 @@ const Competition = () => {
 
       <Benefits/>
       
+      <Link to="/register"><div className="guidebook-button">
+        <button class="clickable">Register now!</button>
+      </div></Link>
+
       <Footer />
     </div>
   );

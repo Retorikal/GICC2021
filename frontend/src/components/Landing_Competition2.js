@@ -5,7 +5,7 @@ import iconMa from "images/Asset 4@4x-8.png";
 
 import eola from "images/eolalogo.png"
 import pateron from "images/pateronlogo.png"
-import ecoplast from "images/ecoplastlogo.jpg"
+import ecoplast from "images/ecoplastlogo.png"
 
 const Landing_Competition2 = () => {
   return (
@@ -28,7 +28,7 @@ const Landing_Competition2 = () => {
             <img className="company" src={eola} />
           </div>
           <p>
-            Coming soon! 
+            EOLA+ is a start up that aims to revolutionize how event organizing is executed. The company utilize millenial creative approach through social media to penetrate the well established market, providing customer with unique event concept, suited for millenials.
           </p>
         </div>
 

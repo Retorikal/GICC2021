@@ -216,7 +216,7 @@ const Profile = () => {
   const sendVerifMail = ()=>{
     auth.sendVerifMail().then(result => {
       if (result.error == 0) {
-        popup.showPopup("Verification re-sent.", "success");
+        popup.showPopup("Verification re-sent (The email might be detected as spam).", "success");
       } else {
         popup.showPopup(result.errormsg, "error");
       }
