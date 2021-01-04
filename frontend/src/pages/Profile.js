@@ -10,7 +10,16 @@ class FileSubmit extends Component {
     super(props);
     this.state = {
       file: "",
+      showUpload: true,
     };
+  }
+
+  componentDidMount(){
+    let file = this.getFile();
+    console.log("Mounted");
+
+    if(file.file != null)
+      this.setState({showUpload: false});
   }
 
   onFileChange(e) {
@@ -30,20 +39,48 @@ class FileSubmit extends Component {
     }
   }
 
-  getFile() {
+  getFile(){
     let files = this.props.authctx.files;
 
     for (let i = 0; i < files.length; i++) {
       if (files[i].purpose == this.props.name) {
-        return (
-          <a style={{ width: "100%" }} href={files[i].file}>
-            <p>{files[i].verified? "File has been verified.":"Download file"}</p>
-          </a>
-        );
+        return files[i];
       }
     }
 
-    return <p>No file has been uploaded.</p>;
+    return {file:null};
+  }
+
+  getFileLink(file) {
+    if(file.file != null)
+      return (
+          <a style={{ width: "100%" }} href={file.file}>
+            <p>{file.verified? "File has been verified (Download here).":"File has been uploaded (Download)."}</p>
+          </a>
+        );
+    else
+      return <p>No file has been uploaded.</p>;
+  }
+
+  button(){
+    if(this.state.showUpload)
+      return (
+        <p
+          className="button clickable"
+          onClick={() => {this.submit();}}
+        >
+          Upload
+        </p>
+      )
+    else
+      return (
+        <p
+          className="button clickable"
+          onClick={() => {this.setState({showUpload: true});}}
+        >
+          Update
+        </p>
+      )
   }
 
   async submit() {
@@ -73,6 +110,7 @@ class FileSubmit extends Component {
         this.props.popupctx.showPopup("Upload failed: " + data.error, "error");
       } else {
         this.props.popupctx.showPopup("Upload successful", "success");
+        this.setState({showUpload: false});
       }
 
       await this.props.authctx.getInfo();
@@ -80,27 +118,22 @@ class FileSubmit extends Component {
   }
 
   render() {
+    let file = this.getFile()
+
     return (
       <div className="textbox">
         <h4>{this.titleString()}</h4>
-        <input
-          type="file"
-          className="checkbox"
-          name={this.props.name}
-          onChange={(e) => {
-            this.onFileChange(e);
-          }}
-        />
+        {(!file.verified && this.state.showUpload?
+          <input
+            type="file"
+            className="checkbox"
+            name={this.props.name}
+            onChange={(e) => {this.onFileChange(e);}}
+          /> : null
+        )}
         <div className="checkbox flex-horizontal">
-          <p
-            className="button clickable"
-            onClick={() => {
-              this.submit();
-            }}
-          >
-            Upload
-          </p>
-          {this.getFile()}
+          {!file.verified ? this.button() : null}
+          {this.getFileLink(file)}
         </div>
       </div>
     );
@@ -130,8 +163,16 @@ class Textfield extends Component {
 }
 
 class Selectfield extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      select: this.props.default,
+    };
+  }
+
   onTextChange(e) {
     this.props.updateText(this.props.name, e.target.value);
+    this.setState({select: e.target.value});
   }
 
   render() {
@@ -139,7 +180,7 @@ class Selectfield extends Component {
       <div className="textbox">
         <h4>{this.props.title}</h4>
         <select
-          defaultValue={this.props.default}
+          value={this.state.select}
           onChange={(e) => {
             this.onTextChange(e);
           }}
@@ -224,6 +265,7 @@ const Profile = () => {
   };
 
   let content;
+
   if (auth.agree_terms == false)
     content = (
       <div className="agreement">
@@ -248,70 +290,78 @@ const Profile = () => {
     );
   else
     content = (
-      <div className="flex-container">
-        <div className="flex-left">
-          <h3>Biodata</h3>
-          <Textfield
-            name="first_name"
-            title="First Name"
-            default={auth.user.first_name}
-            updateText={(a, b) => onUserChange(a, b)}
-          />
-          <Textfield
-            name="last_name"
-            title="Full Name"
-            default={auth.user.last_name}
-            updateText={(a, b) => onUserChange(a, b)}
-          />
-          <Textfield
-            name="uni"
-            title="University"
-            default={auth.uni}
-            updateText={(a, b) => onTextChange(a, b)}
-          />
-          <Textfield
-            name="major"
-            title="Major"
-            default={auth.major}
-            updateText={(a, b) => onTextChange(a, b)}
-          />
-          <Selectfield
-            name="sector"
-            title="Sector"
-            default={sec_cho[auth.sector]}
-            updateText={(a, b) => onTextChange(a, b)}
-          />
-
-          <h3>Contact Information</h3>
-          <Textfield
-            name="email"
-            title="E-mail"
-            default={auth.user.email}
-            updateText={(a, b) => {}}
-            readOnly={true}
-          />
-          <Textfield
-            name="phone_no"
-            title="Phone number"
-            default={auth.phone_no}
-            updateText={(a, b) => onTextChange(a, b)}
-          />
-          <Textfield
-            name="line"
-            title="LINE ID"
-            default={auth.line}
-            updateText={(a, b) => onTextChange(a, b)}
-          />
-
-          <button className="clickable" onClick={updateInfo}>
-            Update information
-          </button>
+      <div>
+        <div className="agreement">
+          {auth.is_verified?
+            <h4><b>We have verified your files, and your registration is complete!</b></h4>:
+            <h4><b>Please complete the following information fields.</b> When done, we will confirm your registration within 3 work days.</h4>
+          }
         </div>
-        <div className="flex-right">
-          <h3>Files</h3>
-          <FileSubmit name="TRF" authctx={auth} popupctx={popup} />
-          <FileSubmit name="KTM" authctx={auth} popupctx={popup} />
-          <FileSubmit name="TWB" authctx={auth} popupctx={popup} />
+        <div className="flex-fullscreen">
+          <div className="flex-left">
+            <h3>Biodata</h3>
+            <Textfield
+              name="first_name"
+              title="First Name"
+              default={auth.user.first_name}
+              updateText={(a, b) => onUserChange(a, b)}
+            />
+            <Textfield
+              name="last_name"
+              title="Full Name"
+              default={auth.user.last_name}
+              updateText={(a, b) => onUserChange(a, b)}
+            />
+            <Textfield
+              name="uni"
+              title="University"
+              default={auth.uni}
+              updateText={(a, b) => onTextChange(a, b)}
+            />
+            <Textfield
+              name="major"
+              title="Major"
+              default={auth.major}
+              updateText={(a, b) => onTextChange(a, b)}
+            />
+            <Selectfield
+              name="sector"
+              title="Sector"
+              default={auth.sector}
+              updateText={(a, b) => onTextChange(a, b)}
+            />
+
+            <h3>Contact Information</h3>
+            <Textfield
+              name="email"
+              title="E-mail"
+              default={auth.user.email}
+              updateText={(a, b) => {}}
+              readOnly={true}
+            />
+            <Textfield
+              name="phone_no"
+              title="Phone number"
+              default={auth.phone_no}
+              updateText={(a, b) => onTextChange(a, b)}
+            />
+            <Textfield
+              name="line"
+              title="LINE ID"
+              default={auth.line}
+              updateText={(a, b) => onTextChange(a, b)}
+            />
+
+            <button className="clickable" onClick={updateInfo}>
+              Update information
+            </button>
+          </div>
+          <div className="flex-right">
+            <h3>Files</h3>
+            <FileSubmit name="TRF" authctx={auth} popupctx={popup} />
+            <FileSubmit name="KTM" authctx={auth} popupctx={popup} />
+            <FileSubmit name="TWB" authctx={auth} popupctx={popup} />
+          </div>
         </div>
       </div>
     );
@@ -320,21 +370,25 @@ const Profile = () => {
     // Wait for auth to complete initial componentDidMount before determining if redirecting is necessary
     return <Redirect to={"/login"} />;
   }
-  return (
-    <div className="content">
-      <div className="container">
-        <div className="profile">
-          <Title text={`Hi, ${auth.user.username}`} />
-          {content}
-          {(auth.mail_verified ? null : <button className="clickable" onClick={sendVerifMail}> Resend verification mail</button>)}
-          <br/>
-          <button className="clickable secondary-button" onClick={auth.logout}>
-            Logout
-          </button>
+
+  if(auth.ready)
+    return (
+      <div className="content">
+        <div className="container">
+          <div className="profile">
+            <Title text={`Hi, ${auth.user.username}`} />
+            {content}
+            {(auth.mail_verified ? null : <button className="clickable" onClick={sendVerifMail}> Resend verification mail</button>)}
+            <br/>
+            <button className="clickable secondary-button" onClick={auth.logout}>
+              Logout
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  else
+    return (<h4>Loading..</h4>);
 };
 
 export default Profile;
