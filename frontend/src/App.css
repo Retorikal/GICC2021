@@ -719,6 +719,10 @@ a:visited {
   padding-top: 0.1em;
 }
 
+.faq-item{
+  width: 90%;
+}
+
 .faq-item button {
   border: none;
   text-align: left;
