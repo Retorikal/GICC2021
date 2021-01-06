@@ -676,6 +676,8 @@ a:visited {
 }
 
 .footer-top {
+  display: flex;
+  flex-wrap: wrap;
   background-color: #eee;
   padding: 1em;
 }

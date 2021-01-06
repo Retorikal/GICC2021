@@ -5,7 +5,7 @@ import Logo from "../images/onwhite_short.png";
 const Footer = () => {
   return (
     <div>
-      <div className="footer-top row content">
+      <div className="footer-top content">
         <div className="footer-logo col-lg-4 col-md-12 col-sm-12 d-flex justify-content-center">
           <div className="footer-logo-container">
             <img src={Logo} />
@@ -41,7 +41,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="copyright d-flex justify-content-center row">
+      <div className="copyright d-flex justify-content-center">
         <p className="text-center">
           Copyright © 2020-2021 GICC
         </p>
