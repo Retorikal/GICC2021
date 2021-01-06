@@ -11,6 +11,7 @@ header {
   display: flex;
   justify-content: space-between;
   padding: 0.8em 1.2em;
+  z-index: 9;
 }
 
 a:link {
@@ -26,7 +27,7 @@ a:visited {
   justify-content: center;
 }
 
-.timeline{
+.timeline {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -34,7 +35,7 @@ a:visited {
   flex-wrap: wrap;
 }
 
-.timeline .timebox{
+.timeline .timebox {
   display: flex;
   flex-direction: row;
 
@@ -44,24 +45,23 @@ a:visited {
   margin: 1em 0em;
 }
 
-.timeline .timebox .timebox-dotbox{
+.timeline .timebox .timebox-dotbox {
   height: 0.5em;
   width: 2em;
   margin: auto 0.25em;
   border-radius: 0.25em;
 
   background-color: #bbbbbb;
-  
+
   display: inline-block;
 
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.timeline .timebox .timebox-circle{
+.timeline .timebox .timebox-circle {
   height: 10em;
   width: 10em;
   margin: 0em 0.25em;
-
 
   border-radius: 5em;
   border-style: solid;
@@ -75,15 +75,15 @@ a:visited {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.timeline .timebox .timebox-content{
+.timeline .timebox .timebox-content {
   display: block;
   margin: auto;
   font-size: 0.9rem;
   text-align: center;
-  font-style: italic; 
+  font-style: italic;
 }
 
-.timeline .timebox .timebox-content span{
+.timeline .timebox .timebox-content span {
   line-height: 1em;
   font-style: normal;
   font-weight: bold;
@@ -517,7 +517,7 @@ a:visited {
   padding: 0;
   margin: 0;
   color: #213665;
-  font-weight: bold
+  font-weight: bold;
 }
 
 .competition-awards h4 {
@@ -600,16 +600,14 @@ a:visited {
   background: url("images/building-landing.jpg");
   background-color: #eee;
   background-size: cover;
-  color: #213665
+  color: #213665;
 }
 
 .landing-competition2 p {
   font-size: 1.2em;
 }
 
-.land-comp
-
-.awards-list {
+.land-comp .awards-list {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -636,11 +634,11 @@ a:visited {
 
   width: 15em;
   min-height: 15em;
-  background-color:#eeeeee;
+  background-color: #eeeeee;
   padding: 2em;
   margin: 0.5em 0.5em;
   border-radius: 1em;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .land-comp2-content .icon {
@@ -672,16 +670,16 @@ a:visited {
   display: inline-block;
 }
 
-.copyright{
+.copyright {
   background-color: #213665;
 }
 
-.footer-top{
+.footer-top {
   background-color: #eee;
   padding: 1em;
 }
 
-.copyright p{
+.copyright p {
   margin: 1em;
   color: white;
   font-style: italic;
@@ -689,13 +687,13 @@ a:visited {
 
 @media only screen and (min-width: 768px) {
   .copyright {
-    box-shadow: inset 100px 0px 100px -50px #D4D4CC, 
-              inset -100px 0px 100px -50px #D4D4CC;
+    box-shadow: inset 100px 0px 100px -50px #d4d4cc,
+      inset -100px 0px 100px -50px #d4d4cc;
   }
 
   .footer-top {
-    box-shadow: inset 100px 0px 100px -50px #D4D4CC, 
-              inset -100px 0px 100px -50px #D4D4CC;
+    box-shadow: inset 100px 0px 100px -50px #d4d4cc,
+      inset -100px 0px 100px -50px #d4d4cc;
   }
 
   .container {
@@ -1020,4 +1018,3 @@ a:visited {
     margin-top: 8em;
   }
 }
-
