@@ -5,6 +5,7 @@ import Title from "components/Title";
 import potrait_1 from "images/potrait-1.jpg";
 import React from "react";
 import Timeline from "components/Competition_Timeline"
+import FAQ from "components/Competition_FAQ"
 import Guidebook from "files/GICC_2021_Guidebook.pdf"
 import { Awards, Benefits } from "components/Competition_Awards"
 import { Link } from "react-router-dom";
@@ -53,6 +54,10 @@ const Competition = () => {
       <Link to="/register"><div className="guidebook-button">
         <button class="clickable">Register now!</button>
       </div></Link>
+
+      <BlueContainer title={"Frequently Asked Questions"} />
+
+      <FAQ/>
 
       <Footer />
     </div>
