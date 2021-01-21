@@ -18,6 +18,7 @@ const Navbar = () => {
         <ul className="show-desktop hide-mobile">
           <Link to="/"><li className="clickable">Home</li></Link> 
           <Link to="/competition"><li className="clickable">Competition</li></Link> 
+          <Link to="/case"><li className="clickable">Case</li></Link> 
           <AuthContext.Consumer>
             {value =>{
               if (value.error == 0)

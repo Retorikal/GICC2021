@@ -6,6 +6,7 @@ import Navbar from "components/Navbar";
 import Landing from "pages/Landing";
 import Preevent from "pages/Preevent";
 import Competition from "pages/Competition";
+import Case from "pages/Case";
 import Login from "pages/Login";
 import Profile from "pages/Profile";
 import Strategicc from "pages/Strategicc";
@@ -38,6 +39,7 @@ const App = () => {
           <Route exact path="/" component={Landing} />
           <Route path="/competition" component={Competition} />
           <Route path="/profile" component={Profile} />
+          <Route path="/case" component={Case} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
         </Router>
