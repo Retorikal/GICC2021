@@ -72,7 +72,7 @@ class Usermanage(generics.GenericAPIView):
         try:
             #self.addUser(request)
             #return Response(request.data, status=status.HTTP_201_CREATED)
-            raise Response({'error': "[Registration has ended.]"}, status=status.HTTP_403_FORBIDDEN)
+            return Response({'error': "[Registration has ended.]"}, status=status.HTTP_403_FORBIDDEN)
         # TODO: Handle exception buat password jelek, email dobel, atau username taken
         except Exception as e:
             print(str(e))
