@@ -1,239 +1,186 @@
 import BlueContainer from "components/BlueContainer";
 import Landing_Competition2 from "components/Landing_Competition2";
+import { Link, Redirect } from "react-router-dom";
 import Footer from "components/Footer";
 import Title from "components/Title";
-import potrait_1 from "images/potrait-1.jpg";
 import React, { useState, useEffect, Component } from "react";
-import Timeline from "components/Competition_Timeline"
-import FAQ from "components/Competition_FAQ"
 import Guidebook from "files/GICC_2021_Guidebook.pdf"
-import { Awards, Benefits } from "components/Competition_Awards"
+import Case_EH from "files/Preliminary Case (EH).pdf"
+import Case_MA from "files/Preliminary Case (OP).pdf"
+import Case_OP from "files/Preliminary Case (MA).pdf"
+import Originality from "files/Statement of Originality.docx"
 import { AuthContext, UseAuth } from "context/Auth";
 import { PopupContext, UsePopup } from "context/Popup";
 
 class FileSubmit extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        file: "",
-        showUpload: true,
-      };
-    }
-  
-    componentDidMount(){
-      let file = this.getFile();
-      console.log("Mounted");
-  
-      if(file.file != null)
-        this.setState({showUpload: false});
-    }
-  
-    onFileChange(e) {
-      this.setState({ file: e.target.files[0] });
-    }
-  
-    titleString() {
-      switch (this.props.name) {
-        case "CASE":
-          return "Case";
-      }
-    }
-  
-    getFile(){
-      let files = this.props.authctx.files;
-  
-      for (let i = 0; i < files.length; i++) {
-        if (files[i].purpose == this.props.name) {
-          return files[i];
-        }
-      }
-  
-      return {file:null};
-    }
-  
-    getFileLink(file) {
-      if(file.file != null)
-        return (
-            <a style={{ width: "100%" }} href={file.file}>
-              <p>{file.verified? "File has been verified (Download here).":"File has been uploaded (Download)."}</p>
-            </a>
-          );
-      else
-        return <p>No file has been uploaded.</p>;
-    }
-  
-    button(){
-      if(this.state.showUpload)
-        return (
-          <p
-            className="button clickable"
-            onClick={() => {this.submit();}}
-          >
-            Upload
-          </p>
-        )
-      else
-        return (
-          <p
-            className="button clickable"
-            onClick={() => {this.setState({showUpload: true});}}
-          >
-            Update
-          </p>
-        )
-    }
-  
-    async submit() {
-      console.log("submitting");
-      console.log(this.state.file);
-  
-      if (this.state.file != "") {
-        let url = "/app/user/files/";
-        let formData = new FormData();
-        formData.append(
-          "file",
-          this.state.file,
-          this.props.name + this.state.file.name
-        );
-        formData.append("purpose", this.props.name);
-        let init = {
-          method: "POST",
-          body: formData,
-          headers: {},
-        };
-        await this.props.authctx.authenticator(init);
-  
-        let response = await fetch(url, init);
-        let data = await response.json();
-  
-        if (response.status >= 400) {
-          this.props.popupctx.showPopup("Upload failed: " + data.error, "error");
-        } else {
-          this.props.popupctx.showPopup("Upload successful", "success");
-          this.setState({showUpload: false});
-        }
-  
-        await this.props.authctx.getInfo();
-      }
-    }
-  
-    render() {
-      let file = this.getFile()
-  
-      return (
-        <div className="textbox">
-          <h4>{this.titleString()}</h4>
-          {(!file.verified && this.state.showUpload?
-            <input
-              type="file"
-              className="checkbox"
-              name={this.props.name}
-              onChange={(e) => {this.onFileChange(e);}}
-            /> : null
-          )}
-          <div className="checkbox flex-horizontal">
-            {!file.verified ? this.button() : null}
-            {this.getFileLink(file)}
-          </div>
-        </div>
-      );
-    }
-  }
-class Textfield extends Component {
-  onTextChange(e) {
-    this.props.updateText(this.props.name, e.target.value);
-  }
-
-  render() {
-    return (
-      <div className="textbox">
-        <h4>{this.props.title}</h4>
-        <input
-          type="text"
-          defaultValue={this.props.default}
-          readOnly={this.props.readOnly}
-          onChange={(e) => {
-            this.onTextChange(e);
-          }}
-        />
-      </div>
-    );
-  }
-}
-class Selectfield extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      select: this.props.default,
+      file: "",
+      showUpload: true,
     };
   }
 
-  onTextChange(e) {
-    this.props.updateText(this.props.name, e.target.value);
-    this.setState({select: e.target.value});
+  componentDidMount(){
+    let file = this.getFile();
+    console.log("Mounted");
+
+    if(file.file != null)
+      this.setState({showUpload: false});
+  }
+
+  onFileChange(e) {
+    this.setState({ file: e.target.files[0] });
+  }
+
+  titleString() {
+    switch (this.props.name) {
+      case "PRO":
+        return "Proposal";
+    }
+  }
+
+  getFile(){
+    let files = this.props.authctx.files;
+
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].purpose == this.props.name) {
+        return files[i];
+      }
+    }
+
+    return {file:null};
+  }
+
+  getFileLink(file) {
+    if(file.file != null)
+      return (
+          <a style={{ width: "100%" }} href={file.file}>
+            <p>{file.verified? "File has been verified (Download here).":"File has been uploaded (Download)."}</p>
+          </a>
+        );
+    else
+      return <p>No file has been uploaded.</p>;
+  }
+
+  button(){
+    if(this.state.showUpload)
+      return (
+        <p
+          className="button clickable"
+          onClick={() => {this.submit();}}
+        >
+          Upload
+        </p>
+      )
+    else
+      return (
+        <p
+          className="button clickable"
+          onClick={() => {this.setState({showUpload: true});}}
+        >
+          Update
+        </p>
+      )
+  }
+
+  async submit() {
+    console.log("submitting");
+    console.log(this.state.file);
+
+    if (this.state.file != "") {
+      let url = "/app/user/files/";
+      let formData = new FormData();
+      formData.append(
+        "file",
+        this.state.file,
+        this.props.name + this.state.file.name
+      );
+      formData.append("purpose", this.props.name);
+      let init = {
+        method: "POST",
+        body: formData,
+        headers: {},
+      };
+      await this.props.authctx.authenticator(init);
+
+      let response = await fetch(url, init);
+      let data = await response.json();
+
+      if (response.status >= 400) {
+        this.props.popupctx.showPopup("Upload failed: " + data.error, "error");
+      } else {
+        this.props.popupctx.showPopup("Upload successful", "success");
+        this.setState({showUpload: false});
+      }
+
+      await this.props.authctx.getInfo();
+    }
   }
 
   render() {
+    let file = this.getFile()
+
     return (
       <div className="textbox">
-        <h4>{this.props.title}</h4>
-        <select
-          value={this.state.select}
-          onChange={(e) => {
-            this.onTextChange(e);
-          }}
-        >
-          <option value="NO">---</option>
-          <option value="EH">Enviromental Health Safety</option>
-          <option value="OP">Operational</option>
-          <option value="MA">Marketing</option>
-        </select>
+        <h4>{this.titleString()}</h4>
+        {(!file.verified && this.state.showUpload?
+          <input
+            type="file"
+            className="checkbox"
+            name={this.props.name}
+            onChange={(e) => {this.onFileChange(e);}}
+          /> : null
+        )}
+        <div className="checkbox flex-horizontal">
+          {!file.verified ? this.button() : null}
+          {this.getFileLink(file)}
+        </div>
       </div>
     );
   }
 }
+
+const sec_cho = {
+  OP: Case_OP,
+  MA: Case_MA,
+  EH: Case_EH,
+};
+
 const Case = () => {
 
   const popup = UsePopup();
   const auth = UseAuth();
 
+  if ((!auth.is_verified || auth.error != 0) && auth.ready) {
+    // Wait for auth to complete initial componentDidMount before determining if redirecting is necessary
+    if(!auth.is_verified)
+      popup.showPopup("Seems like your registration isn't complete. Please contact us to check what's wrong.", "error");
+    return <Redirect to={"/profile"} />;
+  }
+
   return (
     <div className="content">
       <div className="container">
-        <div className="competition-hero">
+        <div className="userfacing competition-hero">
           <Title text={"Case"} />
           <div>
             <p>
-              <span>Ganesha Integration Case Competition 2021</span> is a program that prepares ITB students to face
-              real-world industrial problems and innovate an advancement that improves the key sectors of
-              companies. <br/><br/>
-
-              In the preliminary phase, participants must develop a strategy-based solution for the distributed
-              case to help companies achieve their goals. Five most eligible participants of each sector will be
-              chosen to be finalists and combined into a team of three.<br/><br/>
+              Please check the <a href={Guidebook}><span>updated guidebook</span></a> first, then <span>you can start working on the provided case below.</span> Good luck!
             </p>
           </div>
-          <br/>
           <div className="flex-fullscreen">
             <div className="flex-left">
-              <br/>
-              <br/>
-                <a href="/"><div className="guidebook-button">
-                  <button class="clickable">Download Case</button>
-                </div></a>
+              <div className="participant-id">
+                Your participant ID is <span>{auth.verify_code}</span>.
+              </div>
+              <a href={sec_cho[auth.sector]}><button className="clickable guidebook-button">Download Case</button></a>
+              <a href={Originality}><button className="clickable guidebook-button">Originality statement</button></a>
             </div>
             <div className="flex-right">
               <h3>Upload</h3>
-              <FileSubmit name="CASE" authctx={auth} popupctx={popup} />
+              <FileSubmit name="PRO" authctx={auth} popupctx={popup} />
             </div>
-          </div>
-          <div>
-            <p>
-              
-              Finalist teams are then to develop a solution for
-              the issues given by the case contributor together and present it to the judges and company
-              stakeholders to win the final prize.
-            </p>
           </div>
         </div>
       </div>

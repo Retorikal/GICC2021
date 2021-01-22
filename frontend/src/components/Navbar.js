@@ -18,11 +18,13 @@ const Navbar = () => {
         <ul className="show-desktop hide-mobile">
           <Link to="/"><li className="clickable">Home</li></Link> 
           <Link to="/competition"><li className="clickable">Competition</li></Link> 
-          <Link to="/case"><li className="clickable">Case</li></Link> 
           <AuthContext.Consumer>
             {value =>{
               if (value.error == 0)
-                return (<Link to="/profile"><li className="clickable">Profile</li></Link>);
+                return ([
+                  <Link to="/case"><li className="clickable">Case (For competititors)</li></Link>,
+                  <Link to="/profile"><li className="clickable">Profile</li></Link>
+                ]);
               else
                 return (<Link to="/login"><li className="clickable">Register/Sign in</li></Link>);
             }}  

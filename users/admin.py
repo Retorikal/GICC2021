@@ -7,7 +7,7 @@ from .models import *
 # Register your models here.
 
 class ParticipantAdmin(admin.ModelAdmin):	
-	list_display = ('user', 'origin', 'contact', 'is_verified', 'email', 'sector', 'files')
+	list_display = ('user', 'origin', 'contact', 'is_verified', 'verify_code', 'email', 'sector', 'files')
 
 	def origin(self, obj):
 		return str(obj.uni) + ", " + str(obj.major)

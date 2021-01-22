@@ -53,6 +53,7 @@ class ParticipantSerializer(serializers.ModelSerializer):
 
             'is_verified',
             'mail_verified',
+            'verify_code',
 
             'agree_terms',
 

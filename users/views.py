@@ -72,10 +72,13 @@ class Usermanage(generics.GenericAPIView):
         try:
             #self.addUser(request)
             #return Response(request.data, status=status.HTTP_201_CREATED)
-            return Response({'error': "[Registration has ended.]"}, status=status.HTTP_403_FORBIDDEN)
+            #{'username': [ErrorDetail(string='A user with that username already exists.', code='unique')], 'password': [ErrorDetail(string='This field is required.', code='required')]}
+
+            return Response({'error': [('Registration has ended. Sorry!', '')]}, status=status.HTTP_403_FORBIDDEN)
         # TODO: Handle exception buat password jelek, email dobel, atau username taken
         except Exception as e:
             print(str(e))
+            print(re.findall(r"'(([\w\. ]){10,100})'", str(e)))
             # Get quotation enclosed parts of the error to send back
             return Response({'error': re.findall(r"'(([\w\. ]){10,100})'", str(e))}, status=status.HTTP_403_FORBIDDEN)
 
