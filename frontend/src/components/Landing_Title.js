@@ -11,22 +11,20 @@ const Landing_Title = () => {
           <h1>GANESHA INTEGRATION CASE COMPETITION</h1>
           <div className="green-bar">1</div>
         </div>
-        <div className="title-quote">
-          <ul>
-            <li>
-              <p>
-              GICC will open your eyes on how real-world industrial problems are solved
-              and how innovations are generated, including the ethics and conflicts behind them.
-              </p>
-            </li>
-            <li className="paragraf2">
-              <p>
-              GICC is set to make you cooperate with people you have never met and collaborate with
-              colleagues from different backgrounds. Mimicking a professional environment to prepare you, to
-              change the game in the future.
-              </p>
-            </li>
-          </ul>
+        <div className="title-quote row">
+          <div className="col-lg-5 col-md-6">  
+            <p>
+            GICC will open your eyes on how real-world industrial problems are solved
+            and how innovations are generated, including the ethics and conflicts behind them.
+            </p>
+          </div>
+          <div className="col-lg-5 col-md-6">
+            <p>
+            GICC is set to make you cooperate with people you have never met and collaborate with
+            colleagues from different backgrounds. Mimicking a professional environment to prepare you, to
+            change the game in the future.
+            </p>
+          </div>
         </div>
         <div className="title-logo">
           <img className="logo-km" src={Logo_KM} />
