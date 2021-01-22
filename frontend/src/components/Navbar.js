@@ -21,7 +21,10 @@ const Navbar = () => {
           <AuthContext.Consumer>
             {value =>{
               if (value.error == 0)
-                return (<Link to="/profile"><li className="clickable">Profile</li></Link>);
+                return ([
+                  <Link to="/case"><li className="clickable">Case (For competititors)</li></Link>,
+                  <Link to="/profile"><li className="clickable">Profile</li></Link>
+                ]);
               else
                 return (<Link to="/login"><li className="clickable">Register/Sign in</li></Link>);
             }}  

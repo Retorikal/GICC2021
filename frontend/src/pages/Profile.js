@@ -293,7 +293,7 @@ const Profile = () => {
       <div>
         <div className="agreement">
           {auth.is_verified?
-            <h4><b>We have verified your files, and your registration is complete!</b></h4>:
+            <h4>You can start working on your case <Link style={{display: "inline", margin: 0}} to="/case"><b>here.</b></Link> Good luck!</h4>:
             <h4><b>Please complete the following information fields.</b> When done, we will confirm your registration within 3 work days.</h4>
           }
         </div>
@@ -375,7 +375,7 @@ const Profile = () => {
     return (
       <div className="content">
         <div className="container">
-          <div className="profile">
+          <div className="userfacing">
             <Title text={`Hi, ${auth.user.username}`} />
             {content}
             {(auth.mail_verified ? null : <button className="clickable" onClick={sendVerifMail}> Resend verification mail</button>)}

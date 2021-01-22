@@ -22,6 +22,10 @@ a:visited {
   color: #213665;
 }
 
+.popup-error {
+  z-index: 15;
+}
+
 .flex-container {
   display: flex;
   justify-content: center;
@@ -270,50 +274,50 @@ a:visited {
   font-family: "Overpass";
 }
 
-.profile .title {
+.userfacing .title {
   font-size: 9vw;
 }
 
-.profile .title .shadow-1 {
+.userfacing .title .shadow-1 {
   top: 3vw;
 }
 
-.profile .title .shadow-2 {
+.userfacing .title .shadow-2 {
   top: 6vw;
 }
 
-.profile .textbox {
+.userfacing .textbox {
   margin-bottom: 1em;
   width: 75%;
 }
 
-.profile h3 {
+.userfacing h3 {
   margin: 1.3em 0 0.3em;
   font-size: 2em;
 }
 
-.profile .textbox h4 {
+.userfacing .textbox h4 {
   margin: 1em 0 0.3em;
   font-size: 1.5em;
 }
 
-.profile .textbox input {
+.userfacing .textbox input {
   margin: -2em 0;
 }
 
-.profile .button {
+.userfacing .button {
   background: #213665;
   color: white;
   font-family: "Overpass";
   width: 30%;
 }
 
-.profile .agreement h4 {
+.userfacing .agreement h4 {
   margin: 1em 0 0.3em;
   font-size: 1.5em;
 }
 
-.profile button {
+.userfacing button {
   margin-top: 1.5em;
 
   outline: none;
@@ -326,17 +330,17 @@ a:visited {
   font-family: "Overpass";
 }
 
-.profile .secondary-button {
+.userfacing .secondary-button {
   outline-color: #213665;
   background-color: #f0f0f8;
   color: #213665;
 }
 
-.profile .agreement .button {
+.userfacing .agreement .button {
   width: 50%;
 }
 
-.profile .agreement p {
+.userfacing .agreement p {
   border: none;
   border-radius: 0.3em;
   outline: none;
@@ -348,11 +352,11 @@ a:visited {
   text-align: center;
 }
 
-.profile .agreement .button-container {
+.userfacing .agreement .button-container {
   margin-top: 2em;
 }
 
-.profile .agreement a {
+.userfacing .agreement a {
   margin-left: 1em;
   display: block;
   height: 100%;
@@ -527,14 +531,23 @@ a:visited {
   font-style: italic;
 }
 
+.participant-id{
+  margin-top: 2em;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.5em;
+}
+
 .guidebook-button {
   display: flex;
   justify-content: center;
-  margin-bottom: 1.5em;
+  margin-bottom: 0.5em;
+  margin: auto;
 }
 
 .guidebook-button button {
-  margin-top: 1.5em;
+  margin-top: 1em;
+  margin-bottom: 1em;
   outline: none;
   border: none;
   padding: 0.3em 1em;
@@ -989,15 +1002,15 @@ a:visited {
     font-size: 1.5em;
   }
 
-  .profile .title {
+  .userfacing .title {
     font-size: 7.5vw;
   }
 
-  .profile .title .shadow-1 {
+  .userfacing .title .shadow-1 {
     top: 2.5vw;
   }
 
-  .profile .title .shadow-2 {
+  .userfacing .title .shadow-2 {
     top: 5vw;
   }
 
@@ -1052,31 +1065,35 @@ a:visited {
     width: 100%;
   }
 
-  .profile .textbox {
+  .userfacing .textbox {
     margin-bottom: 1em;
     width: 80%;
   }
 
-  .profile h3 {
+  .userfacing h3 {
     margin: 1.3em 0 0.3em;
     font-size: 2em;
   }
 
-  .profile .textbox h4 {
+  .userfacing .textbox h4 {
     margin: 1.3em 0 0.3em;
     font-size: 1.5em;
   }
 
-  .profile .textbox input {
+  .userfacing .textbox input {
     margin: 0em 0 0;
   }
 
-  .profile-right p {
+  .userfacing-right p {
     font-size: 1.2em;
     padding: 0.7em 0.3em;
   }
 
   .vertical-center {
     margin-top: 8em;
+  }
+
+  .checkbox p{
+    font-size: 1em;
   }
 }
