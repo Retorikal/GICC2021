@@ -62,7 +62,7 @@ class ParticipantSerializer(serializers.ModelSerializer):
             'files'
         ]
 
-        read_only_fields = ['is_verified', 'mail_verified', 'files']
+        read_only_fields = ['is_verified', 'mail_verified', 'verify_code', 'files']
 
 class SignupSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
