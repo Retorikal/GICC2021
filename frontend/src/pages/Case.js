@@ -6,8 +6,8 @@ import Title from "components/Title";
 import React, { useState, useEffect, Component } from "react";
 import Guidebook from "files/GICC_2021_Guidebook.pdf"
 import Case_EH from "files/Preliminary Case (EH).pdf"
-import Case_MA from "files/Preliminary Case (OP).pdf"
-import Case_OP from "files/Preliminary Case (MA).pdf"
+import Case_MA from "files/Preliminary Case (MA).pdf"
+import Case_OP from "files/Preliminary Case (OP).pdf"
 import Originality from "files/Statement of Originality.docx"
 import { AuthContext, UseAuth } from "context/Auth";
 import { PopupContext, UsePopup } from "context/Popup";
