@@ -180,6 +180,7 @@ const Case = () => {
             <div className="flex-right">
               <h3>Upload</h3>
               <FileSubmit name="PRO" authctx={auth} popupctx={popup} />
+              <FileSubmit name="STA" authctx={auth} popupctx={popup} />
             </div>
           </div>
         </div>

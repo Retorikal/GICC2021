@@ -117,6 +117,7 @@ class ParticipantFile(models.Model):
         ('TWB', 'Twibbon'),
         ('KTM', 'Kartu Pelajar'),
         ('PRO', 'Proposal'),
+        ('STA', 'Statement of Originality'),
     ]
 
     def savedFileName(self, filename):
