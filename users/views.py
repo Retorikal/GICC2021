@@ -106,13 +106,13 @@ class Files(views.APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request, format=None):
+        purpose = request.POST.get('purpose')
+        file = ParticipantFile.objects.filter(owner=request.user.participant, purpose=request.POST.get('purpose')).first()
+
         # Gatekeep proposal submissions to allow only verified persons
-        if request.POST.get('purpose') == 'PRO' and not request.user.participant.is_verified:
+        if purpose == 'PRO' or purpose == 'STA' and not request.user.participant.is_verified:
             content = {'error': "Don't do that again, you're not supposed to be able to see this. Also, contact us; your registration is incomplete."}
             return Response(content, status=status.HTTP_403_FORBIDDEN)
-
-
-        file = ParticipantFile.objects.filter(owner=request.user.participant, purpose=request.POST.get('purpose')).first()
 
         # If the file is not found
         if file == None:
@@ -124,7 +124,7 @@ class Files(views.APIView):
         # If the file is already submitted
         else:
             if file.verified:
-                content = {'error': "This file is already verified. You don't need to update it."}
+                content = {'error': "This file is already verified. You can't update it."}
                 return Response(content, status=status.HTTP_403_FORBIDDEN)
             else:
                 file.file = request.FILES["file"]
