@@ -37,6 +37,8 @@ class FileSubmit extends Component {
     switch (this.props.name) {
       case "PRO":
         return "Proposal";
+      case "STA":
+        return "Statement of Originality";
     }
   }
 
