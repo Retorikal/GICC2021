@@ -110,7 +110,7 @@ class Files(views.APIView):
         file = ParticipantFile.objects.filter(owner=request.user.participant, purpose=request.POST.get('purpose')).first()
 
         # Gatekeep proposal submissions to allow only verified persons
-        if purpose == 'PRO' or purpose == 'STA' and not request.user.participant.is_verified:
+        if not request.user.participant.is_verified and (purpose == 'PRO' or purpose == 'STA'):
             content = {'error': "Don't do that again, you're not supposed to be able to see this. Also, contact us; your registration is incomplete."}
             return Response(content, status=status.HTTP_403_FORBIDDEN)
 
