@@ -31,7 +31,7 @@ class ParticipantAdmin(admin.ModelAdmin):
 
 
 class ParticipantFileAdmin(admin.ModelAdmin):
-	list_display = ('__str__', 'owner', 'verified', 'purpose')
+	list_display = ('__str__', 'owner', 'verified', 'purpose', 'lastmod')
 
 	def owner(self, obj):
 		return obj.owner.user.username
