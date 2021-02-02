@@ -134,3 +134,4 @@ class ParticipantFile(models.Model):
     purpose = models.CharField(max_length=31, choices=TYPE_CHOICES)
     file = models.FileField(upload_to=savedFileName, default=None) # Link bukti transfer di file uploader, berupa gambar
     verified = models.BooleanField(default=False) # Pembayaran sudah dikroscek panit
+    lastmod = models.DateTimeField(auto_now=True)

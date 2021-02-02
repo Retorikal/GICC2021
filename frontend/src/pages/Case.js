@@ -181,6 +181,7 @@ const Case = () => {
             </div>
             <div className="flex-right">
               <h3>Upload</h3>
+              <h5>After clicking "Upload", please wait until a notification appears, or until the text says "File has been uploaded".</h5>
               <FileSubmit name="PRO" authctx={auth} popupctx={popup} />
               <FileSubmit name="STA" authctx={auth} popupctx={popup} />
             </div>
